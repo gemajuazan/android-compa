@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="status_task">
+        <item>Por hacer</item>
+        <item>En progreso</item>
+        <item>En revisión</item>
+        <item>Finalizado</item>
+    </string-array>
+
+</resources>
