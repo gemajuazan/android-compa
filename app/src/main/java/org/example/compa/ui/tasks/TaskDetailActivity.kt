@@ -21,8 +21,8 @@ import java.util.*
 
 class TaskDetailActivity : AppCompatActivity() {
 
-    private var id = ""
-    private var name = ""
+    private var id: String = ""
+    private var name: String = ""
 
     private lateinit var editStartDate: TextInputEditText
     private lateinit var editFinishDate: TextInputEditText
