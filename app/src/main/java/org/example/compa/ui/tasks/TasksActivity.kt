@@ -23,7 +23,7 @@ class TasksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tasks_activity)
 
-        setToolbar()
+        //setToolbar()
 
         if (intent.hasExtra("username")) username = intent.getStringExtra("username")!!
 
@@ -70,10 +70,10 @@ class TasksActivity : AppCompatActivity() {
 
     }
 
-    private fun setToolbar() {
+    /*private fun setToolbar() {
         toolbar2.title = getString(R.string.menu_tasks)
         toolbar2.setNavigationOnClickListener {
             finish()
         }
-    }
+    }*/
 }

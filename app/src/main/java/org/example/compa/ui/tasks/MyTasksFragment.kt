@@ -7,15 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.my_tasks_fragment.*
 import org.example.compa.R
 import org.example.compa.db.CompaSQLiteOpenHelper
-import org.example.compa.models.Member
 import org.example.compa.models.Task
-import org.example.compa.utils.MaterialDialog
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MyTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
 
@@ -78,7 +73,7 @@ class MyTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
             /*val startDate = Date(row.getString(2).toLong())
             val finishDate = Date(row.getString(3).toLong())
             val df2 = SimpleDateFormat("dd/MM/yyyy")*/
-            task = Task(
+            /*task = Task(
                 id = row.getInt(0),
                 name = row.getString(1),
                 startDate = row.getString(2),
@@ -87,8 +82,8 @@ class MyTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
                 members = members,
                 numberMembers = members.size,
                 description = row.getString(6)
-            )
-            listTasks.add(task)
+            )*/
+            //listTasks.add(task)
         }
 
         dbCompa.close()
@@ -98,9 +93,9 @@ class MyTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
         for (task in listTasks) {
             val listMembers = task.members
             for (member in listMembers) {
-                if (member == username) {
+                /*if (member == username) {
                     myTasks.add(task)
-                }
+                }*/
             }
         }
     }

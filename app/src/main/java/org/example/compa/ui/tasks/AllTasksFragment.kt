@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.all_tasks_fragment.*
 import org.example.compa.R
-import org.example.compa.db.CompaSQLiteOpenHelper
 import org.example.compa.models.Member
 import org.example.compa.models.Task
 
@@ -41,29 +40,12 @@ class AllTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
     }
 
     private fun initializeTasks() {
-        val db = CompaSQLiteOpenHelper(requireContext(), "dbCompa", null, CompaSQLiteOpenHelper.DATABASE_VERSION)
-        val dbCompa = db.writableDatabase
+        listMembers.add(Member(0, "Gema Juárez"))
+        val task = Task(0, "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", false)
+        listTasks.add(task)
 
-        var task: Task
-
-        val row = dbCompa.rawQuery("SELECT _id, name, startDate, finishDate, category, members, description FROM task", null)
-
-        while (row.moveToNext()) {
-            val members = row.getString(5).split(", ")
-            task = Task(
-                id = row.getInt(0),
-                name = row.getString(1),
-                startDate = row.getString(2),
-                finishDate = row.getString(3),
-                category = row.getString(4),
-                members = members,
-                numberMembers = members.size,
-                description = row.getString(6)
-            )
-            listTasks.add(task)
-        }
-
-        dbCompa.close()
+        val task2 = Task(0, "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", true)
+        listTasks.add(task2)
     }
 
     override fun onItemClick(position: Int) {

@@ -1,21 +1,22 @@
 package org.example.compa.ui.login
 
+import android.R.attr.radius
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Outline
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
+import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import org.example.compa.R
-import org.example.compa.RegisterActivity
+import org.example.compa.databinding.LoginActivityBinding
 import org.example.compa.db.CompaSQLiteOpenHelper
 import org.example.compa.ui.menu.MenuActivity
 import org.example.compa.utils.MaterialDialog
 
+
 class LoginActivity : AppCompatActivity() {
-    private lateinit var loginLinkedinButton: ImageButton
-    private lateinit var loginTwitterButton: ImageButton
+    private lateinit var binding: LoginActivityBinding
 
     private lateinit var loginEmailTextInputEditText: TextInputEditText
     private lateinit var loginPasswordTextInputEditText: TextInputEditText
@@ -29,34 +30,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
+        binding = LoginActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        loginLinkedinButton = findViewById(R.id.login_linkedin_button)
-        loginTwitterButton = findViewById(R.id.login_twitter_button)
-
-        loginEmailTextInputEditText = findViewById(R.id.login_email_input_text)
-        loginPasswordTextInputEditText = findViewById(R.id.login_password_input_text)
-
-        val loginButton = findViewById<Button>(R.id.login)
-        loginButton.setOnClickListener {
-            showDataFromDatabase()
+        binding.login.setOnClickListener {
+            goToMenu()
+            //showDataFromDatabase()
         }
 
-        val signUpButton = findViewById<Button>(R.id.signup)
-        signUpButton.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
-
-        loginLinkedinButton.setOnClickListener {
-            val browse = Intent(Intent.ACTION_VIEW, Uri.parse(urlLinkedIn))
-            startActivity(browse)
-        }
-
-        loginTwitterButton.setOnClickListener {
-            val browse = Intent(Intent.ACTION_VIEW, Uri.parse(urlTwitter))
-            startActivity(browse)
-        }
     }
 
     private fun showDataFromDatabase() {

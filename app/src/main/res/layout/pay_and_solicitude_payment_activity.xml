@@ -53,13 +53,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="@color/colorIconColorMenu">
+                app:boxStrokeColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pay_transmitter_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorBackgroundWhiteTransparent"
+                    android:backgroundTint="@color/colorPrimary"
                     android:hint="@string/pay_transmitter"
                     android:paddingVertical="12dp"
                     android:textColor="#4C4B4B"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
-                app:boxStrokeColor="@color/colorIconColorMenu">
+                app:boxStrokeColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pay_receiver_edit"
@@ -82,7 +82,7 @@
                     android:paddingVertical="12dp"
                     android:textColor="#4C4B4B"
                     android:textColorHint="#4E4D4D"
-                    android:backgroundTint="@color/colorBackgroundWhiteTransparent"/>
+                    android:backgroundTint="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +99,7 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="4dp"
                     android:layout_marginTop="4dp"
-                    app:boxStrokeColor="@color/colorIconColorMenu">
+                    app:boxStrokeColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pay_date_edit"
@@ -109,7 +109,7 @@
                     android:paddingVertical="12dp"
                     android:textColor="#4C4B4B"
                     android:textColorHint="#4E4D4D"
-                    android:backgroundTint="@color/colorBackgroundWhiteTransparent" />
+                    android:backgroundTint="@color/colorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +120,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"
-                    app:boxStrokeColor="@color/colorIconColorMenu">
+                    app:boxStrokeColor="@color/colorPrimary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pay_price_edit"
@@ -131,7 +131,7 @@
                         android:drawableEnd="@drawable/abc_vector_test"
                         android:textColor="#4C4B4B"
                         android:textColorHint="#4E4D4D"
-                        android:backgroundTint="@color/colorBackgroundWhiteTransparent" />
+                        android:backgroundTint="@color/colorPrimary" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,7 +144,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 app:boxCornerRadiusBottomEnd="16dp"
-                app:boxStrokeColor="@color/colorIconColorMenu">
+                app:boxStrokeColor="@color/colorPrimary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pay_concept_edit"
@@ -154,7 +154,7 @@
                     android:paddingVertical="12dp"
                     android:textColor="#4C4B4B"
                     android:textColorHint="#4E4D4D"
-                    android:backgroundTint="@color/colorBackgroundWhiteTransparent"/>
+                    android:backgroundTint="@color/colorPrimary"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
