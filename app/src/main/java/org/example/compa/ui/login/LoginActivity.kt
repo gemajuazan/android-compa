@@ -1,11 +1,7 @@
 package org.example.compa.ui.login
 
-import android.R.attr.radius
 import android.content.Intent
-import android.graphics.Outline
 import android.os.Bundle
-import android.view.View
-import android.view.ViewOutlineProvider
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import org.example.compa.R
