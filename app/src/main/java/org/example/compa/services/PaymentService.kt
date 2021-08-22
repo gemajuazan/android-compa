@@ -13,8 +13,8 @@ import org.example.compa.ui.payments.PaymentsActivity
 class PaymentService : Service() {
 
     private var notificationManager: NotificationManager? = null
-    val CANAL_ID = "mi_canal"
-    val NOTIFICACION_ID = 1
+    private val CANALID = "mi_canal"
+    private val NOTIFICACIONID = 1
 
     override fun onCreate() {
         super.onCreate()
@@ -25,7 +25,7 @@ class PaymentService : Service() {
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
-                CANAL_ID,
+                CANALID,
                 "Mis Notificaciones",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
@@ -33,7 +33,7 @@ class PaymentService : Service() {
             notificationChannel.enableVibration(true)
             notificationManager!!.createNotificationChannel(notificationChannel)
         }
-        val notificacion = NotificationCompat.Builder(this, CANAL_ID)
+        val notificacion = NotificationCompat.Builder(this, CANALID)
             .setSmallIcon(R.drawable.ic_compa_foreground)
             .setContentTitle(getString(R.string.new_cobro))
             .setContentText(getString(R.string.new_cobro_info))
@@ -44,7 +44,7 @@ class PaymentService : Service() {
         intent.putExtra("notificacion", true)
         val intencionPendiente = PendingIntent.getActivity(this, 0, intent, 0)
         notificacion.setContentIntent(intencionPendiente)
-        startForeground(NOTIFICACION_ID, notificacion.build())
+        startForeground(NOTIFICACIONID, notificacion.build())
         return START_STICKY
     }
 

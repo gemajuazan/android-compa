@@ -8,24 +8,56 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
 
-        <Toolbar
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:title="Tareas"
-            android:navigationIcon="@drawable/ic_arrow_back_red_24"
-            android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:titleTextColor="@color/colorPrimary" />
+            android:background="#f5f5f5">
+
+            <ImageView
+                android:id="@+id/back_button_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_back_button"
+                android:clickable="true"
+                android:background="?selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button_image_view"
+                app:layout_constraintStart_toEndOf="@+id/back_button_image_view"
+                app:layout_constraintTop_toTopOf="@+id/back_button_image_view">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/task_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="TAREAS"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white" />
+            android:background="#f5f5f5" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -43,7 +75,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:foregroundTint="@android:color/white"
         android:src="@drawable/ic_add_24"
-        android:tint="@color/colorBackgroundWhite"
+        android:tint="@color/colorPrimary"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@+id/view_pager"
         app:layout_anchorGravity="end|bottom"

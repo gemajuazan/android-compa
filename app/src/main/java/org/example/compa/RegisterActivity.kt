@@ -41,7 +41,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView( R.layout.register_activity)
-        setToolbar()
         val registerButton = findViewById<Button>(R.id.register_button)
 
         registerFields()
@@ -234,14 +233,6 @@ class RegisterActivity : AppCompatActivity() {
                 dialog.cancel()
             }
         }.show()
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private fun setToolbar() {
-        toolbar2.title = getString(R.string.signup)
-        toolbar2.setNavigationOnClickListener {
-            finish()
-        }
     }
 
     private fun updateLabel() {

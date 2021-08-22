@@ -5,42 +5,43 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import org.example.compa.R
+import org.example.compa.databinding.EntertainmentActivityBinding
+import org.example.compa.databinding.LoginActivityBinding
+import org.example.compa.databinding.MenuActivityBinding
+import org.example.compa.ui.entertainment.EntertainmentActivity
 import org.example.compa.ui.payments.PaymentsActivity
 import org.example.compa.ui.profile.ProfileActivity
 import org.example.compa.ui.tasks.TasksActivity
 
 class MenuActivity : AppCompatActivity() {
-    private lateinit var menuProfileButton: Button
-    private lateinit var menuTasksButton: Button
-    private lateinit var menuPaymentsButton: Button
+    private lateinit var binding: MenuActivityBinding
 
     private var username: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.menu_activity)
+        binding = MenuActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (intent.hasExtra("username"))  username = intent.getStringExtra("username")!!
 
-        menuProfileButton = findViewById(R.id.profile)
-        menuTasksButton = findViewById(R.id.tasks)
-        menuPaymentsButton = findViewById(R.id.payments)
-
-        menuProfileButton.setOnClickListener {
+        binding.profile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("username", username)
             startActivity(intent)
         }
 
-        menuTasksButton.setOnClickListener {
+        binding.tasks.setOnClickListener {
             val intent = Intent(this, TasksActivity::class.java)
-            intent.putExtra("username", username)
             startActivity(intent)
         }
 
-        menuPaymentsButton.setOnClickListener {
+        binding.payments.setOnClickListener {
             val intent = Intent(this, PaymentsActivity::class.java)
-            intent.putExtra("username", username)
+            startActivity(intent)
+        }
+
+        binding.entertainment.setOnClickListener {
+            val intent = Intent(this, EntertainmentActivity::class.java)
             startActivity(intent)
         }
     }

@@ -9,6 +9,7 @@ data class Task(
     val finishDate: String,
     val category: String,
     val numberMembers: Int,
-    val members: List<String>,
-    val description: String
+    val members: ArrayList<Member>,
+    val description: String,
+    val mine: Boolean
 ) : Serializable

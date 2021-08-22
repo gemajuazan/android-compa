@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.MultiAutoCompleteTextView
 import android.widget.Spinner
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.task_detail_activity.*
 import org.example.compa.R
 import org.example.compa.db.CompaSQLiteOpenHelper
-import org.example.compa.models.Task
 import org.example.compa.utils.MaterialDialog
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -21,8 +19,8 @@ import java.util.*
 
 class TaskDetailActivity : AppCompatActivity() {
 
-    private var id = ""
-    private var name = ""
+    private var id: String = ""
+    private var name: String = ""
 
     private lateinit var editStartDate: TextInputEditText
     private lateinit var editFinishDate: TextInputEditText
@@ -98,29 +96,25 @@ class TaskDetailActivity : AppCompatActivity() {
                 myCalendarFinish.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabelFinish()
             }
-        editStartDate?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                DatePickerDialog(
-                    this@TaskDetailActivity,
-                    dateStart,
-                    myCalendarStart[Calendar.YEAR],
-                    myCalendarStart[Calendar.MONTH],
-                    myCalendarStart[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
-        })
+        editStartDate.setOnClickListener {
+            DatePickerDialog(
+                this@TaskDetailActivity,
+                dateStart,
+                myCalendarStart[Calendar.YEAR],
+                myCalendarStart[Calendar.MONTH],
+                myCalendarStart[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
 
-        editFinishDate?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                DatePickerDialog(
-                    this@TaskDetailActivity,
-                    dateFinish,
-                    myCalendarFinish[Calendar.YEAR],
-                    myCalendarFinish[Calendar.MONTH],
-                    myCalendarFinish[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
-        })
+        editFinishDate.setOnClickListener {
+            DatePickerDialog(
+                this@TaskDetailActivity,
+                dateFinish,
+                myCalendarFinish[Calendar.YEAR],
+                myCalendarFinish[Calendar.MONTH],
+                myCalendarFinish[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
 
         edit_info.setOnClickListener {
             save_info.visibility = View.VISIBLE

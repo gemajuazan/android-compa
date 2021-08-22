@@ -79,4 +79,15 @@
     <string name="register_successfully">Te has registrado correctamente</string>
     <string name="new_cobro">Nuevo cobro</string>
     <string name="new_cobro_info">Has cobrado un pago, ¡ve a verlo!</string>
+    <string name="welcome">Bienvenido,</string>
+    <string name="compa">COMPA</string>
+    <string name="email_login">, no te mandaremos publicidad</string>
+    <string name="password_login">, por favor no pongas el nombre de tu gato</string>
+    <string name="let_met_log_in">Déjame entrar</string>
+    <string name="i_have_not_account">No tengo cuenta</string>
+    <string name="menu">MENÚ</string>
+    <string name="menu_entertainment">Entretenimiento</string>
+    <string name="menu_configuration">Configuración</string>
+    <string name="menu_exit">Me piro, vampiro</string>
+    <string name="contacts_and_groups">Contactos y grupos</string>
 </resources>
