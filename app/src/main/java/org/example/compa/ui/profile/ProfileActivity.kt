@@ -11,7 +11,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private var username = ""
 
-    private var user = Person(0, "Gema", "Juárez Almazán", "31/10/1996", "gemajuazan@gmail.com", "info1234")
+    private var user = Person("", "Gema", "Juárez Almazán", 1232438574697, "gemajuazan@gmail.com")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun setPerson() {
         binding.nameUserTextView.text = user.name + " " + user.surnames
         binding.emailUserTextView.text = user.email
-        binding.birthdateTextView.text = user.birthdate
+        binding.birthdateTextView.text = user.birthdate.toString()
     }
 
     private fun setOnClickListeners() {

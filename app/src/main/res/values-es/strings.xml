@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="misif_1234">Misifú1234</string>
+    <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
+    <string name="register">Registro</string>
+</resources>

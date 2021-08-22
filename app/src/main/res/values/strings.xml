@@ -90,4 +90,8 @@
     <string name="menu_configuration">Configuración</string>
     <string name="menu_exit">Me piro, vampiro</string>
     <string name="contacts_and_groups">Contactos y grupos</string>
+    <string name="misif_1234">Misifú1234</string>
+    <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
+    <string name="incorrect_data_login_message">O te has equivocado poniendo la contraseña o es que no te has registrado. Por favor, soluciona eso</string>
+    <string name="okay_makey">Okay makey</string>
 </resources>

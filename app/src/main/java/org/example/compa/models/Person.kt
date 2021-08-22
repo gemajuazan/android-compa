@@ -3,10 +3,9 @@ package org.example.compa.models
 import java.io.Serializable
 
 data class Person(
-    val id: Int,
+    val id: String,
     val name: String,
     val surnames: String,
-    val birthdate: String,
-    val email: String,
-    val password: String
+    val birthdate: Long?,
+    val email: String
 ): Serializable
