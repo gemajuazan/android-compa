@@ -5,7 +5,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import org.example.compa.databinding.RegisterActivityBinding
 import org.example.compa.db.CompaSQLiteOpenHelper
 import org.example.compa.models.Person
 import org.example.compa.models.User
@@ -24,6 +24,8 @@ import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var binding: RegisterActivityBinding
 
     private var registerName: TextInputEditText? = null
     private var registerSurnames: TextInputEditText? = null
@@ -43,7 +45,9 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_activity)
+        binding = RegisterActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
@@ -59,17 +63,15 @@ class RegisterActivity : AppCompatActivity() {
                 updateLabel()
             }
 
-        registerBirthdate?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                DatePickerDialog(
-                    this@RegisterActivity,
-                    date,
-                    myCalendar[Calendar.YEAR],
-                    myCalendar[Calendar.MONTH],
-                    myCalendar[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
-        })
+        registerBirthdate?.setOnClickListener {
+            DatePickerDialog(
+                this@RegisterActivity,
+                date,
+                myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
 
         registerButton.setOnClickListener {
             if (!checkForm()) {
@@ -146,7 +148,8 @@ class RegisterActivity : AppCompatActivity() {
                         name = registerName?.text.toString(),
                         surnames = registerSurnames?.text.toString(),
                         birthdate = time,
-                        email = registerEmail?.text.toString()
+                        email = registerEmail?.text.toString(),
+                        username = registerUsername?.text.toString()
                     )
 
                     db.collection("user").document(user?.uid ?: "").set(newUser)

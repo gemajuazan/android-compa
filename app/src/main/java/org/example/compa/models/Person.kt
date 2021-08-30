@@ -7,5 +7,6 @@ data class Person(
     val name: String,
     val surnames: String,
     val birthdate: Long?,
-    val email: String
-): Serializable
+    val email: String,
+    val username: String
+) : Serializable

@@ -94,4 +94,12 @@
     <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
     <string name="incorrect_data_login_message">O te has equivocado poniendo la contraseña o es que no te has registrado. Por favor, soluciona eso</string>
     <string name="okay_makey">Okay makey</string>
+    <string name="title_activity_contacts_and_groups">ContactsAndGroupsActivity</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="update_birthdate_successfully">Has cambiado perfectamente tu fecha de nacimiento</string>
+    <string name="something_was_wrong">Algo ha salido mal</string>
+    <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
 </resources>

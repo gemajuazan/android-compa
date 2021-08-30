@@ -1,6 +1,7 @@
 package org.example.compa.ui.login
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -34,8 +35,6 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         binding.login.setOnClickListener {
-            //goToMenu()
-            //showDataFromDatabase()
             checkLoginFields()
         }
 
@@ -48,6 +47,23 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.twitter.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlTwitter))
+            startActivity(intent)
+        }
+
+        binding.linkedin.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlLinkedIn))
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (auth.currentUser != null) {
+            goToMenu()
+        }
     }
 
     private fun clearFocus() {
@@ -90,16 +106,6 @@ class LoginActivity : AppCompatActivity() {
             return
         }
         login()
-    }
-
-    private fun noLogin() {
-        MaterialDialog.createDialog(this) {
-            setTitle(getString(R.string.oops))
-            setMessage(getString(R.string.no_login))
-            setPositiveButton(getString(R.string.accept)) { dialog, _ ->
-                dialog.cancel()
-            }
-        }.show()
     }
 
     private fun goToMenu() {

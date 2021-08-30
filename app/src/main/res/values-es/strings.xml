@@ -3,4 +3,6 @@
     <string name="misif_1234">Misifú1234</string>
     <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
     <string name="register">Registro</string>
+    <string name="update_birthdate_successfully">Has cambiado perfectamente tu fecha de nacimiento</string>
+    <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
 </resources>

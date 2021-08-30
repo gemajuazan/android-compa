@@ -94,7 +94,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -160,37 +161,69 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginBottom="32dp"
         android:layout_gravity="bottom|center"
-        android:gravity="center"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical">
 
-        android:layout_marginTop="64dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            app:shapeAppearance="@style/LetMeLogIn"
-            android:text="@string/let_met_log_in" />
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/no_account"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:shapeAppearance="@style/LetMeLogIn"
+                android:text="@string/let_met_log_in" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/no_account"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:shapeAppearance="@style/IHaveAccount"
+                android:text="@string/i_have_not_account" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            app:shapeAppearance="@style/IHaveAccount"
-            android:text="@string/i_have_not_account" />
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/twitter"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="8dp"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_twitter"/>
+
+            <ImageButton
+                android:id="@+id/linkedin"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_linkedin"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

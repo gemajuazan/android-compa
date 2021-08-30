@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents">
         <activity
+            android:name=".ui.profile.ContactsAndGroupsActivity"
+            android:label="@string/title_activity_contacts_and_groups"
+            android:theme="@style/NoActionBar" />
+        <activity
             android:name=".ui.entertainment.EntertainmentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
