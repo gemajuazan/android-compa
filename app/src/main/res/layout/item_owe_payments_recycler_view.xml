@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text=">"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/primaryColor"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/owe_receiver"
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="10sp"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/primaryColor" />
 
                     <TextView
                         android:id="@+id/owe_date"
@@ -93,7 +93,7 @@
                         android:layout_marginTop="8dp"
                         android:textAllCaps="true"
                         android:textSize="10sp"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/primaryColor" />
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

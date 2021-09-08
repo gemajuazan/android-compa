@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".ui.menu.MenuActivity">
 
     <LinearLayout
@@ -71,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:strokeWidth="1px"
-            app:strokeColor="@color/colorPrimary">
+            app:strokeColor="@color/primaryColor">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -90,7 +91,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="24dp"
             app:strokeWidth="1px"
-            app:strokeColor="@color/colorPrimary">
+            app:strokeColor="@color/primaryColor">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -109,7 +110,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="24dp"
             app:strokeWidth="1px"
-            app:strokeColor="@color/colorPrimary">
+            app:strokeColor="@color/primaryColor">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -128,7 +129,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="24dp"
             app:strokeWidth="1px"
-            app:strokeColor="@color/colorPrimary">
+            app:strokeColor="@color/primaryColor">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -147,7 +148,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_gravity="end"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@color/primaryColor">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -156,7 +157,7 @@
                 android:textAlignment="textEnd"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp"
-                android:textColor="@color/colorOnPrimary"/>
+                android:textColor="@color/onPrimaryColor"/>
 
         </com.google.android.material.card.MaterialCardView>
 
