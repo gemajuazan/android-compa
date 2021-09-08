@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Compa</string>
     <string name="navigation_drawer_open">Open menu</string>
     <string name="navigation_drawer_close">Close menu</string>
     <string name="action_settings">Settings</string>
@@ -78,6 +77,6 @@
     <string name="register_successfully">You have been register successfully</string>
     <string name="new_cobro">New collection</string>
     <string name="new_cobro_info">You have collected a payment, go see it!</string>
-    <string name="misif_1234">Misifú1234</string>
+    <string name="welcome">Welcome,</string>
 
 </resources>

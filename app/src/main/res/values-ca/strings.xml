@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Compa</string>
     <string name="navigation_drawer_open">Obrir menu</string>
     <string name="navigation_drawer_close">Tancar menu</string>
     <string name="action_settings">Ajustos</string>
@@ -78,5 +77,19 @@
     <string name="register_successfully">T\'has registrat correctament</string>
     <string name="new_cobro">Nou cobrament</string>
     <string name="new_cobro_info">Has cobrat un pagament, ¡veu a veure-ho!</string>
-    <string name="misif_1234">Misifú1234</string>
+    <string name="welcome">Benvingut,</string>
+    <string name="menu">MENU</string>
+    <string name="next">Següent</string>
+    <string name="previous">Anterior</string>
+    <string name="email_login">, no et farem arribar publicitat</string>
+    <string name="password_login">, per favor no posis el nom del teu gat</string>
+    <string name="let_met_log_in">Deixa\'m entrar</string>
+    <string name="i_have_not_account">No tinc compte</string>
+    <string name="menu_entertainment">Entreteniment</string>
+    <string name="menu_configuration">Configuració</string>
+    <string name="menu_exit">Em piro, vampir</string>
+    <string name="contacts_and_groups">Contactes i grups</string>
+    <string name="incorrect_login_message">Inici de sessió incorrecte</string>
+    <string name="incorrect_data_login_message">O t\'has equivocat posant la contrasenya o és que no t\'has registrat. Si us plau, soluciona això</string>
+    <string name="update_birthdate_successfully">Has canviat perfectamente la teua data de naiximent</string>
 </resources>
