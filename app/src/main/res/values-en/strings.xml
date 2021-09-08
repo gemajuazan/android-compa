@@ -78,5 +78,6 @@
     <string name="register_successfully">You have been register successfully</string>
     <string name="new_cobro">New collection</string>
     <string name="new_cobro_info">You have collected a payment, go see it!</string>
+    <string name="misif_1234">Misifú1234</string>
 
 </resources>

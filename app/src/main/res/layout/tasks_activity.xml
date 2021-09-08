@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/primaryColor"
                     android:text="TAREAS"
                     android:textSize="36sp"
                     android:textStyle="bold" />
@@ -72,11 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/secondaryColor"
         android:foregroundTint="@android:color/white"
         android:src="@drawable/ic_add_24"
-        android:tint="@color/colorPrimary"
-        app:backgroundTint="@color/colorPrimary"
+        android:tint="@color/onSecondaryColor"
+        app:backgroundTint="@color/onSecondaryColor"
         app:layout_anchor="@+id/view_pager"
         app:layout_anchorGravity="end|bottom"
         app:rippleColor="@android:color/white" />

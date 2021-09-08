@@ -15,7 +15,7 @@
         android:navigationIcon="@drawable/ic_arrow_back_red_24"
         android:title="Añadir una nueva tarea"
         android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:titleTextColor="@color/colorPrimary"
+        android:titleTextColor="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/add_task_info_form"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/secondaryColor"
                         android:textSize="16sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -61,13 +61,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="16dp"
                         app:boxCornerRadiusTopStart="16dp"
-                        app:boxStrokeColor="@color/colorOnPrimary">
+                        app:boxStrokeColor="@color/onPrimaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_name_task_edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimary"
+                            android:backgroundTint="@color/primaryColor"
                             android:hint="@string/name_task"
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/colorPrimary">
+                        app:boxStrokeColor="@color/onPrimaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_start_date_edit"
@@ -90,7 +90,7 @@
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
                             android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/colorPrimary"/>
+                            android:backgroundTint="@color/primaryColor"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/colorPrimary">
+                        app:boxStrokeColor="@color/onPrimaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_finish_date_edit"
@@ -110,7 +110,7 @@
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
                             android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/colorPrimary" />
+                            android:backgroundTint="@color/primaryColor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/colorPrimary">
+                        app:boxStrokeColor="@color/onPrimaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_category_edit"
@@ -130,7 +130,7 @@
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
                             android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/colorPrimary" />
+                            android:backgroundTint="@color/primaryColor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +141,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp"
                         app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxStrokeColor="@color/colorPrimary">
+                        app:boxStrokeColor="@color/onPrimaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_description_edit"
@@ -151,7 +151,7 @@
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
                             android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/colorPrimary"/>
+                            android:backgroundTint="@color/primaryColor"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:text="@string/members_task_info"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/secondaryColor"
                         android:textSize="16sp" />
 
                     <TextView
@@ -168,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/members_task_info_subtitle"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/secondaryColor"
                         android:textSize="12sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -181,7 +181,7 @@
                         app:boxCornerRadiusBottomStart="8dp"
                         app:boxCornerRadiusTopEnd="8dp"
                         app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="@color/colorPrimary">
+                        app:boxStrokeColor="@color/primaryColor">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add_task_members_edit"
@@ -191,7 +191,7 @@
                             android:paddingVertical="12dp"
                             android:textColor="#4C4B4B"
                             android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/colorPrimary" />
+                            android:backgroundTint="@color/primaryColor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -202,7 +202,7 @@
                         android:layout_marginTop="16dp"
                         android:text="@string/add_task"
                         android:textColor="@android:color/white"
-                        android:backgroundTint="@color/colorPrimary"
+                        android:backgroundTint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />

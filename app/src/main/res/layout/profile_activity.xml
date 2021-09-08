@@ -5,74 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F5F5"
+    android:background="@color/colorBackground"
     tools:context=".ui.profile.ProfileActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar2"
+    <include
+        android:id="@+id/toolbar_profile"
+        layout="@layout/compa_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/profile_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-4dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/back_button_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_back_button"
-            android:clickable="true"
-            android:background="?selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/back_button_image_view"
-            app:layout_constraintStart_toEndOf="@+id/back_button_image_view"
-            app:layout_constraintTop_toTopOf="@+id/back_button_image_view">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profile_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/menu_profile"
-                android:textSize="12sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profile_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-8dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/colorPrimary"
-                android:text="PERFIL"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="4px"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="@color/colorDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/back_button_image_view" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_profile" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -82,7 +33,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintTop_toBottomOf="@id/profile_progress"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -101,7 +53,7 @@
                     android:layout_marginHorizontal="24dp"
                     app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
                     app:strokeWidth="1px"
-                    app:strokeColor="@color/colorPrimary">
+                    app:strokeColor="@color/primaryColor">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -115,41 +67,122 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             android:src="@drawable/ic_profile"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/edit_user_linear_layout"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/colorPrimary" />
+                            app:tint="@color/primaryColor" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/name_user_text_view"
+                        <LinearLayout
+                            android:id="@+id/linearLayout3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:textColor="@color/colorPrimary"
-                            app:layout_constraintBottom_toTopOf="@+id/email_user_text_view"
-                            app:layout_constraintStart_toEndOf="@+id/imageView3"
-                            app:layout_constraintTop_toTopOf="@+id/imageView3"
-                            tools:text="GEMA JUÁREZ" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/email_user_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                             app:layout_constraintStart_toEndOf="@+id/imageView3"
-                            app:layout_constraintTop_toBottomOf="@+id/name_user_text_view"
-                            tools:text="gemajuazan@gmail.com" />
+                            app:layout_constraintTop_toTopOf="@+id/imageView3">
 
-                        <ImageView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/name_user_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:textColor="@color/primaryColor"
+                                tools:text="GEMA JUÁREZ" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/username_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                tools:text="gemajuazan" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/email_user_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:textColor="@color/secondaryLightColor"
+                                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                                app:layout_constraintTop_toBottomOf="@+id/name_user_text_view"
+                                tools:text="gemajuazan@gmail.com" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/edit_user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
+                            android:layout_marginEnd="8dp"
                             android:src="@drawable/ic_edit_24"
-                            app:layout_constraintBottom_toBottomOf="@+id/name_user_text_view"
+                            android:background="?selectableItemBackground"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/email_user_text_view"
-                            app:tint="@color/colorPrimary" />
+                            app:layout_constraintTop_toTopOf="@+id/imageView3"
+                            app:tint="@color/secondaryColor" />
+
+                        <LinearLayout
+                            android:id="@+id/edit_user_linear_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            android:layout_marginHorizontal="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/colorDivider" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/name"
+                                app:boxStrokeColor="@color/secondaryLightColor">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/name_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/surnames"
+                                android:layout_marginTop="8dp"
+                                app:boxStrokeColor="@color/secondaryLightColor">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/surnames_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="8dp"
+                                android:hint="@string/username"
+                                app:boxStrokeColor="@color/secondaryLightColor">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/username_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -161,7 +194,7 @@
                     android:layout_marginHorizontal="24dp"
                     app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
                     app:strokeWidth="1px"
-                    app:strokeColor="@color/colorPrimary">
+                    app:strokeColor="@color/primaryColor">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -174,9 +207,10 @@
                             android:id="@+id/title_birthdate_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="10sp"
+                            android:letterSpacing="0.2"
                             tools:text="@string/date_birth"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/primaryColor" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/birthdate_text_view"
@@ -186,24 +220,29 @@
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:textSize="12sp"
-                            android:textColor="@color/colorSecondary" />
+                            android:textColor="@color/primaryLightColor" />
 
-                        <ImageView
+                        <ImageButton
+                            android:id="@+id/profile_edit_birthdate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_edit_24"
-                            app:tint="@color/colorPrimary" />
+                            android:background="?selectableItemBackground"
+                            android:clickable="true"
+                            app:tint="@color/secondaryColor" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/contacts_and_groups_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="16dp"
                     android:layout_marginHorizontal="24dp"
+                    android:clickable="true"
                     app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right"
-                    app:cardBackgroundColor="@color/colorPrimary">
+                    app:cardBackgroundColor="@color/primaryColor">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -216,16 +255,18 @@
                             android:id="@+id/title_contacts_and_groups_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorOnPrimary"
-                            android:textStyle="bold"
+                            android:textColor="@color/onPrimaryColor"
                             android:layout_weight="1"
+                            android:textAllCaps="true"
+                            android:textSize="10sp"
+                            android:letterSpacing="0.2"
                             tools:text="@string/contacts_and_groups" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_next_button"
-                            app:tint="@color/colorOnPrimary" />
+                            app:tint="@color/onPrimaryColor" />
 
                     </LinearLayout>
 
@@ -243,7 +284,7 @@
         android:text="alpha01-dev01"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#BDBDBD"
+        android:textColor="@color/secondaryLightColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
