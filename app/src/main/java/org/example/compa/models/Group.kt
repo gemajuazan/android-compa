@@ -2,9 +2,8 @@ package org.example.compa.models
 
 import java.io.Serializable
 
-data class Member(
-    val id: Int,
+data class Group(
+    val id: String,
     val name: String,
-    val username: String,
-    val email: String
+    val place: String
 ) : Serializable

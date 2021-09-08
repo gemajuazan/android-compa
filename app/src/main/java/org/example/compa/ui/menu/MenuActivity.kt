@@ -10,8 +10,10 @@ import org.example.compa.databinding.EntertainmentActivityBinding
 import org.example.compa.databinding.LoginActivityBinding
 import org.example.compa.databinding.MenuActivityBinding
 import org.example.compa.ui.entertainment.EntertainmentActivity
+import org.example.compa.ui.friends.FriendsActivity
 import org.example.compa.ui.login.LoginActivity
 import org.example.compa.ui.payments.PaymentsActivity
+import org.example.compa.ui.profile.ContactsAndGroupsActivity
 import org.example.compa.ui.profile.ProfileActivity
 import org.example.compa.ui.tasks.TasksActivity
 
@@ -29,6 +31,16 @@ class MenuActivity : AppCompatActivity() {
 
         binding.profile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.friends.setOnClickListener {
+            val intent = Intent(this, FriendsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.contacts.setOnClickListener {
+            val intent = Intent(this, ContactsAndGroupsActivity::class.java)
             startActivity(intent)
         }
 

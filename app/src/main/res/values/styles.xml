@@ -18,7 +18,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ShapeAppearanceOverlay.MaterialCardView.Left" parent="">
+    <style name="ShapeAppearanceOverlay.MaterialCardView.Left" parent="Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">16dp</item>
         <item name="cornerSizeTopLeft">16dp</item>
@@ -53,6 +53,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:statusBarColor">@color/primaryColor</item>
+        <item name="background">@android:color/transparent</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -62,6 +63,21 @@
     <style name="StatusBar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:statusBarColor">@color/primaryColor</item>
+    </style>
+
+    <style name="CompaCard" parent="Widget.MaterialComponents.CardView">
+        <item name="strokeColor">@color/primaryColor</item>
+        <item name="strokeWidth">1px</item>
+        <item name="backgroundColor">@color/onPrimaryColor</item>
+        <item name="backgroundTint">@color/onPrimaryColor</item>
+        <item name="cardBackgroundColor">@color/onPrimaryColor</item>
+    </style>
+
+    <style name="CompaTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
     </style>
 
 </resources>

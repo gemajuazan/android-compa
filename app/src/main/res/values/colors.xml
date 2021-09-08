@@ -10,11 +10,12 @@
     <color name="secondaryTextColor">#ffffff</color>
     <color name="onPrimaryColor">#FFFFFF</color>
     <color name="onSecondaryColor">#FFFFFF</color>
-    <color name="colorDivider">#4F4F4F</color>
+    <color name="colorDivider">#777777</color>
     <color name="colorStrokeLeft">#BDBDBD</color>
     <color name="backgroundColorCardRight">#F3F2F2</color>
     <color name="colorAccent">#90B290</color>
     <color name="colorError">#B00020</color>
     <color name="colorPrimaryTransparent">#753A3836</color>
     <color name="colorBackground">#F6F5F5</color>
+    <color name="primaryDisabledColor">#C6C4C4</color>
 </resources>
