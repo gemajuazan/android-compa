@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Compa</string>
+    <string name="app_name" translatable="false">Compa</string>
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
     <string name="action_settings">Ajustes</string>
@@ -80,7 +80,7 @@
     <string name="new_cobro">Nuevo cobro</string>
     <string name="new_cobro_info">Has cobrado un pago, ¡ve a verlo!</string>
     <string name="welcome">Bienvenido,</string>
-    <string name="compa">COMPA</string>
+    <string name="compa" translatable="false">COMPA</string>
     <string name="email_login">, no te mandaremos publicidad</string>
     <string name="password_login">, por favor no pongas el nombre de tu gato</string>
     <string name="let_met_log_in">Déjame entrar</string>
@@ -90,15 +90,15 @@
     <string name="menu_configuration">Configuración</string>
     <string name="menu_exit">Me piro, vampiro</string>
     <string name="contacts_and_groups">Contactos y grupos</string>
-    <string name="misif_1234">Misifú1234</string>
+    <string name="misif_1234" translatable="false">Misifú1234</string>
     <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
     <string name="incorrect_data_login_message">O te has equivocado poniendo la contraseña o es que no te has registrado. Por favor, soluciona eso</string>
-    <string name="okay_makey">Okay makey</string>
+    <string name="okay_makey" translatable="false">Okay makey</string>
     <string name="title_activity_contacts_and_groups">ContactsAndGroupsActivity</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
     <string name="update_birthdate_successfully">Has cambiado perfectamente tu fecha de nacimiento</string>
     <string name="something_was_wrong">Algo ha salido mal</string>
     <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
