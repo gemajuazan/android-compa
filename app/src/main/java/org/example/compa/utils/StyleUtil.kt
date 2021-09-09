@@ -94,7 +94,7 @@ class StyleUtil {
             return animationStart
         }
 
-        private const val ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm"
+        private const val ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
 
         fun getRandomString(sizeOfRandomString: Int): String {
             val random = Random()

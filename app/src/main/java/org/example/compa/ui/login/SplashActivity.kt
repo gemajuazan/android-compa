@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import org.example.compa.R
+import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.menu.MenuActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             delay(DISPLAY)
             if (auth.currentUser != null) {
+                AppPreference.setUserUID(auth.currentUser?.uid ?: "")
                 goToMenu()
             } else {
                 goToLogin()

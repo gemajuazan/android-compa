@@ -8,8 +8,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
 import org.example.compa.databinding.SearchFriendActivityBinding
+import org.example.compa.models.Friend
 import org.example.compa.models.Person
-import org.example.compa.ui.adapters.FriendAdapter
+import org.example.compa.ui.adapters.PeopleAdapter
 import org.example.compa.utils.MaterialDialog
 
 class SearchFriendActivity : AppCompatActivity() {
@@ -19,8 +20,9 @@ class SearchFriendActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private var people = arrayListOf<Person>()
-    private var peopleFiltered = arrayListOf<Person>()
-    private var peopleAdapter = FriendAdapter(arrayListOf(), true)
+    private var peopleAdapter = PeopleAdapter(arrayListOf(), true)
+
+    private var me: Person? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,16 +60,27 @@ class SearchFriendActivity : AppCompatActivity() {
                 val birthdate = data?.get("birthdate") as Long? ?: -1
                 val email = data?.get("email") as String? ?: ""
                 val username = data?.get("username") as String? ?: ""
-                val person = Person(
-                    id = id,
-                    name = name,
-                    surnames = surnames,
-                    birthdate = birthdate,
-                    email = email,
-                    username = username
-                )
-                people.add(person)
 
+                if (email == auth.currentUser?.email) {
+                    me = Person(
+                        id = id,
+                        name = name,
+                        surnames = surnames,
+                        birthdate = birthdate,
+                        email = email,
+                        username = username
+                    )
+                } else {
+                    val person = Person(
+                        id = id,
+                        name = name,
+                        surnames = surnames,
+                        birthdate = birthdate,
+                        email = email,
+                        username = username
+                    )
+                    people.add(person)
+                }
             }
             setFriendsAdapter()
         }
@@ -76,9 +89,10 @@ class SearchFriendActivity : AppCompatActivity() {
     }
 
     private fun setFriendsAdapter() {
-        peopleAdapter = FriendAdapter(people, true)
+        peopleAdapter = PeopleAdapter(people, true)
         binding.newFriends.layoutManager = LinearLayoutManager(this)
         binding.newFriends.adapter = peopleAdapter
+
         setOnQueryListenerSearchView()
         peopleAdapter.setOnItemClickListener { person, position, isFavourite ->
             if (isFavourite) {
@@ -87,7 +101,14 @@ class SearchFriendActivity : AppCompatActivity() {
                     setMessage(R.string.do_you_want_to_add_this_friend)
                     setPositiveButton(R.string.accept) { _, _ ->
                         db.collection("person").document(auth.currentUser?.uid ?: "")
-                            .collection("friends").document(person.id).set(person)
+                            .collection("pending_friends").document(person.id).set(Friend(person, solicitude = true, favourite = false))
+
+                        val meAsFriend = me?.let { Friend(it, solicitude = false, favourite = false) }
+                        meAsFriend?.let {
+                            db.collection("person").document(person.id)
+                                .collection("pending_friends").document(auth.currentUser?.uid ?: "")
+                                .set(it)
+                        }
                     }
                     setNegativeButton(R.string.cancel) { _, _ -> }
                 }.show()
@@ -98,7 +119,8 @@ class SearchFriendActivity : AppCompatActivity() {
                     setMessage(R.string.are_you_sure_delete_friend)
                     setPositiveButton(getString(R.string.accept) + " :)") { _, _ ->
                         db.collection("person").document(auth.currentUser?.uid ?: "")
-                            .collection("friends").document(person.id).delete().addOnSuccessListener {
+                            .collection("friends").document(person.id).delete()
+                            .addOnSuccessListener {
                                 MaterialDialog.createDialog(this@SearchFriendActivity) {
                                     setTitle(R.string.delete_friend_title)
                                     setMessage(getString(R.string.delete_friend_successfully))

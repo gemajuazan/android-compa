@@ -10,9 +10,11 @@ import org.example.compa.models.Member
 class TextAdapter(private val listText: ArrayList<Member>, private val needsLine: Boolean, private val needsIcon: Boolean) :
     RecyclerView.Adapter<TextAdapter.ViewHolder>() {
 
+    var itemClickListener: OnItemClickListener? = null
+
     inner class ViewHolder(private val binding: ItemTextBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(member: Member) {
+        fun bind(member: Member, position: Int) {
             binding.text.text = member.email
 
             if (needsLine) binding.line.visibility = View.VISIBLE
@@ -22,7 +24,7 @@ class TextAdapter(private val listText: ArrayList<Member>, private val needsLine
             else binding.cancel.visibility = View.GONE
 
             binding.cancel.setOnClickListener {
-
+                itemClickListener?.onItemClick(position)
             }
         }
     }
@@ -34,7 +36,7 @@ class TextAdapter(private val listText: ArrayList<Member>, private val needsLine
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listText[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +44,10 @@ class TextAdapter(private val listText: ArrayList<Member>, private val needsLine
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, view: View)
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        itemClickListener = onItemClickListener
     }
 }

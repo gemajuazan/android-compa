@@ -69,13 +69,23 @@
                 tools:visibility="visible">
 
                 <ImageButton
+                    android:id="@+id/see_group"
+                    app:shapeAppearance="@style/LetMeLogIn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_baseline_remove_red_eye_24"
+                    android:tint="@color/primaryLightColor"
+                    android:background="?selectableItemBackground"/>
+
+                <ImageButton
                     android:id="@+id/edit_group"
                     app:shapeAppearance="@style/LetMeLogIn"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_edit_24"
-                    android:tint="@color/primaryLightColor"
+                    android:tint="@color/secondaryLightColor"
                     android:background="?selectableItemBackground"/>
 
                 <ImageButton

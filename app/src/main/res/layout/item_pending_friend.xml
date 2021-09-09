@@ -13,8 +13,6 @@
         android:layout_marginHorizontal="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="?selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,12 +68,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
-            android:id="@+id/favourite"
+            android:id="@+id/accept"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="?selectableItemBackground"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            android:tint="@color/primaryColor" />
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:tint="@color/colorAccent" />
+
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_cancel_24"
+            android:tint="@color/colorError" />
 
     </LinearLayout>
 

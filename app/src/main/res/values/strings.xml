@@ -128,4 +128,8 @@
     <string name="add_friend">Añadir amigo</string>
     <string name="do_you_want_to_add_this_friend">¿Estás seguro de que quieres añadir este usuario a tu lista de amigos?</string>
     <string name="are_you_sure_delete_friend">¿Estás seguro de eliminar este amigo de tu lista de amigos? :(</string>
+    <string name="pending_friends">Amigos pendientes</string>
+    <string name="no_pending_friends">No tienes peticiones de amistad pendientes</string>
+    <string name="do_you_want_to_delete_friend">¿Deseas eliminar a este amigo?</string>
+    <string name="select_friend">Selecciona a un amigo</string>
 </resources>

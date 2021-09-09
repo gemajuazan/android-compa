@@ -4,16 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
 import org.example.compa.databinding.ContactsAndGroupsActivityBinding
 import org.example.compa.models.Group
 import org.example.compa.models.Member
 import org.example.compa.ui.adapters.GroupAdapter
-import org.example.compa.utils.StyleUtil
 
 class ContactsAndGroupsActivity : AppCompatActivity() {
     private lateinit var binding: ContactsAndGroupsActivityBinding
-    private var isRotated: Boolean = false
+
+    private lateinit var db: FirebaseFirestore
+    private lateinit var groupAdapter: GroupAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,13 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
         setInitConfiguration()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getGroups(arrayListOf())
+    }
+
     private fun setInitConfiguration() {
+        db = FirebaseFirestore.getInstance()
         setTranslations()
         setFABConfiguration()
         setRecyclerView()
@@ -35,34 +43,65 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     }
 
     private fun setFABConfiguration() {
-/*        StyleUtil.init(binding.editGroup)
-        StyleUtil.init(binding.addGroup)
-        StyleUtil.init(binding.removeGroup)*/
         binding.fabGroups.setOnClickListener {
             goToNewGroup()
-/*            isRotated = StyleUtil.rotateFab(binding.fabGroups, !isRotated, 55F)
-            if (isRotated) {
-                StyleUtil.showIn(binding.editGroup)
-                StyleUtil.showIn(binding.addGroup)
-                StyleUtil.showIn(binding.removeGroup)
-            } else {
-                StyleUtil.showOut(binding.editGroup)
-                StyleUtil.showOut(binding.addGroup)
-                StyleUtil.showOut(binding.removeGroup)
-            }*/
         }
     }
 
     private fun setRecyclerView() {
         val groups = ArrayList<Group>()
-        val members = ArrayList<Member>()
-        members.add(Member(1, "", "gemajuazan","gemajuazan@gmail.com"))
-        members.add(Member(1, "", "gemajuazan","gemajuazan@gmail.com"))
-        groups.add(Group("1", "Grupo Castellón", "Castellón"))
-        groups.add(Group("1", "Grupo Valencia", "Castellón"))
         binding.listGroups.layoutManager = LinearLayoutManager(this)
-        binding.listGroups.adapter =
-            GroupAdapter(listsGroups = groups, listMembers = members, context = this@ContactsAndGroupsActivity, needsLine = false, needsIcon = false)
+        getGroups(groups)
+    }
+
+    private fun getGroups(groups: ArrayList<Group>) {
+        db.collection("groups").get().addOnSuccessListener { groupsFirebase ->
+            for (data in groupsFirebase.documents) {
+                val groupId = data.get("id") as String
+                val name = data.get("name") as String
+                val place = data.get("place") as String
+                val members = arrayListOf<Member>()
+                db.collection("groups").document(groupId).collection("members").get()
+                    .addOnSuccessListener { membersFirebase ->
+                        for (member in membersFirebase.documents) {
+                            val email = member.get("email") as String
+                            val id = member.get("id") as String
+                            val name = member.get("name") as String
+                            val username = member.get("username") as String
+                            val member = Member(id, name, username, email)
+                            members.add(member)
+                        }
+                        val group = Group(groupId, name, place, members)
+                        groups.add(group)
+                        groupAdapter.notifyDataSetChanged()
+                    }
+            }
+            groupAdapter = GroupAdapter(
+                listsGroups = groups,
+                context = this@ContactsAndGroupsActivity,
+                needsLine = false,
+                needsIcon = false
+            )
+            binding.listGroups.adapter = groupAdapter
+        }
+
+        groupAdapter.setOnItemClickListener(object : GroupAdapter.ItemClickListener {
+            override fun onSeeGroupClicked(group: Group, position: Int) {
+                val intent = Intent(this@ContactsAndGroupsActivity, CreateGroupActivity::class.java)
+                intent.putExtra("edit", true)
+                intent.putExtra("groupId", group.id)
+                startActivity(intent)
+            }
+
+            override fun onEditGroupClicked(group: Group, position: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onRemoveGroupClicked(group: Group, position: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun goToNewGroup() {

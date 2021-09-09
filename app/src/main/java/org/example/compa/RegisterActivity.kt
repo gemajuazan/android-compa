@@ -16,6 +16,7 @@ import org.example.compa.databinding.RegisterActivityBinding
 import org.example.compa.db.CompaSQLiteOpenHelper
 import org.example.compa.models.Person
 import org.example.compa.models.User
+import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.menu.MenuActivity
 import org.example.compa.utils.MaterialDialog
 import java.text.ParseException
@@ -143,6 +144,8 @@ class RegisterActivity : AppCompatActivity() {
                         e.printStackTrace();
                     }
 
+
+                    AppPreference.setUserUID(user?.uid ?: "")
                     val newPerson = Person(
                         id = user?.uid ?: "",
                         name = registerName?.text.toString(),
