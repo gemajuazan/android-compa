@@ -9,7 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
 import org.example.compa.databinding.CreateGroupActivityBinding
 import org.example.compa.databinding.FriendsListBinding
-import org.example.compa.databinding.ItemFriendBinding
 import org.example.compa.models.Friend
 import org.example.compa.models.Group
 import org.example.compa.models.Member
@@ -33,6 +32,10 @@ class CreateGroupActivity : AppCompatActivity() {
     private var friendAdapter = FriendAdapter(arrayListOf(), false)
     private var membersAdapter = TextAdapter(arrayListOf(), needsLine = true, needsIcon = true)
 
+    private var onlyRead: Boolean = false
+    private var edit: Boolean = false
+    private var groupId: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = CreateGroupActivityBinding.inflate(layoutInflater)
@@ -44,9 +47,60 @@ class CreateGroupActivity : AppCompatActivity() {
         initFirebase()
         binding.membersGroup.layoutManager = LinearLayoutManager(this)
         setToolbar()
-        getMembers()
         setOnClickListeners()
+        when (intent.getIntExtra("action", -1)) {
+            1 -> {
+                binding.addMember.visibility = View.GONE
+                binding.addMemberToList.visibility = View.GONE
+                binding.addGroup.visibility = View.GONE
+                binding.nameTextInputLayout.isEnabled = false
+                binding.placeTextInputLayout.isEnabled = false
+                setGroupData(intent.getStringExtra("groupId") ?: "")
+                onlyRead = true
+                getMembers()
+            }
+            2 -> {
+                onlyRead = false
+                edit = true
+                setGroupData(intent.getStringExtra("groupId") ?: "")
+                getMembers()
+            }
+            else -> {
+                onlyRead = false
+                members.clear()
+                members.add(
+                    Member(
+                        AppPreference.getUserUID(),
+                        AppPreference.getUserName(),
+                        AppPreference.getUserUsername(),
+                        AppPreference.getUserEmail()
+                    )
+                )
+                getMembers()
+            }
+        }
 
+    }
+
+    private fun setGroupData(newGroupId: String) {
+        groupId = newGroupId
+        db.collection("groups").document(groupId).get().addOnSuccessListener {
+            val name = it.data?.get("name") as String
+            val place = it.data?.get("place") as String
+            binding.nameEditText.setText(name)
+            binding.placeEditText.setText(place)
+            db.collection("groups").document(groupId).collection("members").get()
+                .addOnSuccessListener {
+                    for (member in it.documents) {
+                        val id = member.get("id") as String
+                        val name = member.get("name") as String
+                        val username = member.get("username") as String
+                        val email = member.get("email") as String
+                        members.add(Member(id, name, username, email))
+                    }
+                    getMembers()
+                }
+        }
     }
 
     private fun initFirebase() {
@@ -62,10 +116,17 @@ class CreateGroupActivity : AppCompatActivity() {
 
     private fun getMembers() {
         numMembers = members.size
-        membersAdapter = TextAdapter(members, needsLine = true, needsIcon = true)
+        membersAdapter = if (onlyRead)
+            TextAdapter(members, needsLine = true, needsIcon = false)
+        else
+            TextAdapter(members, needsLine = true, needsIcon = true)
+
         membersAdapter.setOnItemClickListener(object : TextAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                members.removeAt(position)
+                if (position > -1 && position < members.size) {
+                    members.removeAt(position)
+                    getMembers()
+                }
             }
         })
         binding.membersGroup.adapter = membersAdapter
@@ -91,7 +152,7 @@ class CreateGroupActivity : AppCompatActivity() {
             dialogBinding.friendsRecyclerView.visibility = View.VISIBLE
             friendAdapter = FriendAdapter(friends, false)
             dialogBinding.friendsRecyclerView.adapter = friendAdapter
-            friendAdapter.setOnItemClickListener(object: FriendAdapter.ItemClickListener {
+            friendAdapter.setOnItemClickListener(object : FriendAdapter.ItemClickListener {
                 override fun onItemClicked(person: Person, position: Int) {
                     binding.memberEditText.setText(person.username)
                     dialog.dismiss()
@@ -100,7 +161,14 @@ class CreateGroupActivity : AppCompatActivity() {
                             setTitle(getString(R.string.add_member_button))
                             setMessage(getString(R.string.do_you_want_to_add_this_compa))
                             setPositiveButton(getString(R.string.accept)) { _, _ ->
-                                members.add(Member(person.id, name = person.name + " " + person.surnames, username = person.username, email = person.email))
+                                members.add(
+                                    Member(
+                                        person.id,
+                                        name = person.name + " " + person.surnames,
+                                        username = person.username,
+                                        email = person.email
+                                    )
+                                )
                                 getMembers()
                                 binding.memberEditText.setText("")
                                 binding.memberEditText.clearFocus()
@@ -122,7 +190,21 @@ class CreateGroupActivity : AppCompatActivity() {
             dialog.show()
         }
         binding.addGroup.setOnClickListener {
-            showGroupAddedMessage()
+            if (edit) showGroupEditMessage()
+            else {
+                if (binding.nameEditText.text.toString()
+                        .isNotBlank() && binding.placeEditText.text.toString().isNotBlank()
+                ) showGroupAddedMessage()
+                else {
+                    if (binding.nameEditText.text.toString().isBlank()) binding.nameTextInputLayout.error = getString(R.string.empty_field)
+                    if (binding.placeEditText.text.toString().isBlank()) binding.placeTextInputLayout.error = getString(R.string.empty_field)
+
+                    MaterialDialog.createDialog(this) {
+                        setTitle(R.string.check_fields)
+                        setMessage(R.string.check_fields_info)
+                    }.show()
+                }
+            }
         }
     }
 
@@ -131,12 +213,41 @@ class CreateGroupActivity : AppCompatActivity() {
             setTitle(getString(R.string.add_group))
             setMessage(getString(R.string.do_you_want_to_add_group))
             setPositiveButton(getString(R.string.meh)) { _, _ ->
-                val id = getRandomString(12)
-                val group = Group(id = id, name = binding.nameEditText.text.toString(), place = binding.placeEditText.text.toString())
+                val id = getRandomString(16)
+                val group = Group(
+                    id = id,
+                    name = binding.nameEditText.text.toString(),
+                    place = binding.placeEditText.text.toString()
+                )
                 db.collection("groups").document(id).set(group)
 
                 for ((position, member) in members.withIndex()) {
-                    db.collection("groups").document(id).collection("members").document(member.id).set(member)
+                    db.collection("groups").document(id).collection("members").document(member.id)
+                        .set(member)
+                    if (position == members.size - 1) {
+                        finish()
+                    }
+                }
+            }
+            setNegativeButton(getString(R.string.no_no_no)) { _, _ -> }
+        }.show()
+    }
+
+    private fun showGroupEditMessage() {
+        MaterialDialog.createDialog(this) {
+            setTitle(getString(R.string.add_group))
+            setMessage(getString(R.string.do_you_want_to_add_group))
+            setPositiveButton(getString(R.string.meh)) { _, _ ->
+
+                db.collection("groups").document(groupId)
+                    .update("name", binding.nameEditText.text.toString())
+                db.collection("groups").document(groupId)
+                    .update("place", binding.placeEditText.text.toString())
+                db.collection("groups").document(groupId).collection("members").document().delete()
+
+                for ((position, member) in members.withIndex()) {
+                    db.collection("groups").document(groupId).collection("members")
+                        .document(member.id).set(member)
                     if (position == members.size - 1) {
                         finish()
                     }

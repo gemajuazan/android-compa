@@ -36,4 +36,7 @@
     <string name="no_pending_friends">No tienes peticiones de amistad pendientes</string>
     <string name="do_you_want_to_delete_friend">¿Deseas eliminar a este amigo?</string>
     <string name="select_friend">Selecciona a un amigo</string>
+    <string name="do_you_want_to_delete_group">¿Quieres eliminar este grupo?</string>
+    <string name="delete_group">Eliminar grupo</string>
+    <string name="of_course_madafak">Que les den</string>
 </resources>

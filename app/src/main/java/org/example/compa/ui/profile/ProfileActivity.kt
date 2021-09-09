@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
 import org.example.compa.databinding.ProfileActivityBinding
 import org.example.compa.models.Person
+import org.example.compa.preferences.AppPreference
 import org.example.compa.utils.DateUtil
 import org.example.compa.utils.MaterialDialog
 import java.util.*
@@ -67,6 +68,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.birthdateTextView.text = DateUtil.getDate(person?.birthdate ?: -1, "dd/MM/yyyy")
         binding.profileProgress.visibility = View.GONE
         binding.toolbarProfile.view.visibility = View.VISIBLE
+
+        AppPreference.setUserEmail(person?.email ?: "")
+        AppPreference.setUserName(person?.name + " " + person?.surnames)
+        AppPreference.setUserUsername(person?.username ?: "")
     }
 
     private fun getPerson() {
@@ -88,6 +93,7 @@ class ProfileActivity : AppCompatActivity() {
                 email = email,
                 username = username
             )
+
             setPerson()
         }
     }

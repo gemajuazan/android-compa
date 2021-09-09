@@ -88,44 +88,6 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun saveInDatabase() {
-        val db = CompaSQLiteOpenHelper(
-            this,
-            "dbCompa",
-            null,
-            CompaSQLiteOpenHelper.DATABASE_VERSION
-        )
-        val dbCompa = db.writableDatabase
-
-        val name = registerName?.text.toString()
-        val surnames = registerSurnames?.text.toString()
-        val birthdate = registerBirthdate?.text.toString()
-        val username = registerUsername?.text.toString()
-        val email = registerEmail?.text.toString()
-        val password = registerPassword?.text.toString()
-
-
-        val myFormat = "dd/MM/yyyy" //In which you need put here
-        val sdf = SimpleDateFormat(myFormat)
-        try {
-            val d: Date = sdf.parse(birthdate)
-            time = d.time
-        } catch (e: ParseException) {
-            e.printStackTrace();
-        }
-
-        val register = ContentValues()
-        register.put("name", name)
-        register.put("surnames", surnames)
-        register.put("birthdate", time)
-        register.put("username", username)
-        register.put("email", email)
-        register.put("password", password)
-
-        dbCompa.insert("user", null, register)
-        dbCompa.close()
-    }
-
     private fun registerInDatabase() {
         auth.createUserWithEmailAndPassword(registerEmail?.text.toString(), registerPassword?.text.toString())
             .addOnCompleteListener(this
@@ -154,6 +116,10 @@ class RegisterActivity : AppCompatActivity() {
                         email = registerEmail?.text.toString(),
                         username = registerUsername?.text.toString()
                     )
+
+                    AppPreference.setUserEmail(registerEmail?.text.toString())
+                    AppPreference.setUserName(registerName?.text.toString() + " " + registerSurnames?.text.toString())
+                    AppPreference.setUserUsername(registerUsername?.text.toString())
 
                     db.collection("user").document(user?.uid ?: "").set(newUser)
                     db.collection("person").document(user?.uid ?: "").set(newPerson)

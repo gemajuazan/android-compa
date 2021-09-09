@@ -10,6 +10,7 @@ import org.example.compa.databinding.ContactsAndGroupsActivityBinding
 import org.example.compa.models.Group
 import org.example.compa.models.Member
 import org.example.compa.ui.adapters.GroupAdapter
+import org.example.compa.utils.MaterialDialog
 
 class ContactsAndGroupsActivity : AppCompatActivity() {
     private lateinit var binding: ContactsAndGroupsActivityBinding
@@ -55,6 +56,12 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     }
 
     private fun getGroups(groups: ArrayList<Group>) {
+        groupAdapter = GroupAdapter(
+            listsGroups = groups,
+            context = this@ContactsAndGroupsActivity,
+            needsLine = false,
+            needsIcon = false
+        )
         db.collection("groups").get().addOnSuccessListener { groupsFirebase ->
             for (data in groupsFirebase.documents) {
                 val groupId = data.get("id") as String
@@ -83,22 +90,40 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                 needsIcon = false
             )
             binding.listGroups.adapter = groupAdapter
+            setActionsGroup()
         }
 
+    }
+
+    private fun setActionsGroup() {
         groupAdapter.setOnItemClickListener(object : GroupAdapter.ItemClickListener {
             override fun onSeeGroupClicked(group: Group, position: Int) {
                 val intent = Intent(this@ContactsAndGroupsActivity, CreateGroupActivity::class.java)
-                intent.putExtra("edit", true)
+                intent.putExtra("action", 1)
                 intent.putExtra("groupId", group.id)
                 startActivity(intent)
             }
 
             override fun onEditGroupClicked(group: Group, position: Int) {
-                TODO("Not yet implemented")
+                val intent = Intent(this@ContactsAndGroupsActivity, CreateGroupActivity::class.java)
+                intent.putExtra("groupId", group.id)
+                intent.putExtra("action", 2)
+                startActivity(intent)
             }
 
             override fun onRemoveGroupClicked(group: Group, position: Int) {
-                TODO("Not yet implemented")
+                MaterialDialog.createDialog(this@ContactsAndGroupsActivity) {
+                    setTitle(R.string.delete_group)
+                    setMessage(R.string.do_you_want_to_delete_group)
+                    setPositiveButton(R.string.of_course_madafak) { _, _ ->
+                        db.collection("groups").document(group.id).delete()
+                        getGroups(arrayListOf())
+                    }
+                    setNegativeButton(R.string.cancel) { _, _ ->
+
+                    }
+                }.show()
+
             }
 
         })
