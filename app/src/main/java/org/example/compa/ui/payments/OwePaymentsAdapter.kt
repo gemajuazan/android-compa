@@ -29,21 +29,21 @@ class OwePaymentsAdapter(private val listHistorialPayments: ArrayList<Payment>) 
     override fun getItemCount() = listHistorialPayments.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        private val transmitter: TextView = itemView.findViewById(R.id.owe_transmitter)
+        /*private val transmitter: TextView = itemView.findViewById(R.id.owe_transmitter)
         private val receiver: TextView = itemView.findViewById(R.id.owe_receiver)
         private val price: TextView = itemView.findViewById(R.id.owe_price)
         private val date: TextView = itemView.findViewById(R.id.owe_date)
-        private val concept: TextView = itemView.findViewById(R.id.owe_payments_concept)
+        private val concept: TextView = itemView.findViewById(R.id.owe_payments_concept)*/
 
         fun bind(item: Payment) {
-            val dateC = Date(item.date.toLong())
+            /*val dateC = Date(item.date.toLong())
             val df = SimpleDateFormat("dd/MM/yyyy")
 
             transmitter.text = item.transmitter
             receiver.text = item.receiver
             price.text = item.price.toString() + " €"
             date.text = df.format(dateC)
-            concept.text = item.concept
+            concept.text = item.concept*/
         }
     }
 }

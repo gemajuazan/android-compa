@@ -228,6 +228,10 @@ class CreateGroupActivity : AppCompatActivity() {
                         finish()
                     }
                 }
+                for (member in members) {
+                    db.collection("person").document(member.id).collection("groups").document(id).set(group)
+                }
+
             }
             setNegativeButton(getString(R.string.no_no_no)) { _, _ -> }
         }.show()

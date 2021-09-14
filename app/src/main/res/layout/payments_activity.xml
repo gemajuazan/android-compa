@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.payments.PaymentsActivity">
+    android:background="@color/onPrimaryColor"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@color/colorBackground">
 
-        <Toolbar
+        <include
             android:id="@+id/toolbar_payments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:title="Pagos"
-            android:navigationIcon="@drawable/ic_arrow_back_red_24"
-            android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:titleTextColor="@color/primaryColor" />
+            layout="@layout/compa_toolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/colorBackground"
             app:tabIndicatorColor="@color/primaryColor"
-            app:tabSelectedTextColor="@color/primaryColor"/>
+            app:tabSelectedTextColor="@color/primaryColor" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/onPrimaryColor"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/primaryColor"
-        android:foregroundTint="@android:color/white"
-        android:src="@drawable/ic_baseline_money_off_24"
-        android:tint="@color/primaryColor"
-        app:backgroundTint="@color/primaryColor"
-        app:layout_anchor="@+id/view_pager"
-        app:layout_anchorGravity="end|bottom"
-        app:rippleColor="@android:color/white" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_collection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="96dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:foregroundTint="@android:color/white"
-        android:src="@drawable/ic_baseline_get_money_24"
-        android:tint="@color/onPrimaryColor"
-        app:backgroundTint="@android:color/holo_green_dark"
-        app:layout_anchor="@+id/view_pager"
-        app:layout_anchorGravity="end|bottom"
-        app:rippleColor="@android:color/white" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/primaryColor" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/pay_debt"
+            app:shapeAppearance="@style/LetMeLogIn" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_collection"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/onPrimaryColor"
+            android:text="@string/collect_payment"
+            app:shapeAppearance="@style/IHaveAccount" />
+
+    </LinearLayout>
+</LinearLayout>
+

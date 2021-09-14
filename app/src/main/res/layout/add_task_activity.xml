@@ -4,212 +4,419 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F5F5"
+    android:background="@color/colorBackground"
     tools:context=".ui.tasks.AddTaskActivity">
-
-    <Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:navigationIcon="@drawable/ic_arrow_back_red_24"
-        android:title="Añadir una nueva tarea"
-        android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:titleTextColor="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <include
+                    android:id="@+id/compa_toolbar"
+                    layout="@layout/compa_toolbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CompaCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="24dp"
-                    android:orientation="vertical">
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/add_task_info_form"
-                        android:textColor="@color/secondaryColor"
-                        android:textSize="16sp" />
+                        android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:id="@+id/add_task_name_task"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="16dp"
-                        app:boxCornerRadiusTopStart="16dp"
-                        app:boxStrokeColor="@color/onPrimaryColor">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_name_task_edit"
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/primaryColor"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:letterSpacing="0.2"
+                            android:text="@string/task_data"
+                            android:textAllCaps="true"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/colorDivider" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/name_text_input_layout"
+                            style="@style/CompaTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
                             android:hint="@string/name_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                            app:boxStrokeWidth="1px">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_task_start_date"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/onPrimaryColor">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/name_edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="12dp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_start_date_edit"
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/group_text_input_layout"
+                            style="@style/CompaTextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/start_date_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/primaryColor"/>
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/group"
+                            app:boxStrokeWidth="1px">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/group_edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:inputType="none"
+                                android:longClickable="false"
+                                android:padding="12dp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_task_finish_date"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/onPrimaryColor">
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_finish_date_edit"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/finish_date_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/primaryColor" />
+                            android:layout_marginTop="8dp">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/date_start_text_input_layout"
+                                style="@style/CompaTextInputLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
+                                android:hint="@string/start_date_task"
+                                app:boxStrokeWidth="1px"
+                                app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_task_category"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        app:boxStrokeColor="@color/onPrimaryColor">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/date_start_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="none"
+                                    android:longClickable="false"
+                                    android:padding="12dp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_category_edit"
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_arrow_right"
+                                app:tint="@color/primaryColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/date_finish_text_input_layout"
+                                style="@style/CompaTextInputLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_weight="1"
+                                android:hint="@string/finish_date_task"
+                                app:boxStrokeWidth="1px"
+                                app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/date_finish_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="none"
+                                    android:longClickable="false"
+                                    android:padding="12dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/description_text_input_layout"
+                            style="@style/CompaTextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/category_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/primaryColor" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_task_description"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        app:boxCornerRadiusBottomEnd="16dp"
-                        app:boxStrokeColor="@color/onPrimaryColor">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_description_edit"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
                             android:hint="@string/description_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/primaryColor"/>
+                            app:boxStrokeWidth="1px">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/description_edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:gravity="top"
+                                android:inputType="textMultiLine"
+                                android:overScrollMode="always"
+                                android:padding="12dp"
+                                android:scrollbarStyle="insideInset"
+                                android:scrollbars="vertical" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/members_task_info"
-                        android:textColor="@color/secondaryColor"
-                        android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/members_task_info_subtitle"
-                        android:textColor="@color/secondaryColor"
-                        android:textSize="12sp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_task_members"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="@color/primaryColor">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_task_members_edit"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/category_text_input_layout"
+                            style="@style/CompaTextInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/members_task"
-                            android:paddingVertical="12dp"
-                            android:textColor="#4C4B4B"
-                            android:textColorHint="#4E4D4D"
-                            android:backgroundTint="@color/primaryColor" />
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:hint="@string/category_task"
+                            app:boxStrokeWidth="1px">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/category_edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="12dp" />
 
-                    <Button
-                        android:id="@+id/add_task_button"
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CompaCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/members_title_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:letterSpacing="0.2"
+                            android:text="@string/members_group"
+                            android:textAllCaps="true"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/status_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/status"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:visibility="visible" />
+
+                        <View
+                            android:id="@+id/view3"
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/colorDivider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/members_title_text_view" />
+
+                        <LinearLayout
+                            android:id="@+id/members_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view3">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/members_task_recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+
+                                tools:itemCount="5" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/no_members"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="32dp"
+                                android:layout_marginVertical="8dp"
+                                android:text="@string/no_members_added"
+                                android:textAlignment="center"
+                                android:textColor="@color/primaryDisabledColor"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+
+                            <LinearLayout
+                                android:id="@+id/add_member_linear_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:orientation="horizontal"
+                                android:visibility="gone"
+                                tools:visibility="visible">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/member_text_input_layout"
+                                    style="@style/CompaTextInputLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:hint="@string/add_member_group_input_layout"
+                                    app:boxStrokeWidth="1px">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/member_edit_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
+                                        android:longClickable="false" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <ImageButton
+                                    android:id="@+id/add_member_to_list"
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="8dp"
+                                    android:background="?selectableItemBackground"
+                                    android:clickable="true"
+                                    android:src="@drawable/ic_baseline_add_circle_24"
+                                    android:tint="@color/primaryColor" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/work_linear_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginVertical="8dp"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/members_info"
+                            tools:visibility="visible">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/work_realized"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:text="@string/work_realized" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/percentage_work_realized"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:textColor="@color/colorError"
+                                android:textSize="24sp"
+                                tools:text="25%" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/add_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/primaryColor"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right">
+
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/add_task"
-                        android:textColor="@android:color/white"
-                        android:backgroundTint="@color/colorAccent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </RelativeLayout>
+                        android:layout_margin="8dp"
+                        android:text="@string/add_member_button"
+                        android:textColor="@color/onPrimaryColor"
+                        android:textSize="14sp" />
 
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/save_task"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="16dp"
+                    android:backgroundTint="@color/primaryColor"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:textAllCaps="true"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:letterSpacing="0.2"
+                        android:textColor="@color/onPrimaryColor"
+                        android:text="@string/save_info" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
     </ScrollView>
 
 

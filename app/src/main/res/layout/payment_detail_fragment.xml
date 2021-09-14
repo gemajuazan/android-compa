@@ -1,0 +1,172 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/payment_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="@string/payment_detail" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical|center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emisor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondaryLightColor"
+                android:textSize="18sp"
+                tools:text="compañero1" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_arrow_right"
+                android:tint="@color/primaryColor" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/receptor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondaryLightColor"
+                android:textSize="18sp"
+                tools:text="compañero2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/primaryDarkColor"
+                android:text="@string/pay_concept" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/concept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryLightColor"
+                android:layout_weight="1"
+                tools:text="Café y tostadas"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/primaryDarkColor"
+                android:text="@string/pay_price" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryLightColor"
+                android:layout_weight="1"
+                tools:text="12€"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/primaryDarkColor"
+                android:text="@string/pay_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryDisabledColor"
+                android:layout_weight="1"
+                tools:text="28 FEB 2028" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/payment_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/primaryDarkColor"
+                android:text="@string/status" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_weight="1"
+                tools:text="28 FEB 2028" />
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mark_as_paid_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="24dp"
+            android:clickable="true"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right"
+            app:cardBackgroundColor="@color/primaryColor">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mark_as_paid_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:textColor="@color/onPrimaryColor"
+                android:gravity="center_vertical|center"
+                android:textAllCaps="true"
+                android:padding="8dp"
+                android:textSize="10sp"
+                android:letterSpacing="0.2"
+                tools:text="@string/mark_as_paid" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</FrameLayout>

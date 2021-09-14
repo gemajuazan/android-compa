@@ -54,7 +54,7 @@ class TasksAdapter(
         }
 
         fun bind(item: Task) {
-            if (item.mine) {
+            /*if (item.mine) {
                 cardViewMyTask.visibility = View.VISIBLE
                 cardViewNoMyTask.visibility = View.GONE
                 mineNameTask.text = item.name.toUpperCase()
@@ -80,7 +80,7 @@ class TasksAdapter(
                 } else {
                     membersTask.text = item.numberMembers.toString() + " miembro"
                 }
-            }
+            }*/
 
 
         }

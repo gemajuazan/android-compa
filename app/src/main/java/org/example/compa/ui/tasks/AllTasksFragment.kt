@@ -40,12 +40,12 @@ class AllTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
     }
 
     private fun initializeTasks() {
-        listMembers.add(Member("0", "Gema Juárez", "gemajuazan", ""))
-        val task = Task(0, "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", false)
+        /*listMembers.add(Member("0", "Gema Juárez", "gemajuazan", ""))
+        val task = Task("0", "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", false)
         listTasks.add(task)
 
-        val task2 = Task(0, "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", true)
-        listTasks.add(task2)
+        val task2 = Task("0", "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", true)
+        listTasks.add(task2)*/
     }
 
     override fun onItemClick(position: Int) {

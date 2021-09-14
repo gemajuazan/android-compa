@@ -39,4 +39,26 @@
     <string name="do_you_want_to_delete_group">¿Quieres eliminar este grupo?</string>
     <string name="delete_group">Eliminar grupo</string>
     <string name="of_course_madafak">Que les den</string>
+    <string name="task_data">Datos de la tarea</string>
+    <string name="status">Estado</string>
+    <string name="work_realized">Trabajo realizado</string>
+    <string name="for_doing">Por hacer</string>
+    <string name="in_process">En proceso</string>
+    <string name="in_revision">En revisión</string>
+    <string name="finished">Finalizado</string>
+    <string name="no_info">Sin información</string>
+    <string name="select_group">Selecciona grupo</string>
+    <string name="historial">Historial</string>
+    <string name="owe_me">Me deben</string>
+    <string name="what_i_owe">Debo</string>
+    <string name="pay_debt">Pagar deuda</string>
+    <string name="collect_payment">Cobrar pago</string>
+    <string name="paid">Pagado</string>
+    <string name="unpaid">Sin pagar</string>
+    <string name="payment_detail">Detalle del pago</string>
+    <string name="mark_as_paid">Marcado como pagado</string>
+    <string name="who_pay">¿A quién quieres pagar?</string>
+    <string name="do_you_want_to_add_this_payment">¿Estás seguro de añadir este pago?</string>
+    <string name="who_collect">¿A quién quieres cobrar?</string>
+    <string name="do_you_want_to_add_this_collection">¿Estás seguro de añadir este cobro?</string>
 </resources>

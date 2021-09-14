@@ -36,7 +36,7 @@ class HistorialPaymentsAdapter(private val listHistorialPayments: ArrayList<Paym
             transmitter.text = item.transmitter
             receiver.text = item.receiver
             price.text = item.price.toString() + "€"
-            date.text = item.date
+            //date.text = item.date
 
             //if (item.statusPayment == "PAY") price.setTextColor(android.R.color.holo_red_dark)
             //if (item.statusPayment == "REF") price.setTextColor(android.R.color.holo_green_dark)
