@@ -1,15 +1,9 @@
 package org.example.compa.ui.payments
 
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +15,9 @@ import org.example.compa.databinding.MyPaymentsFragmentBinding
 import org.example.compa.databinding.PaymentDetailFragmentBinding
 import org.example.compa.models.Payment
 import org.example.compa.preferences.AppPreference
+import org.example.compa.utils.DateUtil
+import java.text.NumberFormat
+import java.util.*
 
 
 class MyPaymentsFragment : Fragment() {
@@ -42,7 +39,6 @@ class MyPaymentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         db = FirebaseFirestore.getInstance()
-        initializePayments()
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -53,6 +49,7 @@ class MyPaymentsFragment : Fragment() {
 
     private fun initializePayments() {
         payments.clear()
+        binding.loader.visibility = View.VISIBLE
         paymentAdapter = MyPaymentAdapter(payments, requireContext())
         db.collection("payments").get().addOnSuccessListener {
             for (payment in it.documents) {
@@ -72,7 +69,7 @@ class MyPaymentsFragment : Fragment() {
                             id = id,
                             transmitter = transmitter,
                             receiver = receiver,
-                            price = price.toDouble(),
+                            price = price,
                             date = date,
                             concept = concept,
                             typePayment = typePayment,
@@ -87,6 +84,7 @@ class MyPaymentsFragment : Fragment() {
                 }
             }
         }
+        binding.loader.visibility = View.GONE
     }
 
     private fun onClickPayment() {
@@ -102,16 +100,38 @@ class MyPaymentsFragment : Fragment() {
         val paymentDialog = BottomSheetDialog(requireContext())
         val paymentBinding = PaymentDetailFragmentBinding.inflate(layoutInflater)
 
+        var changed = false
+
         paymentBinding.emisor.text = payment.transmitter
         paymentBinding.receptor.text = payment.receiver
         paymentBinding.concept.text = payment.concept
-        paymentBinding.date.text = payment.date.toString()
-        paymentBinding.price.text = payment.price.toString()
+        paymentBinding.date.text = DateUtil.getDate(payment.date ?: -1, "dd/MM/yyyy")
+
+        val format: NumberFormat = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 2
+        format.currency = Currency.getInstance("EUR")
+        paymentBinding.price.text = format.format(payment.price)
+
+        if (payment.statusPayment == "NPA") {
+            paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_paid)
+        } else {
+            paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_unpaid)
+        }
 
         paymentBinding.markAsPaidCard.setOnClickListener {
-            payPayment(payment)
+            changed = true
+            if (payment.statusPayment == "NPA") {
+                payPayment(payment)
+                paymentBinding.status.text = getString(R.string.paid)
+                paymentBinding.status.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+                paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_unpaid)
+            } else {
+                payPayment(payment)
+                paymentBinding.status.text = getString(R.string.unpaid)
+                paymentBinding.status.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorError))
+                paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_paid)
+            }
             paymentBinding.paymentStatus.visibility = View.VISIBLE
-            paymentBinding.status.text = getString(R.string.paid)
         }
 
         paymentDialog.setContentView(paymentBinding.root)
@@ -120,25 +140,8 @@ class MyPaymentsFragment : Fragment() {
 
         paymentDialog.show()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            val window: Window? = paymentDialog.window
-            if (window != null) {
-                val metrics = DisplayMetrics()
-
-                window.windowManager.defaultDisplay.getMetrics(metrics)
-
-                val dimDrawable = GradientDrawable()
-                val navigationDrawable = GradientDrawable()
-
-                navigationDrawable.shape = GradientDrawable.RECTANGLE
-                navigationDrawable.setColor(ContextCompat.getColor(requireContext(), R.color.onPrimaryColor))
-
-                val layers: Array<Drawable> = arrayOf(dimDrawable, navigationDrawable)
-                val windowBackground = LayerDrawable(layers)
-
-                windowBackground.setLayerInsetTop(1, metrics.heightPixels - 10)
-                window.setBackgroundDrawable(windowBackground)
-            }
+        paymentDialog.setOnDismissListener {
+            if (changed) initializePayments()
         }
     }
 

@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:clickable="true"
+        app:strokeColor="@color/colorStrokeLeft"
+        app:strokeWidth="1px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,25 +27,27 @@
             android:layout_marginHorizontal="8dp"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/status_no_payment_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="84dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:visibility="gone"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/colorError"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:cardBackgroundColor="@color/colorError">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/status_no_payment"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:letterSpacing="0.1"
                         tools:text="PAGADO" />
@@ -52,19 +56,19 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/status_payment_card"
-                    android:layout_width="wrap_content"
+                    android:layout_width="84dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:visibility="gone"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/colorAccent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:cardBackgroundColor="@color/colorAccent">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/status_payment"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:letterSpacing="0.1"
                         tools:text="PAGADO" />
@@ -76,11 +80,10 @@
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_weight="0"
                     tools:text="5,99€" />
 
                 <LinearLayout
@@ -88,16 +91,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:gravity="center_vertical|end">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/emisor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         tools:text="compañero1" />
 
                     <ImageView
@@ -110,12 +110,12 @@
                         android:id="@+id/receptor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         tools:text="compañero2" />
 
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/concept"

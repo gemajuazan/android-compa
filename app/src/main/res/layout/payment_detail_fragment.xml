@@ -23,7 +23,7 @@
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginVertical="16dp"
             android:gravity="center_vertical|center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
                 android:id="@+id/emisor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/secondaryLightColor"
+                android:textColor="@color/primaryColor"
                 android:textSize="18sp"
                 tools:text="compañero1" />
 
@@ -41,13 +41,13 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/ic_arrow_right"
-                android:tint="@color/primaryColor" />
+                android:tint="@color/primaryDarkColor" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/receptor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/secondaryLightColor"
+                android:textColor="@color/primaryColor"
                 android:textSize="18sp"
                 tools:text="compañero2" />
 
@@ -147,7 +147,7 @@
             android:id="@+id/mark_as_paid_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="24dp"
+            android:layout_marginVertical="32dp"
             android:clickable="true"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right"
             app:cardBackgroundColor="@color/primaryColor">

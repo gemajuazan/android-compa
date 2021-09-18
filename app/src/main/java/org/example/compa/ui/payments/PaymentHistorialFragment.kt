@@ -1,32 +1,22 @@
 package org.example.compa.ui.payments
 
-import android.app.DatePickerDialog
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
-import org.example.compa.databinding.AddPaymentFragmentBinding
 import org.example.compa.databinding.PaymentDetailFragmentBinding
 import org.example.compa.databinding.PaymentHistorialFragmentBinding
 import org.example.compa.models.Payment
 import org.example.compa.preferences.AppPreference
 import org.example.compa.utils.DateUtil
-import org.example.compa.utils.MaterialDialog
-import org.example.compa.utils.StyleUtil
+import java.text.NumberFormat
 import java.util.*
 
 class PaymentHistorialFragment : Fragment() {
@@ -56,6 +46,7 @@ class PaymentHistorialFragment : Fragment() {
 
     private fun initializePayments() {
         payments.clear()
+        binding.loader.visibility = View.VISIBLE
         paymentAdapter = MyPaymentAdapter(payments, requireContext())
         db.collection("payments").get().addOnSuccessListener {
             for (payment in it.documents) {
@@ -89,6 +80,7 @@ class PaymentHistorialFragment : Fragment() {
                     onClickPayment()
                 }
             }
+            binding.loader.visibility = View.GONE
         }
     }
 
@@ -105,19 +97,64 @@ class PaymentHistorialFragment : Fragment() {
         val paymentDialog = BottomSheetDialog(requireContext())
         val paymentBinding = PaymentDetailFragmentBinding.inflate(layoutInflater)
 
+        var changed = false
+
         paymentBinding.emisor.text = payment.transmitter
         paymentBinding.receptor.text = payment.receiver
         paymentBinding.concept.text = payment.concept
-        paymentBinding.date.text = payment.date.toString()
-        paymentBinding.price.text = payment.price.toString()
+
+        paymentBinding.date.text = DateUtil.getDate(payment.date ?: -1, "dd/MM/yyyy")
+
+        val format: NumberFormat = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 2
+        format.currency = Currency.getInstance("EUR")
+        paymentBinding.price.text = format.format(payment.price)
+
+        if (payment.transmitter == AppPreference.getUserUsername()) {
+            paymentBinding.price.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorError
+                )
+            )
+        } else {
+            paymentBinding.price.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorAccent
+                )
+            )
+        }
+
+        if (payment.statusPayment == "NPA") {
+            paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_paid)
+        } else {
+            paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_unpaid)
+        }
 
         paymentBinding.markAsPaidCard.setOnClickListener {
+            changed = true
             if (payment.statusPayment == "NPA") {
                 payPayment(payment, "PAY")
                 paymentBinding.status.text = getString(R.string.paid)
+                paymentBinding.status.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorAccent
+                    )
+                )
+                paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_unpaid)
+
             } else {
                 payPayment(payment, "NPA")
                 paymentBinding.status.text = getString(R.string.unpaid)
+                paymentBinding.status.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorError
+                    )
+                )
+                paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_paid)
             }
             paymentBinding.paymentStatus.visibility = View.VISIBLE
         }
@@ -128,7 +165,7 @@ class PaymentHistorialFragment : Fragment() {
 
         paymentDialog.show()
         paymentDialog.setOnDismissListener {
-            initializePayments()
+            if (changed) initializePayments()
         }
 
     }

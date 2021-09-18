@@ -61,4 +61,7 @@
     <string name="do_you_want_to_add_this_payment">¿Estás seguro de añadir este pago?</string>
     <string name="who_collect">¿A quién quieres cobrar?</string>
     <string name="do_you_want_to_add_this_collection">¿Estás seguro de añadir este cobro?</string>
+    <string name="pay">Pagar</string>
+    <string name="collect">Cobrar</string>
+    <string name="mark_as_unpaid">Marcar como impagado</string>
 </resources>

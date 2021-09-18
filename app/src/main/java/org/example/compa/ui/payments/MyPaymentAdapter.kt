@@ -11,6 +11,7 @@ import org.example.compa.R
 import org.example.compa.databinding.ItemMyPaymentRecyclerViewBinding
 import org.example.compa.databinding.ItemOwePaymentsRecyclerViewBinding
 import org.example.compa.models.Payment
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -28,7 +29,7 @@ class MyPaymentAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder {
         return when (viewType) {
-            0 -> {
+            1 -> {
                 ViewHolder(
                     ItemMyPaymentRecyclerViewBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -51,7 +52,7 @@ class MyPaymentAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
-            0 -> {
+            1 -> {
                 val holder1: ViewHolder = holder as ViewHolder
                 holder1.bind(payments[position], position)
             }
@@ -80,7 +81,12 @@ class MyPaymentAdapter(
 
             binding.emisor.text = item.transmitter
             binding.receptor.text = item.receiver
-            binding.price.text = item.price.toString() + " €"
+
+            val format: NumberFormat = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 2
+            format.currency = Currency.getInstance("EUR")
+            binding.price.text = format.format(item.price)
+
             binding.date.text = df.format(dateC)
             binding.concept.text = item.concept
 
@@ -119,7 +125,12 @@ class MyPaymentAdapter(
 
             binding.emisor.text = item.transmitter
             binding.receptor.text = item.receiver
-            binding.price.text = item.price.toString() + " €"
+
+            val format: NumberFormat = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 2
+            format.currency = Currency.getInstance("EUR")
+            binding.price.text = format.format(item.price)
+
             binding.date.text = df.format(dateC)
             binding.concept.text = item.concept
 
