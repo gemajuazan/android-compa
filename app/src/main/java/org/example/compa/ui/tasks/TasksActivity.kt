@@ -8,30 +8,31 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.add
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.tasks_activity.*
-import kotlinx.android.synthetic.main.tasks_activity.toolbar2
 import org.example.compa.R
+import org.example.compa.databinding.TasksActivityBinding
 
 class TasksActivity : AppCompatActivity() {
 
-    private lateinit var addTaskButton: FloatingActionButton
+    private lateinit var binding: TasksActivityBinding
     private var username: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.tasks_activity)
+        binding = TasksActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //setToolbar()
 
         if (intent.hasExtra("username")) username = intent.getStringExtra("username")!!
 
-
-        addTaskButton = findViewById(R.id.add_task)
-        addTaskButton.setOnClickListener {
+        binding.addTask.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.backButtonImageView.setOnClickListener {
+            finish()
         }
 
         var tabs: TabLayout = findViewById(R.id.tabs)

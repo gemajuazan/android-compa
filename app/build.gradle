@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-firestore'
 
-    implementation 'com.applandeo:material-calendar-view:1.4.0'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
     implementation 'androidx.preference:preference:1.1.1'
 
 

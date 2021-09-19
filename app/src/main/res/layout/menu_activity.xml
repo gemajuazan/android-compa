@@ -141,7 +141,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:id="@+id/entertainment"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
             android:layout_width="wrap_content"
@@ -158,9 +158,9 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp" />
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>-->
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:id="@+id/configuration"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
             android:layout_width="wrap_content"
@@ -177,7 +177,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>-->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/log_out"

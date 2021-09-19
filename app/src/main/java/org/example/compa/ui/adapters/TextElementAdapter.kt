@@ -6,21 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.example.compa.databinding.ItemTextBinding
 import org.example.compa.databinding.ItemTextWithoutIconBinding
+import org.example.compa.models.DataWithCode
 import org.example.compa.models.Member
 import org.example.compa.models.constants.Constants.StatusTask.Companion.getStatusTask
 import org.example.compa.models.constants.Constants.StatusTask.Companion.getStatusTaskCode
 
-class TextElementAdapter(private val listText: ArrayList<String>) :
+class TextElementAdapter(private val listText: ArrayList<DataWithCode>) :
     RecyclerView.Adapter<TextElementAdapter.ViewHolder>() {
 
     var itemClickListener: OnItemClickListener? = null
 
     inner class ViewHolder(private val binding: ItemTextWithoutIconBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(element: String) {
-            binding.text.text = element
+        fun bind(element: DataWithCode) {
+            binding.text.text = element.text
             binding.text.setOnClickListener {
-                itemClickListener?.onItemClick(element)
+                itemClickListener?.onItemClick(element.code)
             }
         }
     }

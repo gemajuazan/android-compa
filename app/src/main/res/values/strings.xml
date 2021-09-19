@@ -162,4 +162,13 @@
     <string name="pay">Pagar</string>
     <string name="collect">Cobrar</string>
     <string name="mark_as_unpaid">Marcar como impagado</string>
+    <string name="cleanliness">Limpieza</string>
+    <string name="buying">Compra</string>
+    <string name="trash">Basura</string>
+    <string name="washing">Fregar</string>
+    <string name="kitchen">Cocinar</string>
+    <string name="iron">Planchar</string>
+    <string name="select_category">Selecciona categoría</string>
+    <string name="personal_data">Información personal</string>
+    <string name="access_data">Información de acceso</string>
 </resources>

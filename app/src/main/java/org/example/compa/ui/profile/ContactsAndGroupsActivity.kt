@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
 import org.example.compa.databinding.ContactsAndGroupsActivityBinding
 import org.example.compa.models.Group
-import org.example.compa.models.Member
+import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.adapters.GroupAdapter
 import org.example.compa.utils.MaterialDialog
 
@@ -41,6 +41,9 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     private fun setTranslations() {
         binding.compaToolbar.profileTitle.text = getString(R.string.contacts)
         binding.compaToolbar.profileSubtitle.text = getString(R.string.and_groups)
+        binding.compaToolbar.backButtonImageView.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setFABConfiguration() {
@@ -62,36 +65,25 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
             needsLine = false,
             needsIcon = false
         )
-        db.collection("groups").get().addOnSuccessListener { groupsFirebase ->
-            for (data in groupsFirebase.documents) {
-                val groupId = data.get("id") as String
-                val name = data.get("name") as String
-                val place = data.get("place") as String
-                val members = arrayListOf<Member>()
-                db.collection("groups").document(groupId).collection("members").get()
-                    .addOnSuccessListener { membersFirebase ->
-                        for (member in membersFirebase.documents) {
-                            val email = member.get("email") as String
-                            val id = member.get("id") as String
-                            val name = member.get("name") as String
-                            val username = member.get("username") as String
-                            val member = Member(id, name, username, email)
-                            members.add(member)
-                        }
-                        val group = Group(groupId, name, place, members)
-                        groups.add(group)
-                        groupAdapter.notifyDataSetChanged()
-                    }
+        db.collection("person").document(AppPreference.getUserUID()).collection("groups").get()
+            .addOnSuccessListener {
+                for (group in it.documents) {
+                    val id = group.data?.get("id") as String
+                    val place = group.data?.get("place") as String
+                    val name = group.data?.get("name") as String
+                    groups.add(Group(id, name, place))
+                    groupAdapter.notifyDataSetChanged()
+
+                }
+                groupAdapter = GroupAdapter(
+                    groups, context = this@ContactsAndGroupsActivity,
+                    needsLine = false,
+                    needsIcon = false
+                )
+
+                binding.listGroups.adapter = groupAdapter
+                setActionsGroup()
             }
-            groupAdapter = GroupAdapter(
-                listsGroups = groups,
-                context = this@ContactsAndGroupsActivity,
-                needsLine = false,
-                needsIcon = false
-            )
-            binding.listGroups.adapter = groupAdapter
-            setActionsGroup()
-        }
 
     }
 

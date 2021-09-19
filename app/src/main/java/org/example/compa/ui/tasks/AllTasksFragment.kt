@@ -1,56 +1,93 @@
 package org.example.compa.ui.tasks
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.all_tasks_fragment.*
-import org.example.compa.R
-import org.example.compa.models.Member
+import com.google.firebase.firestore.FirebaseFirestore
+import org.example.compa.databinding.AllTasksFragmentBinding
+import org.example.compa.models.Group
 import org.example.compa.models.Task
+import org.example.compa.preferences.AppPreference
 
-class AllTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
+class AllTasksFragment : Fragment() {
 
-    private var listTasks = arrayListOf<Task>()
-    private var myTasks = arrayListOf<Task>()
-    private var listMembers = arrayListOf<Member>()
+    private lateinit var binding: AllTasksFragmentBinding
 
+    private var tasks = arrayListOf<Task>()
+    private lateinit var tasksAdapter: AllTasksAdapter
+
+    private lateinit var db: FirebaseFirestore
+    private var groupsWithId = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.all_tasks_fragment, container, false)
+        binding = AllTasksFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeTasks()
-        recycler_view_all_tasks.layoutManager = LinearLayoutManager(requireContext())
-        recycler_view_all_tasks.adapter = TasksAdapter(listTasks, this)
+        binding.recyclerViewAllTasks.layoutManager = LinearLayoutManager(requireContext())
+
+        db = FirebaseFirestore.getInstance()
+        getMyGroups()
     }
 
-    override fun onResume() {
-        super.onResume()
-        recycler_view_all_tasks.adapter?.notifyDataSetChanged()
+    private fun getTasks() {
+        tasks.clear()
+        tasksAdapter = AllTasksAdapter(tasks, requireContext())
+        db.collection("tasks").get().addOnSuccessListener {
+            for (task in it.documents) {
+                val hashMap = task.data?.get("group") as HashMap<String, Any>
+                val groupId = hashMap["id"] as String
+                if (checkGroup(groupId)) {
+                    val id = task.data?.get("id") as String
+                    val name = task.data?.get("name") as String
+                    val startDate = task.data?.get("startDate") as Long
+                    val finishDate = task.data?.get("finishDate") as Long
+                    val category = task.data?.get("category") as String
+                    val description = task.data?.get("description") as String
+                    val nameGroup = hashMap["name"] as String
+                    val task = Task(
+                        id = id,
+                        name = name,
+                        startDate = startDate,
+                        finishDate = finishDate,
+                        category = category,
+                        members = arrayListOf(),
+                        description = description,
+                        group = Group(groupId, nameGroup, "")
+                    )
+                    tasks.add(task)
+                }
+                tasksAdapter.notifyDataSetChanged()
+            }
+            tasksAdapter.notifyDataSetChanged()
+        }
+        tasksAdapter = AllTasksAdapter(tasks, requireContext())
+        binding.recyclerViewAllTasks.adapter = tasksAdapter
     }
 
-    private fun initializeTasks() {
-        /*listMembers.add(Member("0", "Gema Juárez", "gemajuazan", ""))
-        val task = Task("0", "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", false)
-        listTasks.add(task)
-
-        val task2 = Task("0", "Fregar platos", "05/04/2021", "05/04/2021", "Cocina", 1, listMembers, "Faena dura", true)
-        listTasks.add(task2)*/
+    private fun getMyGroups() {
+        db.collection("person").document(AppPreference.getUserUID()).collection("groups").get().addOnSuccessListener {
+            for (group in it.documents) {
+                val id = group.data?.get("id") as String
+                groupsWithId.add(id)
+            }
+            getTasks()
+        }
     }
 
-    override fun onItemClick(position: Int) {
-        val intent = Intent(requireContext(), TaskDetailActivity::class.java)
-        intent.putExtra("id", listTasks[position].id)
-        startActivity(intent)
+    private fun checkGroup(groupId: String): Boolean {
+        for (group in groupsWithId) {
+            if (group == groupId) return true
+        }
+        return false
     }
 }

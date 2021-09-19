@@ -3,13 +3,9 @@ package org.example.compa.ui.menu
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
-import org.example.compa.R
-import org.example.compa.databinding.EntertainmentActivityBinding
-import org.example.compa.databinding.LoginActivityBinding
 import org.example.compa.databinding.MenuActivityBinding
-import org.example.compa.ui.entertainment.EntertainmentActivity
+import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.friends.FriendsActivity
 import org.example.compa.ui.login.LoginActivity
 import org.example.compa.ui.payments.PaymentsActivity
@@ -26,6 +22,9 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MenuActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+        AppPreference.setUserUID(firebaseAuth.currentUser?.uid ?: "")
 
         if (intent.hasExtra("username"))  username = intent.getStringExtra("username")!!
 
@@ -54,10 +53,10 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.entertainment.setOnClickListener {
+        /*binding.entertainment.setOnClickListener {
             val intent = Intent(this, EntertainmentActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         binding.logOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

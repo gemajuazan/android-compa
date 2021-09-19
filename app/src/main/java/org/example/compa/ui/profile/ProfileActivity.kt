@@ -49,10 +49,6 @@ class ProfileActivity : AppCompatActivity() {
         binding.toolbarProfile.profileSubtitle.text = getString(R.string.menu_profile)
         binding.titleBirthdateTextView.text =
             getString(R.string.date_birth).toUpperCase(Locale.ROOT)
-        binding.titleContactsAndGroupsTextView.text =
-            getString(R.string.contacts_and_groups).toUpperCase(
-                Locale.ROOT
-            )
     }
 
     private fun personalizeView() {
@@ -111,10 +107,6 @@ class ProfileActivity : AppCompatActivity() {
         }
         binding.profileEditBirthdate.setOnClickListener {
             updateBirthdate()
-        }
-        binding.contactsAndGroupsCard.setOnClickListener {
-            val intent = Intent(this, ContactsAndGroupsActivity::class.java)
-            startActivity(intent)
         }
     }
 

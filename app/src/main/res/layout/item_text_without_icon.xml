@@ -24,6 +24,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="8dp"
         android:gravity="center"
+        android:visibility="gone"
         android:textColor="@color/primaryColor"
         android:text="@string/no_info"
         tools:text="texto@texto.com" />

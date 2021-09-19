@@ -78,6 +78,7 @@ class MyPaymentsFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
+
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerView.adapter = paymentAdapter
                     onClickPayment()

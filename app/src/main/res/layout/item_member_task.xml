@@ -23,6 +23,7 @@
         android:layout_weight="1"
         android:textAlignment="textEnd"
         android:textColor="@color/primaryColor"
+        android:visibility="gone"
         tools:text="Por hacer" />
 
     <ImageView
@@ -31,6 +32,7 @@
         android:layout_height="24dp"
         android:src="@drawable/ic_edit_24"
         app:tint="@color/secondaryLightColor"
+        android:visibility="gone"
         android:layout_marginHorizontal="8dp"
         android:background="?selectableItemBackgroundBorderless"/>
 

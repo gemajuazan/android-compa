@@ -1,19 +1,16 @@
 package org.example.compa
 
 import android.app.DatePickerDialog
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.databinding.RegisterActivityBinding
-import org.example.compa.db.CompaSQLiteOpenHelper
 import org.example.compa.models.Person
 import org.example.compa.models.User
 import org.example.compa.preferences.AppPreference
@@ -23,19 +20,9 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: RegisterActivityBinding
-
-    private var registerName: TextInputEditText? = null
-    private var registerSurnames: TextInputEditText? = null
-    private var registerBirthdate: TextInputEditText? = null
-    private var registerUsername: TextInputEditText? = null
-    private var registerEmail: TextInputEditText? = null
-    private var registerRepeatEmail: TextInputEditText? = null
-    private var registerPassword: TextInputEditText? = null
-    private var registerRepeatPassword: TextInputEditText? = null
 
     private val myCalendar = Calendar.getInstance()
     private var time: Long? = 0
@@ -54,17 +41,17 @@ class RegisterActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.register_button)
 
-        registerFields()
+        binding.toolbar2.profileSubtitle.text = getString(R.string.register)
 
         val date =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 myCalendar.set(Calendar.YEAR, year)
                 myCalendar.set(Calendar.MONTH, monthOfYear)
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabel()
             }
 
-        registerBirthdate?.setOnClickListener {
+        binding.registerBirthdateInputText.setOnClickListener {
             DatePickerDialog(
                 this@RegisterActivity,
                 date,
@@ -84,42 +71,40 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showMessageRegisterSuccessfully() {
         val intent = Intent(this, MenuActivity::class.java)
-        intent.putExtra("username", registerUsername?.text.toString())
+        intent.putExtra("username", binding.registerNameInputText.text.toString())
         startActivity(intent)
     }
 
     private fun registerInDatabase() {
-        auth.createUserWithEmailAndPassword(registerEmail?.text.toString(), registerPassword?.text.toString())
+        auth.createUserWithEmailAndPassword(binding.registerEmailInputText.text.toString(), binding.registerPasswordInputText.text.toString())
             .addOnCompleteListener(this
             ) { task ->
                 if (task.isSuccessful) {
                     val user: FirebaseUser? = auth.currentUser
 
-                    val newUser = User(registerUsername?.text.toString(), registerEmail?.text.toString(), user?.uid ?: "", user?.isEmailVerified ?: false)
+                    val newUser = User(binding.registerUsernameInputText.text.toString(), binding.registerEmailInputText.text.toString(), user?.uid ?: "", user?.isEmailVerified ?: false)
 
                     val myFormat = "dd/MM/yyyy" //In which you need put here
                     val sdf = SimpleDateFormat(myFormat)
                     try {
-                        val d: Date = sdf.parse(registerBirthdate?.text.toString())
+                        val d: Date = sdf.parse(binding.registerBirthdateInputText?.text.toString())
                         time = d.time
                     } catch (e: ParseException) {
                         e.printStackTrace();
                     }
-
-
                     AppPreference.setUserUID(user?.uid ?: "")
                     val newPerson = Person(
                         id = user?.uid ?: "",
-                        name = registerName?.text.toString(),
-                        surnames = registerSurnames?.text.toString(),
+                        name = binding.registerNameInputText.text.toString(),
+                        surnames = binding.registerSurnamesInputText.text.toString(),
                         birthdate = time,
-                        email = registerEmail?.text.toString(),
-                        username = registerUsername?.text.toString()
+                        email = binding.registerEmailInputText.text.toString(),
+                        username = binding.registerUsernameInputText.text.toString()
                     )
 
-                    AppPreference.setUserEmail(registerEmail?.text.toString())
-                    AppPreference.setUserName(registerName?.text.toString() + " " + registerSurnames?.text.toString())
-                    AppPreference.setUserUsername(registerUsername?.text.toString())
+                    AppPreference.setUserEmail(binding.registerEmailInputText.text.toString())
+                    AppPreference.setUserName(binding.registerNameInputText.text.toString() + " " + binding.registerSurnamesInputText.text.toString())
+                    AppPreference.setUserUsername(binding.registerUsernameInputText.text.toString())
 
                     db.collection("user").document(user?.uid ?: "").set(newUser)
                     db.collection("person").document(user?.uid ?: "").set(newPerson)
@@ -142,47 +127,28 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun registerFields() {
-        registerName =
-            findViewById(R.id.register_name_input_text)
-        registerSurnames =
-            findViewById(R.id.register_surnames_input_text)
-        registerBirthdate = findViewById(R.id.register_birthdate_input_text)
-        registerUsername =
-            findViewById(R.id.register_username_input_text)
-        registerEmail =
-            findViewById(R.id.register_email_input_text)
-        registerRepeatEmail =
-            findViewById(R.id.register_repeat_email_input_text)
-        registerPassword =
-            findViewById(R.id.register_password_input_text)
-        registerRepeatPassword =
-            findViewById(R.id.register_repeat_password_input_text)
-
-    }
-
     private fun checkForm(): Boolean {
 
-        if (registerName?.text.toString().isNullOrEmpty()){
-            registerName?.error = getString(R.string.empty_field)
+        if (binding.registerNameInputText.text.toString().isEmpty()){
+            binding.registerName.error = getString(R.string.empty_field)
             checkFieldsMessage()
             return true
         }
 
-        if (registerSurnames?.text.toString().isNullOrEmpty()){
-            registerSurnames?.error = getString(R.string.empty_field)
+        if (binding.registerSurnamesInputText.text.toString().isEmpty()){
+            binding.registerSurnames.error = getString(R.string.empty_field)
             checkFieldsMessage()
             return true
         }
 
-        if (registerBirthdate?.text.toString().isNullOrEmpty()){
-            registerSurnames?.error = getString(R.string.empty_field)
+        if (binding.registerBirthdateInputText.text.toString().isEmpty()){
+            binding.registerBirthdate.error = getString(R.string.empty_field)
             checkFieldsMessage()
             return true
         }
 
-        if (registerUsername?.text.toString().isNullOrEmpty()){
-            registerUsername?.error = getString(R.string.empty_field)
+        if (binding.registerUsernameInputText.text.toString().isEmpty()){
+            binding.registerUsername.error = getString(R.string.empty_field)
             checkFieldsMessage()
             return true
         }
@@ -195,22 +161,25 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkAccessInformation(): Boolean {
-        if (registerEmail?.text.toString().isNullOrEmpty() || registerRepeatEmail?.text.toString().isNullOrEmpty() || registerPassword?.text.toString().isNullOrEmpty() || registerRepeatPassword?.text.toString().isNullOrEmpty()) {
+        if (binding.registerEmailInputText.text.toString().isEmpty()
+            || binding.registerRepeatEmailInputText.text.toString().isEmpty()
+            || binding.registerPasswordInputText.text.toString().isEmpty()
+            || binding.registerRepeatPasswordInputText.text.toString().isEmpty()) {
             checkFieldsMessage()
             return true
         }
 
-        if (registerEmail?.text.toString() != registerRepeatEmail?.text.toString()) {
+        if (binding.registerEmailInputText.text.toString() != binding.registerRepeatEmailInputText.text.toString()) {
             emailsAreDifferent()
             return true
         }
 
-        if (registerPassword?.text.toString() != registerRepeatPassword?.text.toString()) {
+        if (binding.registerPasswordInputText.text.toString() != binding.registerRepeatPasswordInputText.text.toString()) {
             passwordsAreDifferent()
             return true
         }
 
-        if (registerPassword?.text.toString().count() < 8) {
+        if (binding.registerRepeatPasswordInputText.text.toString().count() < 8) {
             passwordHasMinorOfEightCharacters()
             return true
         }
@@ -262,7 +231,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun updateLabel() {
         val myFormat = "dd/MM/yyyy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat)
-        registerBirthdate?.setText(sdf.format(myCalendar.timeInMillis))
+        binding.registerBirthdateInputText.setText(sdf.format(myCalendar.timeInMillis))
     }
 
     companion object {

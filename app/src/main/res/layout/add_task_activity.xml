@@ -198,6 +198,9 @@
                                 android:id="@+id/category_edit_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:inputType="none"
+                                android:longClickable="false"
                                 android:padding="12dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -304,6 +307,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_margin="8dp"
                                     android:layout_weight="1"
                                     android:hint="@string/add_member_group_input_layout"
                                     app:boxStrokeWidth="1px">
