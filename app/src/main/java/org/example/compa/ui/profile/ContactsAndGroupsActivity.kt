@@ -109,6 +109,7 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                     setMessage(R.string.do_you_want_to_delete_group)
                     setPositiveButton(R.string.of_course_madafak) { _, _ ->
                         db.collection("groups").document(group.id).delete()
+                        db.collection("groups").document(group.id).collection("members").document().delete()
                         getGroups(arrayListOf())
                     }
                     setNegativeButton(R.string.cancel) { _, _ ->

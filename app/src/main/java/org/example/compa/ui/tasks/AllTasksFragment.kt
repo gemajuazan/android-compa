@@ -1,5 +1,6 @@
 package org.example.compa.ui.tasks
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,12 +67,21 @@ class AllTasksFragment : Fragment() {
                     )
                     tasks.add(task)
                 }
-                tasksAdapter.notifyDataSetChanged()
+
             }
             tasksAdapter.notifyDataSetChanged()
         }
         tasksAdapter = AllTasksAdapter(tasks, requireContext())
         binding.recyclerViewAllTasks.adapter = tasksAdapter
+
+        tasksAdapter.setOnItemClickListener(object : AllTasksAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(requireContext(), AddTaskActivity::class.java)
+                intent.putExtra("id", tasks[position].id)
+                startActivity(intent)
+            }
+
+        })
     }
 
     private fun getMyGroups() {

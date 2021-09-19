@@ -35,7 +35,7 @@ class TasksActivity : AppCompatActivity() {
             finish()
         }
 
-        var tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(view_pager)
 
         val viewPager = findViewById<ViewPager>(R.id.view_pager)

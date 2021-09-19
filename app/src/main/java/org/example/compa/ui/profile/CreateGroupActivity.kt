@@ -250,6 +250,7 @@ class CreateGroupActivity : AppCompatActivity() {
                 db.collection("groups").document(groupId).collection("members").document().delete()
 
                 for ((position, member) in members.withIndex()) {
+
                     db.collection("groups").document(groupId).collection("members")
                         .document(member.id).set(member)
                     if (position == members.size - 1) {

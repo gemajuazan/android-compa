@@ -44,6 +44,7 @@ class MyTasksFragment : Fragment() {
 
     private fun getTasks() {
         myTasks.clear()
+        tasksAdapter = TasksAdapter(myTasks, requireContext())
         for (idTask in myTaskByMyUser) {
             db.collection("tasks").document(idTask).get().addOnSuccessListener {
                 val hashMap = it.data?.get("group") as HashMap<String, Any>
@@ -68,7 +69,7 @@ class MyTasksFragment : Fragment() {
                 myTasks.add(task)
                 tasksAdapter.notifyDataSetChanged()
             }
-            //tasksAdapter.notifyDataSetChanged()
+            tasksAdapter.notifyDataSetChanged()
         }
         tasksAdapter = TasksAdapter(myTasks, requireContext())
         binding.recyclerViewTasks.adapter = tasksAdapter
@@ -84,6 +85,7 @@ class MyTasksFragment : Fragment() {
     }
 
     private fun getMyTask() {
+        myTaskByMyUser.clear()
         db.collection("tasks_status").get().addOnSuccessListener {
             for ((index, task) in it.documents.withIndex()) {
                 val id = task.data?.get("id") as String

@@ -34,7 +34,7 @@ class AllTasksAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listTasks[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount(): Int {
@@ -43,12 +43,16 @@ class AllTasksAdapter(
 
     inner class ViewHolder(private val binding: ItemMyTaskBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Task) {
+        fun bind(item: Task, position: Int) {
             binding.nameTask.text = item.name
             binding.dateTask.text = "${DateUtil.getDate(item.startDate, "dd/MM/yy")} - ${DateUtil.getDate(item.finishDate, "dd/MM/yy")}"
             binding.categoryTask.text = context.getString(Constants.CategoryTask.getCategoryTask(item.category))
 
             binding.imageTask.setImageResource(Constants.CategoryTask.getCategoryImageTask(item.category))
+
+            binding.cardViewNoMyTask.setOnClickListener {
+                itemClickListener?.onItemClick(position)
+            }
         }
     }
 
