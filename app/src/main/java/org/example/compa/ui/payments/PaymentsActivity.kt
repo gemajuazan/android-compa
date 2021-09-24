@@ -319,11 +319,8 @@ class PaymentsActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        binding.toolbarPayments.profileSubtitle.text = getString(R.string.menu_payments)
-        binding.toolbarPayments.view.visibility = View.GONE
-        binding.toolbarPayments.backButtonImageView.setOnClickListener {
-            finish()
-        }
+        binding.toolbarPayments.title.text = getString(R.string.menu_payments)
+
     }
 
     private fun getFriends() {

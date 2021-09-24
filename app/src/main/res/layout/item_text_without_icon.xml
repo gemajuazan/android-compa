@@ -15,6 +15,7 @@
         android:padding="12dp"
         android:gravity="center"
         android:textColor="@color/primaryColor"
+        android:fontFamily="@font/raleway_light"
         tools:text="texto@texto.com" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -26,6 +27,7 @@
         android:gravity="center"
         android:visibility="gone"
         android:textColor="@color/primaryColor"
+        android:fontFamily="@font/raleway_light"
         android:text="@string/no_info"
         tools:text="texto@texto.com" />
 

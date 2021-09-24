@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
                 android:textStyle="bold"
+                android:fontFamily="@font/raleway_light"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="gemajuazan" />
@@ -50,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/raleway_light"
                 android:textColor="@color/secondaryColor"
                 app:layout_constraintStart_toEndOf="@+id/view2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -61,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/primaryLightColor"
+                android:fontFamily="@font/raleway_light"
                 app:layout_constraintStart_toStartOf="@+id/username_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/username_text_view"
                 tools:text="31/10/1996" />

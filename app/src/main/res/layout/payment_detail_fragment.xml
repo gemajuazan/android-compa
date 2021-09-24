@@ -17,6 +17,7 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textStyle="bold"
+            android:fontFamily="@font/raleway_light"
             android:text="@string/payment_detail" />
 
         <LinearLayout
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
                 android:textSize="18sp"
+                android:fontFamily="@font/raleway_light"
                 tools:text="compañero1" />
 
             <ImageView
@@ -49,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
                 android:textSize="18sp"
+                android:fontFamily="@font/raleway_light"
                 tools:text="compañero2" />
 
         </LinearLayout>
@@ -63,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/pay_concept" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -70,6 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryLightColor"
+                android:fontFamily="@font/raleway_light"
                 android:layout_weight="1"
                 tools:text="Café y tostadas"/>
 
@@ -85,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/pay_price" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -92,6 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryLightColor"
+                android:fontFamily="@font/raleway_light"
                 android:layout_weight="1"
                 tools:text="12€"/>
 
@@ -107,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/pay_date" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -114,6 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryDisabledColor"
+                android:fontFamily="@font/raleway_light"
                 android:layout_weight="1"
                 tools:text="28 FEB 2028" />
 
@@ -131,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/primaryDarkColor"
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/status" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -138,6 +148,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
+                android:fontFamily="@font/raleway_light"
                 android:layout_weight="1"
                 tools:text="28 FEB 2028" />
 
@@ -161,6 +172,7 @@
                 android:gravity="center_vertical|center"
                 android:textAllCaps="true"
                 android:padding="8dp"
+                android:fontFamily="@font/raleway_light"
                 android:textSize="10sp"
                 android:letterSpacing="0.2"
                 tools:text="@string/mark_as_paid" />

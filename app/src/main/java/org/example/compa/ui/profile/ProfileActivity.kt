@@ -45,8 +45,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setStrings() {
-        binding.toolbarProfile.profileTitle.text = getString(R.string.menu_profile)
-        binding.toolbarProfile.profileSubtitle.text = getString(R.string.menu_profile)
+/*        binding.toolbarProfile.profileTitle.text = getString(R.string.menu_profile)
+        binding.toolbarProfile.profileSubtitle.text = getString(R.string.menu_profile)*/
         binding.titleBirthdateTextView.text =
             getString(R.string.date_birth).toUpperCase(Locale.ROOT)
     }
@@ -63,7 +63,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.usernameTextView.text = person?.username
         binding.birthdateTextView.text = DateUtil.getDate(person?.birthdate ?: -1, "dd/MM/yyyy")
         binding.profileProgress.visibility = View.GONE
-        binding.toolbarProfile.view.visibility = View.VISIBLE
+        //binding.toolbarProfile.view.visibility = View.VISIBLE
 
         AppPreference.setUserEmail(person?.email ?: "")
         AppPreference.setUserName(person?.name + " " + person?.surnames)
@@ -72,7 +72,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun getPerson() {
         binding.profileProgress.visibility = View.VISIBLE
-        binding.toolbarProfile.view.visibility = View.GONE
+        //binding.toolbarProfile.view.visibility = View.GONE
         val user: FirebaseUser? = auth.currentUser
         db.collection("person").document(user?.uid ?: "").get().addOnSuccessListener {
             val id = it.data?.get("id") as String? ?: ""
@@ -95,9 +95,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
-        binding.toolbarProfile.backButtonImageView.setOnClickListener {
+        /*binding.toolbarProfile.backButtonImageView.setOnClickListener {
             finish()
-        }
+        }*/
         binding.editUser.setOnClickListener {
             if (!editMode) {
                 updateInfoUser()

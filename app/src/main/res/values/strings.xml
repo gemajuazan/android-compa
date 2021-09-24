@@ -171,4 +171,7 @@
     <string name="select_category">Selecciona categoría</string>
     <string name="personal_data">Información personal</string>
     <string name="access_data">Información de acceso</string>
+    <string name="phone">Teléfono</string>
+    <string name="search_friends">Buscar amigos</string>
+    <string name="all">Todo</string>
 </resources>

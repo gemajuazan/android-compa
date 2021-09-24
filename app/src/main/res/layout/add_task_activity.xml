@@ -42,7 +42,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_margin="8dp">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
@@ -50,6 +51,7 @@
                             android:layout_marginHorizontal="8dp"
                             android:layout_marginTop="8dp"
                             android:letterSpacing="0.2"
+                            android:fontFamily="@font/raleway_light"
                             android:text="@string/task_data"
                             android:textAllCaps="true"
                             android:textSize="12sp" />
@@ -75,6 +77,7 @@
                                 android:id="@+id/name_edit_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_light"
                                 android:padding="12dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +99,7 @@
                                 android:focusableInTouchMode="false"
                                 android:inputType="none"
                                 android:longClickable="false"
+                                android:fontFamily="@font/raleway_light"
                                 android:padding="12dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +128,7 @@
                                     android:focusableInTouchMode="false"
                                     android:inputType="none"
                                     android:longClickable="false"
+                                    android:fontFamily="@font/raleway_light"
                                     android:padding="12dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -154,6 +159,7 @@
                                     android:focusableInTouchMode="false"
                                     android:inputType="none"
                                     android:longClickable="false"
+                                    android:fontFamily="@font/raleway_light"
                                     android:padding="12dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -180,6 +186,7 @@
                                 android:overScrollMode="always"
                                 android:padding="12dp"
                                 android:scrollbarStyle="insideInset"
+                                android:fontFamily="@font/raleway_light"
                                 android:scrollbars="vertical" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -201,6 +208,7 @@
                                 android:focusableInTouchMode="false"
                                 android:inputType="none"
                                 android:longClickable="false"
+                                android:fontFamily="@font/raleway_light"
                                 android:padding="12dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -231,6 +239,7 @@
                             android:text="@string/members_group"
                             android:textAllCaps="true"
                             android:textSize="12sp"
+                            android:fontFamily="@font/raleway_light"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -243,6 +252,7 @@
                             android:text="@string/status"
                             android:textSize="12sp"
                             android:visibility="gone"
+                            android:fontFamily="@font/raleway_light"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:visibility="visible" />
@@ -273,10 +283,7 @@
                                 android:id="@+id/members_task_recycler_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
-
+                                android:layout_margin="16dp"
                                 tools:itemCount="5" />
 
 
@@ -286,6 +293,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="32dp"
                                 android:layout_marginVertical="8dp"
+                                android:fontFamily="@font/raleway_light"
                                 android:text="@string/no_members_added"
                                 android:textAlignment="center"
                                 android:textColor="@color/primaryDisabledColor"
@@ -317,6 +325,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
+                                        android:fontFamily="@font/raleway_light"
                                         android:longClickable="false" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -357,6 +366,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/raleway_light"
                                 android:text="@string/work_realized" />
 
                             <com.google.android.material.textview.MaterialTextView
@@ -366,6 +376,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
                                 android:textColor="@color/colorError"
+                                android:fontFamily="@font/raleway_light"
                                 android:textSize="24sp"
                                 tools:text="25%" />
                         </LinearLayout>
@@ -388,6 +399,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:fontFamily="@font/raleway_light"
                         android:text="@string/add_member_button"
                         android:textColor="@color/onPrimaryColor"
                         android:textSize="14sp" />
@@ -413,6 +425,7 @@
                         android:textSize="12sp"
                         android:letterSpacing="0.2"
                         android:textColor="@color/onPrimaryColor"
+                        android:fontFamily="@font/raleway_light"
                         android:text="@string/save_info" />
 
                 </com.google.android.material.card.MaterialCardView>

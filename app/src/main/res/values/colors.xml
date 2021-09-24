@@ -18,4 +18,5 @@
     <color name="colorPrimaryTransparent">#753A3836</color>
     <color name="colorBackground">#F6F5F5</color>
     <color name="primaryDisabledColor">#C6C4C4</color>
+    <color name="cardSecondaryColor">#FBF5F2</color>
 </resources>

@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.register_button)
 
-        binding.toolbar2.profileSubtitle.text = getString(R.string.register)
+        binding.toolbar2.title.text = getString(R.string.register)
 
         val date =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->

@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.2"
+                    android:fontFamily="@font/raleway_light"
                     android:text="@string/data_group_label"
                     android:textAllCaps="true"
                     android:textSize="12sp"
@@ -60,6 +61,7 @@
                         android:id="@+id/name_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_light"
                         android:padding="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +79,7 @@
                         android:id="@+id/place_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_light"
                         android:padding="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.2"
                     android:text="@string/members_group"
+                    android:fontFamily="@font/raleway_light"
                     android:textAllCaps="true"
                     android:textSize="12sp" />
 
@@ -129,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
                     android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/raleway_light"
                     android:text="@string/no_members_added"
                     android:textAlignment="center"
                     android:textColor="@color/primaryDisabledColor"
@@ -159,7 +164,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusableInTouchMode="false"
-                            android:longClickable="false" />
+                            android:longClickable="false"
+                            android:fontFamily="@font/raleway_light"
+                            />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -195,6 +202,7 @@
                 android:layout_margin="8dp"
                 android:text="@string/add_member_button"
                 android:textColor="@color/onPrimaryColor"
+                android:fontFamily="@font/raleway_light"
                 android:textSize="14sp" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -216,6 +224,7 @@
                 android:layout_margin="8dp"
                 android:letterSpacing="0.2"
                 android:text="@string/save_info"
+                android:fontFamily="@font/raleway_light"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/onPrimaryColor"

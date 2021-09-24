@@ -110,8 +110,7 @@ class CreateGroupActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        binding.toolbarCreateGroup.profileTitle.text = getString(R.string.add)
-        binding.toolbarCreateGroup.profileSubtitle.text = getString(R.string.group)
+        binding.toolbarCreateGroup.title.text = getString(R.string.group)
     }
 
     private fun getMembers() {

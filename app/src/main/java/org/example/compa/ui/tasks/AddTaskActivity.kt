@@ -220,19 +220,19 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun setToolbar() {
         if (type == 0) {
-            binding.compaToolbar.profileSubtitle.text = getString(R.string.add_task)
+            binding.compaToolbar.title.text = getString(R.string.add_task)
             binding.saveTask.visibility = View.VISIBLE
             binding.addMember.visibility = View.VISIBLE
         } else {
             val nameTask = intent.getStringExtra("name_task") ?: ""
-            binding.compaToolbar.profileSubtitle.text = nameTask
+            binding.compaToolbar.title.text = nameTask
             binding.addMember.visibility = View.GONE
             binding.saveTask.visibility = View.GONE
         }
 
-        binding.compaToolbar.backButtonImageView.setOnClickListener {
+        /*binding.compaToolbar.backButtonImageView.setOnClickListener {
             finish()
-        }
+        }*/
     }
 
     private fun setStartDateCalendar() {

@@ -9,6 +9,7 @@ import kotlinx.coroutines.delay
 import org.example.compa.R
 import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.menu.MenuActivity
+import org.example.compa.ui.menu.MenuNavigationActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goToMenu() {
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, MenuNavigationActivity::class.java)
         startActivity(intent)
     }
 

@@ -64,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:text="@string/email_login"
+                android:fontFamily="@font/raleway_light"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/email_first" />
@@ -95,6 +96,7 @@
                 android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_light"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
+                android:fontFamily="@font/raleway_light"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -131,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:text="@string/password_login"
+                android:fontFamily="@font/raleway_light"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/password_first" />
@@ -162,7 +166,8 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_light"/>
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -187,6 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                android:fontFamily="@font/raleway_light"
                 app:shapeAppearance="@style/LetMeLogIn"
                 android:text="@string/let_met_log_in" />
 
@@ -197,6 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:shapeAppearance="@style/IHaveAccount"
+                android:fontFamily="@font/raleway_light"
                 android:text="@string/i_have_not_account" />
 
         </LinearLayout>

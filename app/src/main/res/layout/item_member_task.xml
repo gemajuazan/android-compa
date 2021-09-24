@@ -14,6 +14,7 @@
         android:layout_weight="1"
         android:textColor="@color/primaryColor"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/raleway_light"
         tools:text="compañero1@gmail.com" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -24,6 +25,7 @@
         android:textAlignment="textEnd"
         android:textColor="@color/primaryColor"
         android:visibility="gone"
+        android:fontFamily="@font/raleway_light"
         tools:text="Por hacer" />
 
     <ImageView

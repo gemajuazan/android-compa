@@ -40,12 +40,10 @@ class SearchFriendActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        binding.toolbar.backButtonImageView.setOnClickListener {
+/*        binding.toolbar.backButtonImageView.setOnClickListener {
             finish()
-        }
-
-        binding.toolbar.profileTitle.text = getString(R.string.search)
-        binding.toolbar.profileSubtitle.text = getString(R.string.menu_friends)
+        }*/
+        binding.toolbar.title.text = getString(R.string.search)
     }
 
     private fun initFirebase() {

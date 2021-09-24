@@ -39,11 +39,11 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     }
 
     private fun setTranslations() {
-        binding.compaToolbar.profileTitle.text = getString(R.string.contacts)
-        binding.compaToolbar.profileSubtitle.text = getString(R.string.and_groups)
-        binding.compaToolbar.backButtonImageView.setOnClickListener {
+        binding.compaToolbar.title.text = getString(R.string.contacts)
+        binding.compaToolbar.title.text = getString(R.string.and_groups)
+/*        binding.compaToolbar.backButtonImageView.setOnClickListener {
             finish()
-        }
+        }*/
     }
 
     private fun setFABConfiguration() {

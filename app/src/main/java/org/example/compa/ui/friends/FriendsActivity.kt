@@ -54,11 +54,10 @@ class FriendsActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        binding.toolbar.backButtonImageView.setOnClickListener {
+/*        binding.toolbar.backButtonImageView.setOnClickListener {
             finish()
-        }
-        binding.toolbar.profileTitle.text = getString(R.string.menu_friends)
-        binding.toolbar.profileSubtitle.text = getString(R.string.menu_friends)
+        }*/
+        binding.toolbar.title.text = getString(R.string.menu_friends)
     }
 
     private fun initFirebase() {
@@ -196,11 +195,11 @@ class FriendsActivity : AppCompatActivity() {
 
     private fun resetView() {
         binding.progressFriends.visibility = View.VISIBLE
-        binding.toolbar.view.visibility = View.GONE
+        //binding.toolbar.view.visibility = View.GONE
     }
 
     private fun showViewAndHideProgress() {
         binding.progressFriends.visibility = View.GONE
-        binding.toolbar.view.visibility = View.VISIBLE
+        //binding.toolbar.view.visibility = View.VISIBLE
     }
 }

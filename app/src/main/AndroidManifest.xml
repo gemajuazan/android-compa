@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents">
-        <activity android:name=".ui.friends.SearchFriendActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.menu.MenuNavigationActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.friends.SearchFriendActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.friends.FriendsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -33,13 +36,7 @@
             android:name=".ui.entertainment.EntertainmentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.payments.PayAndSolicitudePayment"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.tasks.AddTaskActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.tasks.TaskDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.payments.PaymentsActivity"

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:clickable="true"
-        app:cardBackgroundColor="#F0F6DED5"
+        app:cardBackgroundColor="@color/cardSecondaryColor"
         app:strokeColor="@color/secondaryLightColor"
         app:strokeWidth="1px"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,16 +32,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_margin="4dp"
                 android:gravity="center_vertical">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/status_no_payment_card"
-                    android:layout_width="84dp"
+                    android:layout_width="68dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_weight="0"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/cardSecondaryColor"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/colorError">
+                    app:strokeColor="@color/colorError"
+                    app:strokeWidth="2px"
+                    app:cardElevation="0dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/status_no_payment"
@@ -49,20 +53,27 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:textAlignment="center"
-                        android:textColor="@android:color/white"
+                        android:textAllCaps="true"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorError"
                         android:letterSpacing="0.1"
+                        android:fontFamily="@font/raleway_light"
                         tools:text="PAGADO" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/status_payment_card"
-                    android:layout_width="84dp"
+                    android:layout_width="68dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_weight="0"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/cardSecondaryColor"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/colorAccent">
+                    app:strokeColor="@color/colorAccent"
+                    app:strokeWidth="2px"
+                    app:cardElevation="0dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/status_payment"
@@ -70,8 +81,12 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:textAlignment="center"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/colorAccent"
+                        android:textAllCaps="true"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
                         android:letterSpacing="0.1"
+                        android:fontFamily="@font/raleway_light"
                         tools:text="PAGADO" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -84,6 +99,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_weight="0"
+                    android:fontFamily="@font/raleway_light"
                     tools:text="5,99€" />
 
                 <LinearLayout
@@ -98,6 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
+                        android:fontFamily="@font/raleway_light"
                         tools:text="compañero1" />
 
                     <ImageView
@@ -111,6 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
+                        android:fontFamily="@font/raleway_light"
                         tools:text="compañero2" />
 
                 </LinearLayout>
@@ -125,6 +143,7 @@
                 android:maxLines="2"
                 android:textColor="@color/primaryLightColor"
                 android:visibility="gone"
+                android:fontFamily="@font/raleway_light"
                 tools:text="Café y tostadas"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -134,6 +153,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@color/primaryDisabledColor"
                 android:visibility="gone"
+                android:fontFamily="@font/raleway_light"
                 tools:text="27/02/2021 15:28"/>
 
         </LinearLayout>

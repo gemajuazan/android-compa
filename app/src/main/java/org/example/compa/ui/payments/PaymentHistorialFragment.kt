@@ -1,5 +1,6 @@
 package org.example.compa.ui.payments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +8,23 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
+import org.example.compa.databinding.AddPaymentFragmentBinding
+import org.example.compa.databinding.FriendsListBinding
 import org.example.compa.databinding.PaymentDetailFragmentBinding
 import org.example.compa.databinding.PaymentHistorialFragmentBinding
+import org.example.compa.models.Friend
 import org.example.compa.models.Payment
+import org.example.compa.models.Person
 import org.example.compa.preferences.AppPreference
+import org.example.compa.ui.adapters.FriendAdapter
 import org.example.compa.utils.DateUtil
+import org.example.compa.utils.MaterialDialog
+import org.example.compa.utils.StyleUtil
 import java.text.NumberFormat
 import java.util.*
 
@@ -28,6 +37,9 @@ class PaymentHistorialFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
 
     private val myCalendar = Calendar.getInstance()
+
+    private var friends = arrayListOf<Friend>()
+    private var friendAdapter = FriendAdapter(arrayListOf(), false)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +54,8 @@ class PaymentHistorialFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         initializePayments()
         binding.recyclerViewHistorial.layoutManager = LinearLayoutManager(requireContext())
+        getFriends()
+        setOnClickListeners()
     }
 
     private fun initializePayments() {
@@ -172,6 +186,256 @@ class PaymentHistorialFragment : Fragment() {
 
     private fun payPayment(payment: Payment, status: String) {
         db.collection("payments").document(payment.id).update("statusPayment", status)
+    }
+
+    private fun showAddPaymentBottomSheet() {
+        val paymentDialog = BottomSheetDialog(requireContext())
+        val paymentBinding = AddPaymentFragmentBinding.inflate(layoutInflater)
+
+        paymentBinding.paymentDetailTitle.text = getString(R.string.pay_debt)
+        paymentBinding.paymentDetailMessage.text = getString(R.string.who_pay)
+
+        paymentBinding.transmitterEditText.setText(AppPreference.getUserUsername())
+        paymentBinding.transmitterTextInput.isEnabled = false
+
+        paymentBinding.receiverEditText.isFocusableInTouchMode = false
+        paymentBinding.receiverEditText.isLongClickable = false
+
+        paymentBinding.markAsPaidTextView.text = getString(R.string.pay)
+
+        var changed = false
+
+        paymentBinding.receiverEditText.setOnClickListener {
+            val dialogBinding = FriendsListBinding.inflate(layoutInflater)
+            val dialog = MaterialDialog.createDialog(requireContext()) {
+                setTitle(R.string.select_friend)
+                setView(dialogBinding.root)
+            }
+
+            dialogBinding.friendsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            dialogBinding.friendsRecyclerView.visibility = View.VISIBLE
+            friendAdapter = FriendAdapter(friends, false)
+            dialogBinding.friendsRecyclerView.adapter = friendAdapter
+            friendAdapter.setOnItemClickListener(object : FriendAdapter.ItemClickListener {
+                override fun onItemClicked(person: Person, position: Int) {
+                    paymentBinding.receiverEditText.setText(person.username)
+                    dialog.dismiss()
+                }
+
+                override fun onItemAddClicked(person: Person, position: Int) {
+                    // Ignore
+                }
+
+                override fun onItemLongClicked(person: Person, position: Int) {
+                    // Ignore
+                }
+            })
+            dialog.show()
+        }
+
+        val date =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                myCalendar.set(Calendar.YEAR, year)
+                myCalendar.set(Calendar.MONTH, monthOfYear)
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                paymentBinding.dateFinishEditText.setText(DateUtil.getDate(myCalendar.timeInMillis, "dd/MM/yyyy"))
+            }
+
+        paymentBinding.dateFinishEditText.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                date,
+                myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
+
+        paymentBinding.markAsPaidCard.setOnClickListener {
+            if ((paymentBinding.receiverEditText.text.toString() != "" && paymentBinding.conceptEditText.toString() != "")
+                && (paymentBinding.dateFinishEditText.text.toString() != "" && paymentBinding.conceptEditText.text.toString() != "")) {
+                MaterialDialog.createDialog(requireContext()) {
+                    setMessage(R.string.do_you_want_to_add_this_payment)
+                    setPositiveButton(R.string.accept) { _, _ ->
+                        val id = StyleUtil.getRandomString(16)
+                        val payment = Payment(
+                            id = id,
+                            transmitter = AppPreference.getUserUsername(),
+                            receiver = paymentBinding.receiverEditText.text.toString(),
+                            date = myCalendar.timeInMillis,
+                            price = paymentBinding.costEditText.text.toString().toDouble(),
+                            concept = paymentBinding.conceptEditText.text.toString(),
+                            typePayment = "PAY",
+                            statusPayment = "NPA"
+                        )
+                        db.collection("payments").document(id).set(payment)
+                        changed = true
+                        paymentDialog.dismiss()
+                    }
+                    setNegativeButton(R.string.cancel) { _, _ -> }
+                }.show()
+            } else {
+                if (paymentBinding.transmitterEditText.text.toString() == "") paymentBinding.transmitterTextInput.error = getString(R.string.empty_field)
+                if (paymentBinding.costEditText.text.toString() == "") paymentBinding.costTextInputLayout.error = getString(R.string.empty_field)
+                if (paymentBinding.dateFinishEditText.text.toString() == "") paymentBinding.dateFinishTextInputLayout.error = getString(R.string.empty_field)
+                if (paymentBinding.conceptEditText.text.toString() == "") paymentBinding.conceptTextInputLayout.error = getString(R.string.empty_field)
+            }
+        }
+
+        paymentDialog.setContentView(paymentBinding.root)
+        paymentDialog.dismissWithAnimation = true
+        paymentDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        paymentDialog.show()
+        paymentDialog.setOnDismissListener {
+            if (changed) {
+                initializePayments()
+            }
+        }
+
+    }
+
+    private fun showAddCollectionBottomSheet() {
+        val paymentDialog = BottomSheetDialog(requireContext())
+        val paymentBinding = AddPaymentFragmentBinding.inflate(layoutInflater)
+
+        paymentBinding.paymentDetailTitle.text = getString(R.string.collect_payment)
+        paymentBinding.paymentDetailMessage.text = getString(R.string.who_collect)
+
+        paymentBinding.receiverEditText.setText(AppPreference.getUserUsername())
+        paymentBinding.receiverTextInputLayout.isEnabled = false
+
+        paymentBinding.transmitterEditText.isFocusableInTouchMode = false
+        paymentBinding.transmitterEditText.isLongClickable = false
+
+        paymentBinding.markAsPaidTextView.text = getString(R.string.collect)
+
+        var changed = false
+
+        paymentBinding.transmitterEditText.setOnClickListener {
+            val dialogBinding = FriendsListBinding.inflate(layoutInflater)
+            val dialog = MaterialDialog.createDialog(requireContext()) {
+                setTitle(R.string.select_friend)
+                setView(dialogBinding.root)
+            }
+
+            dialogBinding.friendsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            dialogBinding.friendsRecyclerView.visibility = View.VISIBLE
+            friendAdapter = FriendAdapter(friends, false)
+            dialogBinding.friendsRecyclerView.adapter = friendAdapter
+            friendAdapter.setOnItemClickListener(object : FriendAdapter.ItemClickListener {
+                override fun onItemClicked(person: Person, position: Int) {
+                    paymentBinding.transmitterEditText.setText(person.username)
+                    dialog.dismiss()
+                }
+
+                override fun onItemAddClicked(person: Person, position: Int) {
+                    // Ignore
+                }
+
+                override fun onItemLongClicked(person: Person, position: Int) {
+                    // Ignore
+                }
+            })
+            dialog.show()
+        }
+
+        val date =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                myCalendar.set(Calendar.YEAR, year)
+                myCalendar.set(Calendar.MONTH, monthOfYear)
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                paymentBinding.dateFinishEditText.setText(DateUtil.getDate(myCalendar.timeInMillis, "dd/MM/yyyy"))
+            }
+
+        paymentBinding.dateFinishEditText.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                date,
+                myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH],
+                myCalendar[Calendar.DAY_OF_MONTH]
+            ).show()
+        }
+
+        paymentBinding.markAsPaidCard.setOnClickListener {
+            if ((paymentBinding.transmitterEditText.text.toString() != "" && paymentBinding.costEditText.toString() != "")
+                && (paymentBinding.dateFinishEditText.text.toString() != "" && paymentBinding.conceptEditText.text.toString() != "")) {
+                MaterialDialog.createDialog(requireContext()) {
+                    setMessage(R.string.do_you_want_to_add_this_collection)
+                    setPositiveButton(R.string.accept) { _, _ ->
+                        val id = StyleUtil.getRandomString(16)
+                        val payment = Payment(
+                            id = id,
+                            transmitter = paymentBinding.transmitterEditText.text.toString(),
+                            receiver = AppPreference.getUserUsername(),
+                            date = myCalendar.timeInMillis,
+                            price = paymentBinding.costEditText.text.toString().toDouble(),
+                            concept = paymentBinding.conceptEditText.text.toString(),
+                            typePayment = "REF",
+                            statusPayment = "NPA"
+                        )
+                        changed = true
+                        db.collection("payments").document(id).set(payment)
+                        paymentDialog.dismiss()
+                    }
+                    setNegativeButton(R.string.cancel) { _, _ -> }
+                }.show()
+            } else {
+                if (paymentBinding.transmitterEditText.text.toString() == "") paymentBinding.transmitterTextInput.error = getString(R.string.empty_field)
+                if (paymentBinding.costEditText.text.toString() == "") paymentBinding.costTextInputLayout.error = getString(R.string.empty_field)
+                if (paymentBinding.dateFinishEditText.text.toString() == "") paymentBinding.dateFinishTextInputLayout.error = getString(R.string.empty_field)
+                if (paymentBinding.conceptEditText.text.toString() == "") paymentBinding.conceptTextInputLayout.error = getString(R.string.empty_field)
+            }
+        }
+
+        paymentDialog.setContentView(paymentBinding.root)
+        paymentDialog.dismissWithAnimation = true
+        paymentDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        paymentDialog.show()
+        paymentDialog.setOnDismissListener {
+            if (changed) {
+                initializePayments()
+            }
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.addCollection.setOnClickListener {
+            showAddCollectionBottomSheet()
+        }
+
+        binding.addPayment.setOnClickListener {
+            showAddPaymentBottomSheet()
+        }
+    }
+
+    private fun getFriends() {
+        db.collection("person").document(AppPreference.getUserUID()).collection("friends").get()
+            .addOnSuccessListener {
+                for (data in it.documents) {
+                    val hashMap = data.data?.get("person") as HashMap<String, Any>
+                    val solicitude = data.get("solicitude") as Boolean
+                    val favourite = data.get("favourite") as Boolean
+                    val id = hashMap["id"] as String? ?: ""
+                    val name = hashMap["name"] as String? ?: ""
+                    val surnames = hashMap["surnames"] as String? ?: ""
+                    val birthdate = hashMap["birthdate"] as Long? ?: -1
+                    val email = hashMap["email"] as String? ?: ""
+                    val username = hashMap["username"] as String? ?: ""
+                    val person = Person(
+                        id = id,
+                        name = name,
+                        surnames = surnames,
+                        birthdate = birthdate,
+                        email = email,
+                        username = username
+                    )
+                    val friend = Friend(person, solicitude = solicitude, favourite = favourite)
+                    friends.add(friend)
+                }
+            }
     }
 
 }

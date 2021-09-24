@@ -35,6 +35,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/raleway_light"
                     android:letterSpacing="0.1"
                     tools:text="grupo castellón"/>
 
