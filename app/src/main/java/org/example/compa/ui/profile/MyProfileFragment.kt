@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import org.example.compa.R
 import org.example.compa.databinding.MyProfileFragmentBinding
 import org.example.compa.models.Person
@@ -23,6 +25,7 @@ class MyProfileFragment : Fragment() {
 
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+    private lateinit var storage: FirebaseStorage
 
     private var person: Person? = null
 
@@ -30,12 +33,6 @@ class MyProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setInitConfiguration()
-
-        db = FirebaseFirestore.getInstance()
-        auth = FirebaseAuth.getInstance()
-
-        getPerson()
-
     }
 
     override fun onCreateView(
@@ -45,6 +42,16 @@ class MyProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = MyProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        storage = FirebaseStorage.getInstance()
+
+        getPerson()
     }
 
     private fun setInitConfiguration() {
@@ -80,7 +87,8 @@ class MyProfileFragment : Fragment() {
                 birthdate = birthdate,
                 email = email,
                 username = username,
-                phone = phone
+                phone = phone,
+                image = ""
             )
 
             setPerson()
@@ -91,8 +99,16 @@ class MyProfileFragment : Fragment() {
         binding.itemName.text = person?.name + " " + person?.surnames
         binding.itemUsername.valueTextView.text = person?.username
         binding.itemEmail.valueTextView.text = person?.email
-        binding.itemPhoneNumber.valueTextView.text = person?.username
+        binding.itemPhoneNumber.valueTextView.text = person?.phone
         binding.itemBirthdate.valueTextView.text = DateUtil.getDate(person?.birthdate ?: -1, "dd/MM/yyyy")
+
+        if (context != null) {
+            storage.reference.child("images/${AppPreference.getUserUID()}").downloadUrl.addOnSuccessListener {
+                Glide.with(requireContext())
+                    .load(it.toString())
+                    .into(binding.imageUser)
+            }
+        }
 
         AppPreference.setUserEmail(person?.email ?: "")
         AppPreference.setUserName(person?.name + " " + person?.surnames)
@@ -109,7 +125,9 @@ class MyProfileFragment : Fragment() {
             startActivity(intent)
         }
         binding.editInfo.linearLayout.setOnClickListener {
-            val intent = Intent(requireContext(), FriendsActivity::class.java)
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            intent.putExtra("edit", true)
+            intent.putExtra("id", AppPreference.getUserUID())
             startActivity(intent)
         }
         binding.logOut.linearLayout.setOnClickListener {

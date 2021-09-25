@@ -1,10 +1,13 @@
 package org.example.compa.ui.adapters
 
 import android.annotation.SuppressLint
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import org.example.compa.R
 import org.example.compa.databinding.ItemFriendBinding
@@ -41,7 +44,7 @@ class PeopleAdapter(
             binding.birthdateTextView.text = DateUtil.getDate(person.birthdate ?: -1, "dd/MM/yyyy")
 
             if (addFriend) {
-                binding.favourite.setImageResource(R.drawable.ic_baseline_person_add_24)
+                binding.favourite.setImageResource(R.drawable.ic_add)
             } else {
                 binding.favourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
@@ -50,20 +53,7 @@ class PeopleAdapter(
             val position = listFriends.indexOf(person)
             binding.favourite.setOnClickListener {
                 isFavourite = !isFavourite
-                if (isFavourite) {
-                    if (addFriend) {
-                        binding.favourite.setImageResource(R.drawable.ic_baseline_accessibility_24)
-                    } else {
-                        binding.favourite.setImageResource(R.drawable.ic_baseline_favorite_24)
-                    }
-                } else {
-                    if (addFriend) {
-                        binding.favourite.setImageResource(R.drawable.ic_baseline_person_add_24)
-                    } else {
-                        binding.favourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-                    }
-                }
-                itemClickListener?.onItemClicked(person, position, isFavourite)
+                itemClickListener?.onItemClicked(person, position, isFavourite, binding.favourite)
             }
         }
     }
@@ -118,7 +108,7 @@ class PeopleAdapter(
     }
 
     fun interface ItemClickListener {
-        fun onItemClicked(person: Person, position: Int, isFavourite: Boolean)
+        fun onItemClicked(person: Person, position: Int, isFavourite: Boolean, view: ImageButton)
     }
 
     fun setOnItemClickListener(onItemClickListener: ItemClickListener) {

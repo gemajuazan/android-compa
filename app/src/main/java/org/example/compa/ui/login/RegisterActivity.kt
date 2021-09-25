@@ -101,7 +101,8 @@ class RegisterActivity : AppCompatActivity() {
                         birthdate = time,
                         email = binding.registerEmailInputText.text.toString(),
                         username = binding.registerUsernameInputText.text.toString(),
-                        phone = binding.registerPhoneInputText.text.toString()
+                        phone = binding.registerPhoneInputText.text.toString(),
+                        image = ""
                     )
 
                     AppPreference.setUserEmail(binding.registerEmailInputText.text.toString())

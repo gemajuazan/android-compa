@@ -9,6 +9,7 @@ import org.example.compa.ui.home.HomeFragment
 import org.example.compa.ui.payments.MyPaymentsFragment
 import org.example.compa.ui.payments.PaymentHistorialFragment
 import org.example.compa.ui.profile.MyProfileFragment
+import org.example.compa.ui.settings.SettingsFragment
 import org.example.compa.ui.tasks.AllTasksFragment
 
 class MenuNavigationActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class MenuNavigationActivity : AppCompatActivity() {
     private lateinit var profileFragment: MyProfileFragment
     private lateinit var tasksFragment: AllTasksFragment
     private lateinit var paymentsFragment: PaymentHistorialFragment
-    private lateinit var settingsFragment: MyPaymentsFragment
+    private lateinit var settingsFragment: SettingsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +53,7 @@ class MenuNavigationActivity : AppCompatActivity() {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit()
                 }
                 R.id.menu_main_configuration -> {
-                    settingsFragment = MyPaymentsFragment()
+                    settingsFragment = SettingsFragment()
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_view, settingsFragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit()
                 }

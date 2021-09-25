@@ -40,11 +40,10 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     }
 
     private fun setTranslations() {
-        binding.compaToolbar.title.text = getString(R.string.contacts)
         binding.compaToolbar.title.text = getString(R.string.groups)
-/*        binding.compaToolbar.backButtonImageView.setOnClickListener {
+        binding.compaToolbar.arrorBack.setOnClickListener {
             finish()
-        }*/
+        }
     }
 
     private fun setFABConfiguration() {

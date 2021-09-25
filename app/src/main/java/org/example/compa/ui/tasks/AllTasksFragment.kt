@@ -38,13 +38,16 @@ class AllTasksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewAllTasks.layoutManager = LinearLayoutManager(requireContext())
 
-        db = FirebaseFirestore.getInstance()
-        getMyGroups()
-
         binding.addTask.setOnClickListener {
             val intent = Intent(requireContext(), AddTaskActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        db = FirebaseFirestore.getInstance()
+        getMyGroups()
     }
 
     private fun getTasks() {
@@ -95,6 +98,7 @@ class AllTasksFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(requireContext(), AddTaskActivity::class.java)
                 intent.putExtra("id", tasks[position].id)
+                intent.putExtra("name_task", tasks[position].name)
                 intent.putExtra("type", 1)
                 startActivity(intent)
             }
@@ -103,6 +107,7 @@ class AllTasksFragment : Fragment() {
     }
 
     private fun getMyGroups() {
+        binding.groupsChipGroup.removeAllViews()
         val chip = Chip(requireContext())
         chip.text = getString(R.string.all)
         chip.setChipBackgroundColorResource(R.color.primaryLightColor)

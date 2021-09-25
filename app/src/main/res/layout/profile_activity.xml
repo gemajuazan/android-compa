@@ -8,287 +8,248 @@
     android:background="@color/colorBackground"
     tools:context=".ui.profile.ProfileActivity">
 
-    <include
-        android:id="@+id/toolbar_profile"
-        layout="@layout/compa_toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
-
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/profile_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-4dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_profile" />
-
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_progress"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
+                <include
+                    android:id="@+id/toolbar_profile"
+                    layout="@layout/compa_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="24dp"
-                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
-                    app:strokeWidth="1px"
-                    app:strokeColor="@color/primaryColor">
+                    android:layout_height="wrap_content" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:src="@drawable/ic_profile"
-                            app:layout_constraintBottom_toTopOf="@+id/edit_user_linear_layout"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/primaryColor" />
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                            app:layout_constraintStart_toEndOf="@+id/imageView3"
-                            app:layout_constraintTop_toTopOf="@+id/imageView3">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/name_user_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:textColor="@color/primaryColor"
-                                tools:text="GEMA JUÁREZ" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/username_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                tools:text="gemajuazan" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/email_user_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:textColor="@color/secondaryLightColor"
-                                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                                app:layout_constraintTop_toBottomOf="@+id/name_user_text_view"
-                                tools:text="gemajuazan@gmail.com" />
-                        </LinearLayout>
-
-                        <ImageButton
-                            android:id="@+id/edit_user"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_edit_24"
-                            android:background="?selectableItemBackground"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/imageView3"
-                            app:tint="@color/secondaryColor" />
-
-                        <LinearLayout
-                            android:id="@+id/edit_user_linear_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:orientation="vertical"
-                            android:layout_marginHorizontal="8dp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView3">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1px"
-                                android:layout_marginBottom="8dp"
-                                android:background="@color/colorDivider" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/name"
-                                app:boxStrokeColor="@color/secondaryLightColor">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/name_edit_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/surnames"
-                                android:layout_marginTop="8dp"
-                                app:boxStrokeColor="@color/secondaryLightColor">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/surnames_edit_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="8dp"
-                                android:hint="@string/username"
-                                app:boxStrokeColor="@color/secondaryLightColor">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/username_edit_text"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="24dp"
-                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
-                    app:strokeWidth="1px"
-                    app:strokeColor="@color/primaryColor">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/title_birthdate_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:letterSpacing="0.2"
-                            tools:text="@string/date_birth"
-                            android:textColor="@color/primaryColor" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/birthdate_text_view"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/date_birth"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:textSize="12sp"
-                            android:textColor="@color/primaryLightColor" />
-
-                        <ImageButton
-                            android:id="@+id/profile_edit_birthdate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_edit_24"
-                            android:background="?selectableItemBackground"
-                            android:clickable="true"
-                            app:tint="@color/secondaryColor" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!--<com.google.android.material.card.MaterialCardView
-                    android:id="@+id/contacts_and_groups_card"
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/profile_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="16dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:clickable="true"
-                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right"
-                    app:cardBackgroundColor="@color/primaryColor">
+                    android:layout_marginTop="-4dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar_profile" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="8dp"
-                        android:gravity="center_vertical">
+                        android:layout_marginVertical="8dp"
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/title_contacts_and_groups_text_view"
-                            android:layout_width="wrap_content"
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/onPrimaryColor"
-                            android:layout_weight="1"
-                            android:textAllCaps="true"
-                            android:textSize="10sp"
+                            android:layout_marginVertical="16dp"
+                            android:gravity="center">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="96dp"
+                                android:layout_height="96dp"
+                                android:layout_gravity="center"
+                                app:cardBackgroundColor="@color/onPrimaryColor"
+                                app:cardCornerRadius="24dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/image_user"
+                                    android:layout_width="96dp"
+                                    android:layout_height="96dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_user" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/change_image"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/raleway_light"
+                                android:text="@string/change_image" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:fontFamily="@font/raleway_light"
                             android:letterSpacing="0.2"
-                            tools:text="@string/contacts_and_groups" />
+                            android:text="@string/personal_data"
+                            android:textAllCaps="true"
+                            android:textColor="@color/primaryDarkColor"
+                            android:textSize="10sp" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/register_name"
+                            style="@style/CompaTextInputLayout"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_next_button"
-                            app:tint="@color/onPrimaryColor" />
+                            android:layout_marginHorizontal="8dp"
+                            android:hint="@string/name">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/register_name_input_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_light"
+                                android:inputType="text" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@color/secondaryLightColor" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/register_surnames"
+                            style="@style/CompaTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/surnames">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/register_surnames_input_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_light"
+                                android:inputType="text" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@color/secondaryLightColor" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/register_birthdate"
+                            style="@style/CompaTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/date_birth">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/register_birthdate_input_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:fontFamily="@font/raleway_light"
+                                android:longClickable="false" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@color/secondaryLightColor" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/register_username"
+                            style="@style/CompaTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/username">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/register_username_input_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_light" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="8dp"
+                            android:background="@color/secondaryLightColor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginHorizontal="8dp">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/register_phone"
+                                style="@style/CompaTextInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="@string/phone">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/register_phone_input_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageButton
+                                android:id="@+id/call"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:src="@drawable/ic_telephone"
+                                android:layout_marginEnd="8dp"
+                                android:background="?selectableItemBackgroundBorderless"
+                                app:tint="@color/primaryColor"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                </com.google.android.material.card.MaterialCardView>-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/save_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:text="@string/save_info"
+                    app:cornerRadius="24dp" />
 
             </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="alpha01-dev01"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/secondaryLightColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

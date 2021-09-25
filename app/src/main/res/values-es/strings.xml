@@ -81,4 +81,7 @@
     <string name="no_task">No hay tareas. ¡Crea una!</string>
     <string name="no_payments">No hay gastos que mostrar. ¡Crea uno!</string>
     <string name="no_groups">No perteneces a ningún grupo. ¡Crea el primero!</string>
+    <string name="change_image">Cambiar imagen</string>
+    <string name="uploading_image">Subiendo imagen</string>
+    <string name="explanation_icons">Todos los iconos de la aplicación han sido elegidos y diseñados por la plataforma de Flaticon. Los autores de los mismos son: FreePick, Srip, Pixel Perfect y Prettycons.</string>
 </resources>

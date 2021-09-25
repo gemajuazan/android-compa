@@ -87,7 +87,7 @@ class AddTaskActivity : AppCompatActivity() {
         getTask()
         getFriends()
         setStatusList()
-        setUserInList()
+        if (type == 0) setUserInList()
         setToolbar()
         setStartDateCalendar()
         setFinishDateCalendar()
@@ -231,8 +231,9 @@ class AddTaskActivity : AppCompatActivity() {
         } else {
             val nameTask = intent.getStringExtra("name_task") ?: ""
             binding.compaToolbar.title.text = nameTask
-            binding.addMember.visibility = View.GONE
-            binding.saveTask.visibility = View.GONE
+            binding.compaToolbar.arrorBack.setOnClickListener { finish() }
+            binding.addMember.visibility = View.VISIBLE
+            binding.saveTask.visibility = View.VISIBLE
         }
 
         /*binding.compaToolbar.backButtonImageView.setOnClickListener {
@@ -284,7 +285,7 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         binding.saveTask.setOnClickListener {
-            if (intent.getStringExtra("id") != "") {
+            if (type != 0) {
                 if (checkFields()) updateInfo()
                 else {
                     MaterialDialog.createDialog(this) {
@@ -532,7 +533,8 @@ class AddTaskActivity : AppCompatActivity() {
                         birthdate = birthdate,
                         email = email,
                         username = username,
-                        phone = phone
+                        phone = phone,
+                        image = ""
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

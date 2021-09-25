@@ -655,7 +655,8 @@ class PaymentHistorialFragment : Fragment() {
                         birthdate = birthdate,
                         email = email,
                         username = username,
-                        phone = phone
+                        phone = phone,
+                        image = ""
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

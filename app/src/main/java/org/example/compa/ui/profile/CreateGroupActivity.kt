@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.example.compa.App
 import org.example.compa.R
 import org.example.compa.databinding.CreateGroupActivityBinding
 import org.example.compa.databinding.FriendsListBinding
@@ -195,8 +196,12 @@ class CreateGroupActivity : AppCompatActivity() {
                         .isNotBlank() && binding.placeEditText.text.toString().isNotBlank()
                 ) showGroupAddedMessage()
                 else {
-                    if (binding.nameEditText.text.toString().isBlank()) binding.nameTextInputLayout.error = getString(R.string.empty_field)
-                    if (binding.placeEditText.text.toString().isBlank()) binding.placeTextInputLayout.error = getString(R.string.empty_field)
+                    if (binding.nameEditText.text.toString()
+                            .isBlank()
+                    ) binding.nameTextInputLayout.error = getString(R.string.empty_field)
+                    if (binding.placeEditText.text.toString()
+                            .isBlank()
+                    ) binding.placeTextInputLayout.error = getString(R.string.empty_field)
 
                     MaterialDialog.createDialog(this) {
                         setTitle(R.string.check_fields)
@@ -228,7 +233,8 @@ class CreateGroupActivity : AppCompatActivity() {
                     }
                 }
                 for (member in members) {
-                    db.collection("person").document(member.id).collection("groups").document(id).set(group)
+                    db.collection("person").document(member.id).collection("groups").document(id)
+                        .set(group)
                 }
 
             }
@@ -241,6 +247,22 @@ class CreateGroupActivity : AppCompatActivity() {
             setTitle(getString(R.string.add_group))
             setMessage(getString(R.string.do_you_want_to_add_group))
             setPositiveButton(getString(R.string.meh)) { _, _ ->
+
+                db.collection("person").document(AppPreference.getUserUID()).collection("groups")
+                    .document(groupId).update("name", binding.nameEditText.text.toString())
+                db.collection("person").document(AppPreference.getUserUID()).collection("groups")
+                    .document(groupId).update("place", binding.placeEditText.text.toString())
+
+                db.collection("person").document(AppPreference.getUserUID()).collection("groups").document(groupId).collection("members").document().delete()
+
+                for ((position, member) in members.withIndex()) {
+
+                    db.collection("person").document(AppPreference.getUserUID()).collection("groups").document(groupId).collection("members")
+                        .document(member.id).set(member)
+                    if (position == members.size - 1) {
+                        finish()
+                    }
+                }
 
                 db.collection("groups").document(groupId)
                     .update("name", binding.nameEditText.text.toString())
@@ -282,7 +304,8 @@ class CreateGroupActivity : AppCompatActivity() {
                         birthdate = birthdate,
                         email = email,
                         username = username,
-                        phone = phone
+                        phone = phone,
+                        image = ""
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)
