@@ -61,13 +61,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_gravity="end"
-                    app:strokeColor="@color/secondaryColor"
+                    app:strokeColor="@color/primaryLightColor"
                     app:strokeWidth="2px"
                     app:cardElevation="0dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/category_task"
-                        android:textColor="@color/secondaryColor"
+                        android:textColor="@color/primaryLightColor"
                         android:fontFamily="@font/raleway_light"
                         android:layout_margin="6dp"
                         android:textAllCaps="true"

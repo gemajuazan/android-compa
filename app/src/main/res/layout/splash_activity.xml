@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background_color_compa"
+    android:background="@color/primaryColor"
     tools:context="org.example.compa.ui.login.SplashActivity">
 
     <LinearLayout
@@ -14,19 +14,13 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:src="@drawable/ic_logo_compa"/>
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_marginTop="16dp"
-            app:trackColor="@color/onPrimaryColor"
-            app:trackThickness="2dp" />
-
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/load_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/onPrimaryColor"

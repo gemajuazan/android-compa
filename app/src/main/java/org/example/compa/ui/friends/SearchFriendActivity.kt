@@ -58,6 +58,7 @@ class SearchFriendActivity : AppCompatActivity() {
                 val birthdate = data?.get("birthdate") as Long? ?: -1
                 val email = data?.get("email") as String? ?: ""
                 val username = data?.get("username") as String? ?: ""
+                val phone = data?.get("phone") as String? ?: ""
 
                 if (email == auth.currentUser?.email) {
                     me = Person(
@@ -66,7 +67,8 @@ class SearchFriendActivity : AppCompatActivity() {
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                 } else {
                     val person = Person(
@@ -75,7 +77,8 @@ class SearchFriendActivity : AppCompatActivity() {
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                     people.add(person)
                 }

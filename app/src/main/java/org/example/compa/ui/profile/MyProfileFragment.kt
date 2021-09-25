@@ -72,13 +72,15 @@ class MyProfileFragment : Fragment() {
             val birthdate = it.data?.get("birthdate") as Long? ?: -1
             val email = it.data?.get("email") as String? ?: ""
             val username = it.data?.get("username") as String? ?: ""
+            val phone = it.data?.get("phone") as String? ?: ""
             person = Person(
                 id = id,
                 name = name,
                 surnames = surnames,
                 birthdate = birthdate,
                 email = email,
-                username = username
+                username = username,
+                phone = phone
             )
 
             setPerson()

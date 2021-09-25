@@ -104,7 +104,7 @@
     <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
     <string name="contacts">Contactos</string>
     <string name="and_groups">y grupos</string>
-    <string name="loading_app">Cargando aplicación...</string>
+    <string name="loading_app">Cargando aplicación</string>
     <string name="name_group">Nombre del grupo</string>
     <string name="place_group_create">Lugar del desastre</string>
     <string name="data_group_label">Datos del grupo</string>
@@ -171,8 +171,12 @@
     <string name="select_category">Selecciona categoría</string>
     <string name="personal_data">Información personal</string>
     <string name="access_data">Información de acceso</string>
-    <string name="phone">Teléfono</string>
+    <string name="phone">Teléfono (con prefijo)</string>
     <string name="search_friends">Buscar amigos</string>
     <string name="all">Todo</string>
     <string name="filter_by">"Filtrar por: "</string>
+    <string name="add_task_to_external_calendar">Añadir tarea al calendario</string>
+    <string name="no_task">No hay tareas. ¡Crea una!</string>
+    <string name="no_payments">No hay gastos que mostrar. ¡Crea uno!</string>
+    <string name="no_groups">No perteneces a ningún grupo. ¡Crea el primero!</string>
 </resources>

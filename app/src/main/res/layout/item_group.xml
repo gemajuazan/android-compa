@@ -19,7 +19,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,65 +40,44 @@
                     android:letterSpacing="0.1"
                     tools:text="grupo castellón"/>
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/arrow_group"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_gravity="center_vertical"
-                    android:backgroundTint="@android:color/transparent"
-                    style="?selectableItemBackground"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+                <LinearLayout
+                    android:id="@+id/actions_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="8dp">
 
-            </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/see_group"
+                        app:shapeAppearance="@style/LetMeLogIn"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_details"
+                        android:tint="@color/secondaryDarkColor"
+                        android:background="?selectableItemBackground"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/members_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:visibility="gone"/>
+                    <ImageButton
+                        android:id="@+id/edit_group"
+                        app:shapeAppearance="@style/LetMeLogIn"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_pencil"
+                        android:tint="@color/primaryDarkColor"
+                        android:background="?selectableItemBackground"/>
 
-            <LinearLayout
-                android:id="@+id/actions_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                    <ImageButton
+                        android:id="@+id/remove_group"
+                        app:shapeAppearance="@style/LetMeLogIn"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_delete"
+                        android:tint="@color/colorError"
+                        android:background="?selectableItemBackground"/>
 
-                <ImageButton
-                    android:id="@+id/see_group"
-                    app:shapeAppearance="@style/LetMeLogIn"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_baseline_remove_red_eye_24"
-                    android:tint="@color/primaryLightColor"
-                    android:background="?selectableItemBackground"/>
-
-                <ImageButton
-                    android:id="@+id/edit_group"
-                    app:shapeAppearance="@style/LetMeLogIn"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_edit_24"
-                    android:tint="@color/secondaryLightColor"
-                    android:background="?selectableItemBackground"/>
-
-                <ImageButton
-                    android:id="@+id/remove_group"
-                    app:shapeAppearance="@style/LetMeLogIn"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_delete_24"
-                    android:tint="@color/colorError"
-                    android:background="?selectableItemBackground"/>
+                </LinearLayout>
 
             </LinearLayout>
 

@@ -87,7 +87,8 @@ class ProfileActivity : AppCompatActivity() {
                 surnames = surnames,
                 birthdate = birthdate,
                 email = email,
-                username = username
+                username = username,
+                phone = ""
             )
 
             setPerson()

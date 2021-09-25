@@ -8,5 +8,6 @@ data class Person(
     val surnames: String,
     val birthdate: Long?,
     val email: String,
-    val username: String
+    val username: String,
+    val phone: String
 ) : Serializable

@@ -3,6 +3,7 @@ package org.example.compa.ui.profile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import org.example.compa.R
@@ -40,7 +41,7 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
 
     private fun setTranslations() {
         binding.compaToolbar.title.text = getString(R.string.contacts)
-        binding.compaToolbar.title.text = getString(R.string.and_groups)
+        binding.compaToolbar.title.text = getString(R.string.groups)
 /*        binding.compaToolbar.backButtonImageView.setOnClickListener {
             finish()
         }*/
@@ -75,6 +76,7 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                     groupAdapter.notifyDataSetChanged()
 
                 }
+                showNoGroups(groups)
                 groupAdapter = GroupAdapter(
                     groups, context = this@ContactsAndGroupsActivity,
                     needsLine = false,
@@ -85,6 +87,18 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                 setActionsGroup()
             }
 
+    }
+
+    private fun showNoGroups(groups: ArrayList<Group>) {
+        if (groups.size == 0) {
+            binding.noGroups.visibility = View.VISIBLE
+            binding.noGroupsMessage.visibility = View.VISIBLE
+            binding.listGroups.visibility = View.GONE
+        } else {
+            binding.noGroups.visibility = View.GONE
+            binding.noGroupsMessage.visibility = View.GONE
+            binding.listGroups.visibility = View.VISIBLE
+        }
     }
 
     private fun setActionsGroup() {
@@ -108,8 +122,8 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                     setTitle(R.string.delete_group)
                     setMessage(R.string.do_you_want_to_delete_group)
                     setPositiveButton(R.string.of_course_madafak) { _, _ ->
-                        db.collection("groups").document(group.id).delete()
                         db.collection("groups").document(group.id).collection("members").document().delete()
+                        db.collection("groups").document(group.id).delete()
                         getGroups(arrayListOf())
                     }
                     setNegativeButton(R.string.cancel) { _, _ ->

@@ -1,8 +1,10 @@
 package org.example.compa.ui.tasks
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -81,6 +83,7 @@ class AddTaskActivity : AppCompatActivity() {
         binding.membersTaskRecyclerView.layoutManager = LinearLayoutManager(this)
         membersAdapter = MemberTaskAdapter(arrayListOf(), this)
         binding.membersTaskRecyclerView.adapter = membersAdapter
+        type = intent.getIntExtra("type", 0)
         getTask()
         getFriends()
         setStatusList()
@@ -157,6 +160,7 @@ class AddTaskActivity : AppCompatActivity() {
         val member = Member(AppPreference.getUserUID(), AppPreference.getUserName(), AppPreference.getUserUsername(), AppPreference.getUserEmail())
         members.add(member)
         membersTask.add(MemberTask(member, FOR_DOING))
+        getMembers()
     }
 
     private fun setStatusList() {
@@ -223,6 +227,7 @@ class AddTaskActivity : AppCompatActivity() {
             binding.compaToolbar.title.text = getString(R.string.add_task)
             binding.saveTask.visibility = View.VISIBLE
             binding.addMember.visibility = View.VISIBLE
+            binding.noMembers.visibility = View.VISIBLE
         } else {
             val nameTask = intent.getStringExtra("name_task") ?: ""
             binding.compaToolbar.title.text = nameTask
@@ -280,9 +285,19 @@ class AddTaskActivity : AppCompatActivity() {
 
         binding.saveTask.setOnClickListener {
             if (intent.getStringExtra("id") != "") {
-                updateInfo()
+                if (checkFields()) updateInfo()
+                else {
+                    MaterialDialog.createDialog(this) {
+                        setMessage(getString(R.string.check_fields_info))
+                    }.show()
+                }
             } else {
-                saveTask()
+                if (checkFields()) saveTask()
+                else {
+                    MaterialDialog.createDialog(this) {
+                        setMessage(getString(R.string.check_fields_info))
+                    }.show()
+                }
             }
         }
 
@@ -313,6 +328,30 @@ class AddTaskActivity : AppCompatActivity() {
                 }
             })
         }
+
+        binding.addExternalCalendar.setOnClickListener {
+            if (checkFields()) setDataToExternalCalendar()
+            else {
+                MaterialDialog.createDialog(this) {
+                    setMessage(getString(R.string.check_fields_info))
+                }.show()
+            }
+        }
+    }
+
+    private fun setDataToExternalCalendar() {
+        val insertCalendarIntent = Intent(Intent.ACTION_INSERT)
+            .setData(CalendarContract.Events.CONTENT_URI)
+            .putExtra(CalendarContract.Events.TITLE, binding.nameEditText.text.toString())
+            .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, myCalendarStart.timeInMillis)
+            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, myCalendarFinish.timeInMillis)
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, binding.groupEditText.text.toString())
+            .putExtra(CalendarContract.Events.DESCRIPTION, binding.descriptionEditText.text.toString())
+            .putExtra(Intent.EXTRA_EMAIL, AppPreference.getUserEmail())
+            .putExtra(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE)
+            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_FREE)
+        startActivity(insertCalendarIntent)
     }
 
     private fun addMembertOflist() {
@@ -414,6 +453,40 @@ class AddTaskActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun checkFields(): Boolean {
+        if (binding.nameEditText.text.toString().isBlank()) {
+            binding.nameTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        if (binding.groupEditText.text.toString().isBlank()) {
+            binding.groupTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        if (binding.dateStartEditText.text.toString().isBlank()) {
+            binding.dateStartTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        if (binding.dateFinishEditText.text.toString().isBlank()) {
+            binding.dateFinishTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        if (binding.descriptionEditText.text.toString().isBlank()) {
+            binding.descriptionTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        if (binding.categoryEditText.text.toString().isBlank()) {
+            binding.categoryTextInputLayout.error = getString(R.string.empty_field)
+            return false
+        }
+
+        return true
+    }
+
     private fun saveTask() {
         val name = binding.nameEditText.text.toString()
         val description = binding.descriptionEditText.text.toString()
@@ -451,13 +524,15 @@ class AddTaskActivity : AppCompatActivity() {
                     val birthdate = hashMap["birthdate"] as Long? ?: -1
                     val email = hashMap["email"] as String? ?: ""
                     val username = hashMap["username"] as String? ?: ""
+                    val phone = hashMap["phone"] as String? ?: ""
                     val person = Person(
                         id = id,
                         name = name,
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

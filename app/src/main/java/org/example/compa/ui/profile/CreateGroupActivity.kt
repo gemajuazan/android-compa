@@ -85,8 +85,8 @@ class CreateGroupActivity : AppCompatActivity() {
     private fun setGroupData(newGroupId: String) {
         groupId = newGroupId
         db.collection("groups").document(groupId).get().addOnSuccessListener {
-            val name = it.data?.get("name") as String
-            val place = it.data?.get("place") as String
+            val name = it.data?.get("name") as String?
+            val place = it.data?.get("place") as String?
             binding.nameEditText.setText(name)
             binding.placeEditText.setText(place)
             db.collection("groups").document(groupId).collection("members").get()
@@ -274,13 +274,15 @@ class CreateGroupActivity : AppCompatActivity() {
                     val birthdate = hashMap["birthdate"] as Long? ?: -1
                     val email = hashMap["email"] as String? ?: ""
                     val username = hashMap["username"] as String? ?: ""
+                    val phone = hashMap["phone"] as String? ?: ""
                     val person = Person(
                         id = id,
                         name = name,
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

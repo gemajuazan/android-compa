@@ -336,13 +336,15 @@ class PaymentsActivity : AppCompatActivity() {
                     val birthdate = hashMap["birthdate"] as Long? ?: -1
                     val email = hashMap["email"] as String? ?: ""
                     val username = hashMap["username"] as String? ?: ""
+                    val phone = hashMap["phone"] as String? ?: ""
                     val person = Person(
                         id = id,
                         name = name,
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

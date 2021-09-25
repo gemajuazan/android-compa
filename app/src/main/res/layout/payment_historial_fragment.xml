@@ -185,6 +185,27 @@
             android:layout_marginHorizontal="12dp"
             android:layout_marginBottom="72dp" />
 
+        <ImageView
+            android:id="@+id/no_payments"
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_no_fee"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:tint="@color/secondaryLightColor" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/no_payments_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondaryLightColor"
+            android:fontFamily="@font/raleway_light"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_payments"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </FrameLayout>

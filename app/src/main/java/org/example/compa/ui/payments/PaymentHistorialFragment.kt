@@ -89,12 +89,25 @@ class PaymentHistorialFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
+                    showNoPayments()
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerViewHistorial.adapter = paymentAdapter
                     onClickPayment()
                 }
             }
             binding.loader.visibility = View.GONE
+        }
+    }
+
+    private fun showNoPayments() {
+        if (payments.size == 0) {
+            binding.noPayments.visibility = View.VISIBLE
+            binding.noPaymentsMessage.visibility = View.VISIBLE
+            binding.recyclerViewHistorial.visibility = View.GONE
+        } else {
+            binding.noPayments.visibility = View.GONE
+            binding.noPaymentsMessage.visibility = View.GONE
+            binding.recyclerViewHistorial.visibility = View.VISIBLE
         }
     }
 
@@ -129,7 +142,7 @@ class PaymentHistorialFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
-
+                    showNoPayments()
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerViewHistorial.adapter = paymentAdapter
                     onClickPayment()
@@ -170,6 +183,7 @@ class PaymentHistorialFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
+                    showNoPayments()
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerViewHistorial.adapter = paymentAdapter
                     onClickPayment()
@@ -189,15 +203,15 @@ class PaymentHistorialFragment : Fragment() {
                 val id = payment.data?.get("id") as String
                 db.collection("payments").document(id).get().addOnSuccessListener { payment ->
                     val statusPayment = payment.data?.get("statusPayment") as String
+                    val transmitter = payment.data?.get("transmitter") as String
+                    val receiver = payment.data?.get("receiver") as String
 
-                    if (statusPayment == "PAY") {
+                    if (statusPayment == "PAY" && (transmitter == AppPreference.getUserUsername() || receiver == AppPreference.getUserUsername())) {
                         val id = payment.data?.get("id") as String
                         val price = payment.data?.get("price") as Double
                         val date = payment.data?.get("date") as Long
                         val concept = payment.data?.get("concept") as String
                         val typePayment = payment.data?.get("typePayment") as String
-                        val transmitter = payment.data?.get("transmitter") as String
-                        val receiver = payment.data?.get("receiver") as String
                         val newPayment = Payment(
                             id = id,
                             transmitter = transmitter,
@@ -211,7 +225,7 @@ class PaymentHistorialFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
-
+                    showNoPayments()
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerViewHistorial.adapter = paymentAdapter
                     onClickPayment()
@@ -230,15 +244,15 @@ class PaymentHistorialFragment : Fragment() {
                 val id = payment.data?.get("id") as String
                 db.collection("payments").document(id).get().addOnSuccessListener { payment ->
                     val statusPayment = payment.data?.get("statusPayment") as String
+                    val transmitter = payment.data?.get("transmitter") as String
+                    val receiver = payment.data?.get("receiver") as String
 
-                    if (statusPayment == "NPA") {
+                    if (statusPayment == "NPA" && (transmitter == AppPreference.getUserUsername() || receiver == AppPreference.getUserUsername())) {
                         val id = payment.data?.get("id") as String
                         val price = payment.data?.get("price") as Double
                         val date = payment.data?.get("date") as Long
                         val concept = payment.data?.get("concept") as String
                         val typePayment = payment.data?.get("typePayment") as String
-                        val transmitter = payment.data?.get("transmitter") as String
-                        val receiver = payment.data?.get("receiver") as String
                         val newPayment = Payment(
                             id = id,
                             transmitter = transmitter,
@@ -252,7 +266,7 @@ class PaymentHistorialFragment : Fragment() {
                         payments.add(newPayment)
                         paymentAdapter.notifyDataSetChanged()
                     }
-
+                    showNoPayments()
                     paymentAdapter = MyPaymentAdapter(payments, requireContext())
                     binding.recyclerViewHistorial.adapter = paymentAdapter
                     onClickPayment()
@@ -633,13 +647,15 @@ class PaymentHistorialFragment : Fragment() {
                     val birthdate = hashMap["birthdate"] as Long? ?: -1
                     val email = hashMap["email"] as String? ?: ""
                     val username = hashMap["username"] as String? ?: ""
+                    val phone = hashMap["phone"] as String? ?: ""
                     val person = Person(
                         id = id,
                         name = name,
                         surnames = surnames,
                         birthdate = birthdate,
                         email = email,
-                        username = username
+                        username = username,
+                        phone = phone
                     )
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)

@@ -31,7 +31,7 @@ class GroupAdapter(
         private var isRotated: Boolean = false
 
         fun bind(group: Group, position: Int) {
-            binding.arrowGroup.setOnClickListener {
+            /*binding.arrowGroup.setOnClickListener {
                 isRotated = StyleUtil.rotateFab(binding.arrowGroup, !isRotated, 180f)
                 if (isRotated) {
                     binding.membersRecyclerView.visibility = View.VISIBLE
@@ -40,10 +40,10 @@ class GroupAdapter(
                     binding.membersRecyclerView.visibility = View.GONE
                     binding.actionsGroup.visibility = View.GONE
                 }
-            }
+            }*/
             binding.nameGroup.text = group.name
-            binding.membersRecyclerView.layoutManager = LinearLayoutManager(context)
-            binding.membersRecyclerView.adapter = TextAdapter(group.members, needsLine, needsIcon)
+            //binding.membersRecyclerView.layoutManager = LinearLayoutManager(context)
+            //binding.membersRecyclerView.adapter = TextAdapter(group.members, needsLine, needsIcon)
 
             binding.seeGroup.setOnClickListener {
                 itemClickListener?.onSeeGroupClicked(group, position)

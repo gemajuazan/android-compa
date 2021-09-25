@@ -73,8 +73,12 @@
     <string name="select_category">Selecciona categoría</string>
     <string name="personal_data">Información personal</string>
     <string name="access_data">Información de acceso</string>
-    <string name="phone">Teléfono</string>
+    <string name="phone">Teléfono (con prefijo)</string>
     <string name="search_friends">Buscar amigos</string>
     <string name="all">Todo</string>
     <string name="filter_by">"Filtrar por: "</string>
+    <string name="add_task_to_external_calendar">Añadir tarea al calendario</string>
+    <string name="no_task">No hay tareas. ¡Crea una!</string>
+    <string name="no_payments">No hay gastos que mostrar. ¡Crea uno!</string>
+    <string name="no_groups">No perteneces a ningún grupo. ¡Crea el primero!</string>
 </resources>

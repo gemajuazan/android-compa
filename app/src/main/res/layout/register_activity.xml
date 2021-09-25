@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.login.RegisterActivity">
 
     <include
         android:id="@+id/toolbar2"
@@ -32,7 +32,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="32dp"
+                android:layout_marginVertical="16dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -49,9 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="16dp"
-                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
-                        app:strokeWidth="1px"
-                        app:strokeColor="@color/primaryColor">
+                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -65,7 +63,7 @@
                                 android:layout_margin="16dp"
                                 android:text="@string/personal_data"
                                 android:textAllCaps="true"
-                                android:textColor="@color/primaryColor"
+                                android:textColor="@color/primaryDarkColor"
                                 android:fontFamily="@font/raleway_light"
                                 android:letterSpacing="0.2"
                                 android:textSize="10sp" />
@@ -76,9 +74,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
-                                android:layout_marginTop="8dp"
-                                android:hint="@string/name"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/name">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_name_input_text"
@@ -89,6 +85,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_surnames"
                                 style="@style/CompaTextInputLayout"
@@ -96,8 +99,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/surnames"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/surnames">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_surnames_input_text"
@@ -108,6 +110,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_birthdate"
                                 style="@style/CompaTextInputLayout"
@@ -115,8 +124,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/date_birth"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/date_birth">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_birthdate_input_text"
@@ -128,6 +136,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_username"
                                 style="@style/CompaTextInputLayout"
@@ -135,11 +150,34 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/username"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/username">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_username_input_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/register_phone"
+                                style="@style/CompaTextInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/phone">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/register_phone_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/raleway_light"/>
@@ -153,9 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="16dp"
-                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
-                        app:strokeWidth="1px"
-                        app:strokeColor="@color/primaryColor">
+                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -169,7 +205,7 @@
                                 android:layout_margin="16dp"
                                 android:text="@string/access_data"
                                 android:textAllCaps="true"
-                                android:textColor="@color/primaryColor"
+                                android:textColor="@color/primaryDarkColor"
                                 android:fontFamily="@font/raleway_light"
                                 android:letterSpacing="0.2"
                                 android:textSize="10sp" />
@@ -180,9 +216,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
-                                android:layout_marginTop="8dp"
-                                android:hint="@string/email"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/email">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_email_input_text"
@@ -192,6 +226,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_repeat_email"
                                 style="@style/CompaTextInputLayout"
@@ -199,8 +240,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/repeat_email"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/repeat_email">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_repeat_email_input_text"
@@ -210,6 +250,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_password"
                                 style="@style/CompaTextInputLayout"
@@ -217,8 +264,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/password"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/password">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_password_input_text"
@@ -229,6 +275,13 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_repeat_password"
                                 style="@style/CompaTextInputLayout"
@@ -236,8 +289,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"
                                 android:layout_marginTop="8dp"
-                                android:hint="@string/repeat_password"
-                                app:boxStrokeWidth="1px">
+                                android:hint="@string/repeat_password">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_repeat_password_input_text"
@@ -251,7 +303,7 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/register_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -260,7 +312,8 @@
                         android:text="@string/register"
                         android:fontFamily="@font/raleway_light"
                         android:textColor="@color/onPrimaryColor"
-                        app:backgroundTint="@color/primaryColor" />
+                        app:backgroundTint="@color/primaryColor"
+                        app:cornerRadius="24dp"/>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

@@ -1,4 +1,4 @@
-package org.example.compa
+package org.example.compa.ui.login
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import org.example.compa.R
 import org.example.compa.databinding.RegisterActivityBinding
 import org.example.compa.models.Person
 import org.example.compa.models.User
@@ -99,7 +100,8 @@ class RegisterActivity : AppCompatActivity() {
                         surnames = binding.registerSurnamesInputText.text.toString(),
                         birthdate = time,
                         email = binding.registerEmailInputText.text.toString(),
-                        username = binding.registerUsernameInputText.text.toString()
+                        username = binding.registerUsernameInputText.text.toString(),
+                        phone = binding.registerPhoneInputText.text.toString()
                     )
 
                     AppPreference.setUserEmail(binding.registerEmailInputText.text.toString())
