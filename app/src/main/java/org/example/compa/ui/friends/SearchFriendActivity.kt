@@ -62,6 +62,10 @@ class SearchFriendActivity : AppCompatActivity() {
             for (data in it.documents) {
                 val id = data?.get("id") as String? ?: ""
 
+                if (id == AppPreference.getUserUID()) {
+                    me = setPerson(data, id)
+                }
+
                 if (!checkIfPersonIsMyFriend(id)) {
                     val person = setPerson(data, id)
                     people.add(person)

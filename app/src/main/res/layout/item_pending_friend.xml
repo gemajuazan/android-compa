@@ -10,6 +10,7 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_marginHorizontal="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -89,6 +90,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_final"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginStart="8dp"

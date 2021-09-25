@@ -50,11 +50,13 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToMenu() {
         val intent = Intent(this, MenuNavigationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
     private fun goToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 }

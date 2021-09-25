@@ -14,6 +14,7 @@ import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.adapters.FriendAdapter
 import org.example.compa.ui.adapters.PendingFriendAdapter
 import org.example.compa.ui.profile.ProfileActivity
+import org.example.compa.utils.DataUtil.Companion.getPersonFromDatabaseHashMap
 import org.example.compa.utils.MaterialDialog
 
 class FriendsActivity : AppCompatActivity() {
@@ -88,7 +89,7 @@ class FriendsActivity : AppCompatActivity() {
                     val hashMap = data.data?.get("person") as HashMap<String, Any>
                     val solicitude = data.get("solicitude") as Boolean
                     val favourite = data.get("favourite") as Boolean
-                    val person = getPerson(hashMap)
+                    val person = getPersonFromDatabaseHashMap(hashMap)
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     pendingFriends.add(friend)
                 }
@@ -103,34 +104,13 @@ class FriendsActivity : AppCompatActivity() {
                     val hashMap = data.data?.get("person") as HashMap<String, Any>
                     val solicitude = data.get("solicitude") as Boolean
                     val favourite = data.get("favourite") as Boolean
-                    val person = getPerson(hashMap)
+                    val person = getPersonFromDatabaseHashMap(hashMap)
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)
                 }
 
                 setFriends()
             }
-    }
-
-    private fun getPerson(hashMap: HashMap<String, Any>): Person {
-        val id = hashMap["id"] as String? ?: ""
-        val name = hashMap["name"] as String? ?: ""
-        val surnames = hashMap["surnames"] as String? ?: ""
-        val birthdate = hashMap["birthdate"] as Long? ?: -1
-        val email = hashMap["email"] as String? ?: ""
-        val username = hashMap["username"] as String? ?: ""
-        val phone = hashMap["phone"] as String? ?: ""
-        val person = Person(
-            id = id,
-            name = name,
-            surnames = surnames,
-            birthdate = birthdate,
-            email = email,
-            username = username,
-            phone = phone,
-            image = ""
-        )
-        return person
     }
 
     private fun setFriends() {
@@ -188,7 +168,6 @@ class FriendsActivity : AppCompatActivity() {
             setRecyclerViewPendingFriendsAdapter()
             setOnItemClickedPendingFriends()
         }
-
 
     }
 

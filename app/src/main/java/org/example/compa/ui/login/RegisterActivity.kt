@@ -15,7 +15,7 @@ import org.example.compa.databinding.RegisterActivityBinding
 import org.example.compa.models.Person
 import org.example.compa.models.User
 import org.example.compa.preferences.AppPreference
-import org.example.compa.ui.menu.MenuActivity
+import org.example.compa.ui.menu.MenuNavigationActivity
 import org.example.compa.utils.MaterialDialog
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -71,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showMessageRegisterSuccessfully() {
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, MenuNavigationActivity::class.java)
         intent.putExtra("username", binding.registerNameInputText.text.toString())
         startActivity(intent)
     }

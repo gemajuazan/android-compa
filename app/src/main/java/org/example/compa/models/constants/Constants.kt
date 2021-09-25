@@ -41,6 +41,9 @@ class Constants {
             const val WASH = "WAS"
             const val KITCHEN = "KIT"
             const val IRON = "IRO"
+            const val CLEAN_CLOTHES = "CCL"
+            const val HANG_UP = "HUP"
+            const val ENTERTAINMENT = "ENT"
 
             fun getCategoryTask(statusCode: String): Int {
                 return when (statusCode) {
@@ -50,6 +53,9 @@ class Constants {
                     WASH -> R.string.washing
                     KITCHEN -> R.string.kitchen
                     IRON -> R.string.iron
+                    CLEAN_CLOTHES -> R.string.washing_machine
+                    HANG_UP -> R.string.clothes
+                    ENTERTAINMENT -> R.string.menu_entertainment
                     else -> R.string.cleanliness
                 }
             }
@@ -62,6 +68,9 @@ class Constants {
                     WASH -> R.drawable.ic_wash
                     KITCHEN -> R.drawable.ic_kitchen
                     IRON -> R.drawable.ic_iron
+                    CLEAN_CLOTHES -> R.drawable.ic_washing_machine
+                    HANG_UP -> R.drawable.ic_hang_up_clothes
+                    ENTERTAINMENT -> R.drawable.ic_entertainment
                     else -> R.drawable.ic_scrub
                 }
             }

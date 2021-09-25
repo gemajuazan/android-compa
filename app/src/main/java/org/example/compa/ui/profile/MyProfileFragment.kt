@@ -1,5 +1,6 @@
 package org.example.compa.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,8 +18,10 @@ import org.example.compa.models.Person
 import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.friends.FriendsActivity
 import org.example.compa.ui.login.LoginActivity
+import org.example.compa.utils.DataUtil.Companion.getPersonFromDatabase
 import org.example.compa.utils.DateUtil
 
+@SuppressLint("SetTextI18n")
 class MyProfileFragment : Fragment() {
 
     private lateinit var binding: MyProfileFragmentBinding
@@ -39,7 +42,6 @@ class MyProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = MyProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -73,24 +75,7 @@ class MyProfileFragment : Fragment() {
     private fun getPerson() {
         val user: FirebaseUser? = auth.currentUser
         db.collection("person").document(user?.uid ?: "").get().addOnSuccessListener {
-            val id = it.data?.get("id") as String? ?: ""
-            val name = it.data?.get("name") as String? ?: ""
-            val surnames = it.data?.get("surnames") as String? ?: ""
-            val birthdate = it.data?.get("birthdate") as Long? ?: -1
-            val email = it.data?.get("email") as String? ?: ""
-            val username = it.data?.get("username") as String? ?: ""
-            val phone = it.data?.get("phone") as String? ?: ""
-            person = Person(
-                id = id,
-                name = name,
-                surnames = surnames,
-                birthdate = birthdate,
-                email = email,
-                username = username,
-                phone = phone,
-                image = ""
-            )
-
+            person = getPersonFromDatabase(it)
             setPerson()
         }
     }

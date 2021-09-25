@@ -22,6 +22,8 @@ import org.example.compa.R
 import org.example.compa.databinding.ProfileActivityBinding
 import org.example.compa.models.Person
 import org.example.compa.preferences.AppPreference
+import org.example.compa.utils.DataUtil
+import org.example.compa.utils.DataUtil.Companion.getPersonFromDatabase
 import org.example.compa.utils.DateUtil
 import org.example.compa.utils.MaterialDialog
 import org.example.compa.utils.StyleUtil
@@ -104,6 +106,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.registerPhone.isEnabled = false
         binding.registerUsername.isEnabled = false
         binding.call.visibility = View.VISIBLE
+        binding.changeImage.visibility = View.GONE
     }
 
     private fun clearFocus() {
@@ -165,25 +168,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun getPerson() {
         binding.profileProgress.visibility = View.VISIBLE
         db.collection("person").document(userId).get().addOnSuccessListener {
-            val id = it.data?.get("id") as String? ?: ""
-            val name = it.data?.get("name") as String? ?: ""
-            val surnames = it.data?.get("surnames") as String? ?: ""
-            val birthdate = it.data?.get("birthdate") as Long? ?: -1
-            val email = it.data?.get("email") as String? ?: ""
-            val username = it.data?.get("username") as String? ?: ""
-            val phone = it.data?.get("phone") as String? ?: ""
-            val image = it.data?.get("image") as String? ?: ""
-            person = Person(
-                id = id,
-                name = name,
-                surnames = surnames,
-                birthdate = birthdate,
-                email = email,
-                username = username,
-                phone = phone,
-                image = image
-            )
-
+            person = getPersonFromDatabase(it)
             setPerson()
         }
     }

@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import org.example.compa.R
 import org.example.compa.databinding.MenuNavigationActivityBinding
-import org.example.compa.ui.home.HomeFragment
-import org.example.compa.ui.payments.MyPaymentsFragment
 import org.example.compa.ui.payments.PaymentHistorialFragment
 import org.example.compa.ui.profile.MyProfileFragment
 import org.example.compa.ui.settings.SettingsFragment

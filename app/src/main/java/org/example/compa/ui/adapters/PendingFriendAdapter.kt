@@ -28,8 +28,6 @@ class PendingFriendAdapter(
     inner class ViewHolder(private val binding: ItemPendingFriendBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private var isFavourite = false
-
         fun bind(friend: Friend, position: Int) {
             binding.nameTextView.text = friend.person.name + " " + friend.person.surnames
             binding.usernameTextView.text = friend.person.username
@@ -41,6 +39,10 @@ class PendingFriendAdapter(
             } else {
                 binding.accept.visibility = View.VISIBLE
                 binding.cancel.visibility = View.VISIBLE
+            }
+
+            if (listPeople.size - 1 == position) {
+                binding.viewFinal.visibility = View.GONE
             }
 
             binding.accept.setOnClickListener {

@@ -175,6 +175,7 @@ class AllTasksFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(requireContext(), AddTaskActivity::class.java)
                 intent.putExtra("id", tasks[position].id)
+                intent.putExtra("name_task", tasks[position].name)
                 startActivity(intent)
             }
 

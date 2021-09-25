@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".ui.menu.MenuActivity">
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -38,7 +37,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/ic_user"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"

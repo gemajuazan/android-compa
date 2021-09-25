@@ -182,4 +182,6 @@
     <string name="change_image">Cambiar imagen</string>
     <string name="uploading_image">Subiendo imagen</string>
     <string name="explanation_icons">Todos los iconos de la aplicación han sido elegidos y diseñados por la plataforma de Flaticon. Los autores de los mismos son: FreePick, Srip, Pixel Perfect y Prettycons.</string>
+    <string name="washing_machine">Lavar</string>
+    <string name="clothes">Ropa</string>
 </resources>

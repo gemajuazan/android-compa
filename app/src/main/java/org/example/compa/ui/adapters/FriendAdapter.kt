@@ -36,13 +36,13 @@ class FriendAdapter(
 
         private var isFavourite = false
 
-        fun bind(friend: Friend) {
+        fun bind(friend: Friend, position: Int) {
             binding.nameTextView.text = friend.person.name + " " + friend.person.surnames
             binding.usernameTextView.text = friend.person.username
             binding.birthdateTextView.text = DateUtil.getDate(friend.person.birthdate ?: -1, "dd/MM/yyyy")
 
             if (addFriend) {
-                binding.favourite.setImageResource(R.drawable.ic_baseline_person_add_24)
+                binding.favourite.setImageResource(R.drawable.ic_add_user)
             } else {
                 binding.favourite.visibility = View.GONE
             }
@@ -58,12 +58,24 @@ class FriendAdapter(
                     }
                 } else {
                     if (addFriend) {
-                        binding.favourite.setImageResource(R.drawable.ic_baseline_person_add_24)
+                        binding.favourite.setImageResource(R.drawable.ic_add_user)
                     } else {
                         binding.favourite.visibility = View.GONE
                     }
                 }
                 itemClickListener?.onItemAddClicked(friend.person, position)
+            }
+
+            if (position == listFilteredFriends.size - 1) {
+                binding.viewFinal.visibility = View.GONE
+            }
+
+            if (position == listFriends.size - 1) {
+                binding.viewFinal.visibility = View.GONE
+            }
+
+            if (position == listPeople.size - 1) {
+                binding.viewFinal.visibility = View.GONE
             }
 
             binding.linearLayout4.setOnLongClickListener {
@@ -84,7 +96,7 @@ class FriendAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listFilteredFriends[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount(): Int {

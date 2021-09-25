@@ -8,22 +8,23 @@ import android.provider.CalendarContract
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import org.example.compa.App
 import org.example.compa.R
 import org.example.compa.databinding.AddTaskActivityBinding
 import org.example.compa.databinding.FriendsListBinding
 import org.example.compa.databinding.TextListBinding
 import org.example.compa.models.*
-import org.example.compa.models.constants.Constants
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.BUYING
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.CLEAN
+import org.example.compa.models.constants.Constants.CategoryTask.Companion.CLEAN_CLOTHES
+import org.example.compa.models.constants.Constants.CategoryTask.Companion.ENTERTAINMENT
+import org.example.compa.models.constants.Constants.CategoryTask.Companion.HANG_UP
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.IRON
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.KITCHEN
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.TRASH
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.WASH
 import org.example.compa.models.constants.Constants.CategoryTask.Companion.getCategoryTask
-import org.example.compa.models.constants.Constants.CategoryTask.Companion.getCategoryTaskCode
 import org.example.compa.models.constants.Constants.StatusTask.Companion.FINISHED
 import org.example.compa.models.constants.Constants.StatusTask.Companion.FOR_DOING
 import org.example.compa.models.constants.Constants.StatusTask.Companion.IN_PROCESS
@@ -31,6 +32,7 @@ import org.example.compa.models.constants.Constants.StatusTask.Companion.IN_REVI
 import org.example.compa.models.constants.Constants.StatusTask.Companion.getStatusTask
 import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.adapters.*
+import org.example.compa.utils.DataUtil.Companion.getPersonFromDatabaseHashMap
 import org.example.compa.utils.DateUtil
 import org.example.compa.utils.MaterialDialog
 import org.example.compa.utils.StyleUtil
@@ -79,15 +81,13 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun setInitConfiguration() {
-        db = FirebaseFirestore.getInstance()
-        binding.membersTaskRecyclerView.layoutManager = LinearLayoutManager(this)
-        membersAdapter = MemberTaskAdapter(arrayListOf(), this)
-        binding.membersTaskRecyclerView.adapter = membersAdapter
-        type = intent.getIntExtra("type", 0)
+        initFirebase()
+        setRecyclerViewMembers()
+        getIntents()
         getTask()
         getFriends()
         setStatusList()
-        if (type == 0) setUserInList()
+        setCurrentUserInList()
         setToolbar()
         setStartDateCalendar()
         setFinishDateCalendar()
@@ -96,78 +96,118 @@ class AddTaskActivity : AppCompatActivity() {
         setCategoryList()
     }
 
+    private fun getIntents() {
+        type = intent.getIntExtra("type", 0)
+    }
+
+    private fun initFirebase() {
+        db = FirebaseFirestore.getInstance()
+    }
+
+    private fun setRecyclerViewMembers() {
+        binding.membersTaskRecyclerView.layoutManager = LinearLayoutManager(this)
+        membersAdapter = MemberTaskAdapter(arrayListOf(), this)
+        binding.membersTaskRecyclerView.adapter = membersAdapter
+    }
+
     private fun getTask() {
         val id = intent.getStringExtra("id") ?: ""
         if (id != "") {
             db.collection("tasks").document(id).get().addOnSuccessListener {
-                val name = it.data?.get("name") as String
-                val startDate = it.data?.get("startDate") as Long
-                val finishDate = it.data?.get("finishDate") as Long
-                val category = it.data?.get("category") as String
-                val description = it.data?.get("description") as String
-                val hashMap = it.data?.get("group") as HashMap<String, Any>
-                val groupId = hashMap["id"] as String
-                val groupName = hashMap["name"] as String
-                val groupPlace = hashMap["place"] as String
-                val group = Group(groupId, groupName, groupPlace)
-                groupSelected = group
-                categorySelected = category
-                task = Task(
-                    id = id,
-                    name = name,
-                    startDate = startDate,
-                    finishDate = finishDate,
-                    category = category,
-                    description = description,
-                    group = group
-                )
-
-                binding.nameEditText.setText(task?.name)
-                binding.groupEditText.setText(task?.group?.name)
-                binding.dateStartEditText.setText(task?.startDate?.let { it1 -> DateUtil.getDate(it1, "dd/MM/yy") })
-                binding.dateFinishEditText.setText(task?.finishDate?.let { it1 -> DateUtil.getDate(it1, "dd/MM/yy") })
-                binding.categoryEditText.setText(task?.category)
-                binding.descriptionEditText.setText(task?.description)
-                binding.groupEditText.setText(task?.name)
+                getTaskFromDatabase(it, id)
+                setTask()
             }
-
-            db.collection("tasks_status").document(id).collection("members").get().addOnSuccessListener {
-                for (member in it.documents) {
-                    val hashMap = member.data?.get("member") as HashMap<String, Any>
-                    val id = hashMap["id"] as String
-                    val name = hashMap["name"] as String
-                    val username = hashMap["username"] as String
-                    val email = hashMap["email"] as String
-                    val status = member.data?.get("statusTask") as String
-                    membersTask.add(
-                        MemberTask(Member(
-                            id,
-                            name = name,
-                            username = username,
-                            email = email
-                        ), status)
-                    )
+            db.collection("tasks_status").document(id).collection("members").get()
+                .addOnSuccessListener {
+                    for (member in it.documents) {
+                        val hashMap = member.data?.get("member") as HashMap<String, Any>
+                        val status = member.data?.get("statusTask") as String
+                        val newMember = getMember(hashMap)
+                        membersTask.add(
+                            MemberTask(newMember, status)
+                        )
+                    }
+                    getMembers()
                 }
-                getMembers()
-            }
-
         }
-
-
     }
 
-    private fun setUserInList() {
-        val member = Member(AppPreference.getUserUID(), AppPreference.getUserName(), AppPreference.getUserUsername(), AppPreference.getUserEmail())
-        members.add(member)
-        membersTask.add(MemberTask(member, FOR_DOING))
-        getMembers()
+    private fun setTask() {
+        binding.nameEditText.setText(task?.name)
+        binding.groupEditText.setText(task?.group?.name)
+        binding.dateStartEditText.setText(task?.startDate?.let { it1 ->
+            DateUtil.getDate(
+                it1,
+                "dd/MM/yy"
+            )
+        })
+        binding.dateFinishEditText.setText(task?.finishDate?.let { it1 ->
+            DateUtil.getDate(
+                it1,
+                "dd/MM/yy"
+            )
+        })
+        binding.categoryEditText.setText(getCategoryTask(task?.category ?: ""))
+        binding.descriptionEditText.setText(task?.description)
+        binding.groupEditText.setText(task?.name)
+    }
+
+    private fun getTaskFromDatabase(it: DocumentSnapshot, id: String) {
+        val name = it.data?.get("name") as String
+        val startDate = it.data?.get("startDate") as Long
+        val finishDate = it.data?.get("finishDate") as Long
+        val category = it.data?.get("category") as String
+        val description = it.data?.get("description") as String
+        val hashMap = it.data?.get("group") as HashMap<String, Any>
+        val groupId = hashMap["id"] as String
+        val groupName = hashMap["name"] as String
+        val groupPlace = hashMap["place"] as String
+        val group = Group(groupId, groupName, groupPlace)
+        groupSelected = group
+        categorySelected = category
+        task = Task(
+            id = id,
+            name = name,
+            startDate = startDate,
+            finishDate = finishDate,
+            category = category,
+            description = description,
+            group = group
+        )
+    }
+
+    private fun getMember(hashMap: HashMap<String, Any>): Member {
+        val id = hashMap["id"] as String
+        val name = hashMap["name"] as String
+        val username = hashMap["username"] as String
+        val email = hashMap["email"] as String
+        return Member(
+            id,
+            name = name,
+            username = username,
+            email = email
+        )
+    }
+
+    private fun setCurrentUserInList() {
+        if (type == 0) {
+            val member = Member(
+                AppPreference.getUserUID(),
+                AppPreference.getUserName(),
+                AppPreference.getUserUsername(),
+                AppPreference.getUserEmail()
+            )
+            members.add(member)
+            membersTask.add(MemberTask(member, FOR_DOING))
+            getMembers()
+        }
     }
 
     private fun setStatusList() {
-        statusTask.add(DataWithCode(getString(getCategoryTask(FOR_DOING)), FOR_DOING))
-        statusTask.add(DataWithCode(getString(getCategoryTask(IN_PROCESS)), IN_PROCESS))
-        statusTask.add(DataWithCode(getString(getCategoryTask(IN_REVISION)), IN_REVISION))
-        statusTask.add(DataWithCode(getString(getCategoryTask(FINISHED)), FINISHED))
+        statusTask.add(DataWithCode(getString(getStatusTask(FOR_DOING)), FOR_DOING))
+        statusTask.add(DataWithCode(getString(getStatusTask(IN_PROCESS)), IN_PROCESS))
+        statusTask.add(DataWithCode(getString(getStatusTask(IN_REVISION)), IN_REVISION))
+        statusTask.add(DataWithCode(getString(getStatusTask(FINISHED)), FINISHED))
     }
 
     private fun setCategoryList() {
@@ -177,6 +217,9 @@ class AddTaskActivity : AppCompatActivity() {
         categories.add(DataWithCode(getString(getCategoryTask(WASH)), WASH))
         categories.add(DataWithCode(getString(getCategoryTask(KITCHEN)), KITCHEN))
         categories.add(DataWithCode(getString(getCategoryTask(IRON)), IRON))
+        categories.add(DataWithCode(getString(getCategoryTask(CLEAN_CLOTHES)), CLEAN_CLOTHES))
+        categories.add(DataWithCode(getString(getCategoryTask(HANG_UP)), HANG_UP))
+        categories.add(DataWithCode(getString(getCategoryTask(ENTERTAINMENT)), ENTERTAINMENT))
     }
 
     private fun getGroups() {
@@ -189,36 +232,9 @@ class AddTaskActivity : AppCompatActivity() {
                     val name = group.data?.get("name") as String
                     groups.add(Group(id, name, place))
                     groupsAdapter.notifyDataSetChanged()
-
                 }
                 groupsAdapter = TextGroupAdapter(groups)
-
             }
-        binding.groupEditText.setOnClickListener {
-            val dialogBinding = TextListBinding.inflate(layoutInflater)
-            dialogBinding.elementsAdapter.layoutManager = LinearLayoutManager(this)
-            dialogBinding.elementsAdapter.adapter = groupsAdapter
-
-            val dialog = MaterialDialog.createDialog(this@AddTaskActivity) {
-                setTitle(R.string.select_group)
-                setView(dialogBinding.root)
-            }
-
-            dialog.show()
-
-            groupsAdapter.setOnItemClickListener(object : TextGroupAdapter.OnItemClickListener {
-                override fun onItemClick(group: Group) {
-                    binding.groupEditText.setText(group.name)
-                    groupSelected = group
-                    dialog.dismiss()
-                }
-
-            })
-        }
-
-        binding.categoryEditText.setOnClickListener {
-
-        }
 
     }
 
@@ -236,9 +252,9 @@ class AddTaskActivity : AppCompatActivity() {
             binding.saveTask.visibility = View.VISIBLE
         }
 
-        /*binding.compaToolbar.backButtonImageView.setOnClickListener {
+        binding.compaToolbar.arrorBack.setOnClickListener {
             finish()
-        }*/
+        }
     }
 
     private fun setStartDateCalendar() {
@@ -280,10 +296,21 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
+        addMemberOnClickListener()
+        saveTaskOnClickListener()
+        groupOnClickListener()
+        memberOnClickListener()
+        categoryOnClickListener()
+        addExternalCalendarOnClickListener()
+    }
+
+    private fun addMemberOnClickListener() {
         binding.addMember.setOnClickListener {
             binding.addMemberLinearLayout.visibility = View.VISIBLE
         }
+    }
 
+    private fun saveTaskOnClickListener() {
         binding.saveTask.setOnClickListener {
             if (type != 0) {
                 if (checkFields()) updateInfo()
@@ -301,11 +328,38 @@ class AddTaskActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    private fun groupOnClickListener() {
+        binding.groupEditText.setOnClickListener {
+            val dialogBinding = TextListBinding.inflate(layoutInflater)
+            dialogBinding.elementsAdapter.layoutManager = LinearLayoutManager(this)
+            dialogBinding.elementsAdapter.adapter = groupsAdapter
+
+            val dialog = MaterialDialog.createDialog(this@AddTaskActivity) {
+                setTitle(R.string.select_group)
+                setView(dialogBinding.root)
+            }
+
+            dialog.show()
+
+            groupsAdapter.setOnItemClickListener(object : TextGroupAdapter.OnItemClickListener {
+                override fun onItemClick(group: Group) {
+                    binding.groupEditText.setText(group.name)
+                    groupSelected = group
+                    dialog.dismiss()
+                }
+            })
+        }
+    }
+
+    private fun memberOnClickListener() {
         binding.memberEditText.setOnClickListener {
             addMembertOflist()
         }
+    }
 
+    private fun categoryOnClickListener() {
         binding.categoryEditText.setOnClickListener {
             val dialogBinding = TextListBinding.inflate(layoutInflater)
             dialogBinding.elementsAdapter.layoutManager =
@@ -329,7 +383,9 @@ class AddTaskActivity : AppCompatActivity() {
                 }
             })
         }
+    }
 
+    private fun addExternalCalendarOnClickListener() {
         binding.addExternalCalendar.setOnClickListener {
             if (checkFields()) setDataToExternalCalendar()
             else {
@@ -348,10 +404,16 @@ class AddTaskActivity : AppCompatActivity() {
             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, myCalendarStart.timeInMillis)
             .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, myCalendarFinish.timeInMillis)
             .putExtra(CalendarContract.Events.EVENT_LOCATION, binding.groupEditText.text.toString())
-            .putExtra(CalendarContract.Events.DESCRIPTION, binding.descriptionEditText.text.toString())
+            .putExtra(
+                CalendarContract.Events.DESCRIPTION,
+                binding.descriptionEditText.text.toString()
+            )
             .putExtra(Intent.EXTRA_EMAIL, AppPreference.getUserEmail())
             .putExtra(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE)
-            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_FREE)
+            .putExtra(
+                CalendarContract.Events.AVAILABILITY,
+                CalendarContract.Events.AVAILABILITY_FREE
+            )
         startActivity(insertCalendarIntent)
     }
 
@@ -384,12 +446,14 @@ class AddTaskActivity : AppCompatActivity() {
                                 )
                             )
                             membersTask.add(
-                                MemberTask(Member(
-                                    person.id,
-                                    name = person.name + " " + person.surnames,
-                                    username = person.username,
-                                    email = person.email
-                                ), FOR_DOING)
+                                MemberTask(
+                                    Member(
+                                        person.id,
+                                        name = person.name + " " + person.surnames,
+                                        username = person.username,
+                                        email = person.email
+                                    ), FOR_DOING
+                                )
                             )
                             getMembers()
                             binding.memberEditText.setText("")
@@ -420,7 +484,7 @@ class AddTaskActivity : AppCompatActivity() {
         setOnClickListenerMembers()
     }
 
-    private fun setOnClickListenerMembers () {
+    private fun setOnClickListenerMembers() {
         membersAdapter.setOnItemClickListener(object : MemberTaskAdapter.ItemClickListener {
             override fun onEditClicked(person: MemberTask, position: Int, textView: TextView) {
                 val dialogBinding = TextListBinding.inflate(layoutInflater)
@@ -445,12 +509,18 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun updateInfo() {
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("name", binding.nameEditText.text.toString())
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("description", binding.descriptionEditText.text.toString())
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("group", groupSelected)
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("dateStart", myCalendarStart.timeInMillis)
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("dateFinish", myCalendarFinish.timeInMillis)
-        db.collection("tasks").document(intent.getStringExtra("id") ?: "").update("category", categorySelected)
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("name", binding.nameEditText.text.toString())
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("description", binding.descriptionEditText.text.toString())
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("group", groupSelected)
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("dateStart", myCalendarStart.timeInMillis)
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("dateFinish", myCalendarFinish.timeInMillis)
+        db.collection("tasks").document(intent.getStringExtra("id") ?: "")
+            .update("category", categorySelected)
         finish()
     }
 
@@ -519,23 +589,7 @@ class AddTaskActivity : AppCompatActivity() {
                     val hashMap = data.data?.get("person") as HashMap<String, Any>
                     val solicitude = data.get("solicitude") as Boolean
                     val favourite = data.get("favourite") as Boolean
-                    val id = hashMap["id"] as String? ?: ""
-                    val name = hashMap["name"] as String? ?: ""
-                    val surnames = hashMap["surnames"] as String? ?: ""
-                    val birthdate = hashMap["birthdate"] as Long? ?: -1
-                    val email = hashMap["email"] as String? ?: ""
-                    val username = hashMap["username"] as String? ?: ""
-                    val phone = hashMap["phone"] as String? ?: ""
-                    val person = Person(
-                        id = id,
-                        name = name,
-                        surnames = surnames,
-                        birthdate = birthdate,
-                        email = email,
-                        username = username,
-                        phone = phone,
-                        image = ""
-                    )
+                    val person = getPersonFromDatabaseHashMap(hashMap)
                     val friend = Friend(person, solicitude = solicitude, favourite = favourite)
                     friends.add(friend)
                 }

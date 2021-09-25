@@ -2,21 +2,12 @@ package org.example.compa.ui.tasks
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.my_tasks_item_recycler_view.view.*
-import org.example.compa.R
 import org.example.compa.databinding.ItemMyTaskBinding
-import org.example.compa.databinding.MyTasksItemRecyclerViewBinding
 import org.example.compa.models.Task
 import org.example.compa.models.constants.Constants
-import org.example.compa.ui.adapters.FriendAdapter
 import org.example.compa.utils.DateUtil
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
