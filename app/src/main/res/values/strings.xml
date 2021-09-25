@@ -81,20 +81,20 @@
     <string name="new_cobro_info">Has cobrado un pago, ¡ve a verlo!</string>
     <string name="welcome">Bienvenido,</string>
     <string name="compa" translatable="false">COMPA</string>
-    <string name="email_login">, no te mandaremos publicidad</string>
-    <string name="password_login">, por favor no pongas el nombre de tu gato</string>
+    <string name="email_login" translatable="false">, no te mandaremos publicidad</string>
+    <string name="password_login" translatable="false">, por favor no pongas el nombre de tu gato</string>
     <string name="let_met_log_in">Déjame entrar</string>
     <string name="i_have_not_account">No tengo cuenta</string>
     <string name="menu">MENÚ</string>
     <string name="menu_entertainment">Entretenimiento</string>
-    <string name="menu_configuration">Configuración</string>
+    <string name="menu_configuration">Ajustes</string>
     <string name="menu_exit">Me piro, vampiro</string>
     <string name="contacts_and_groups">Contactos y grupos</string>
     <string name="misif_1234" translatable="false">Misifú1234</string>
     <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
     <string name="incorrect_data_login_message">O te has equivocado poniendo la contraseña o es que no te has registrado. Por favor, soluciona eso</string>
     <string name="okay_makey" translatable="false">Okay makey</string>
-    <string name="title_activity_contacts_and_groups">ContactsAndGroupsActivity</string>
+    <string name="title_activity_contacts_and_groups" translatable="false">ContactsAndGroupsActivity</string>
     <string name="next">Siguiente</string>
     <string name="previous">Anterior</string>
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
@@ -152,7 +152,7 @@
     <string name="paid">Pagado</string>
     <string name="unpaid">Sin pagar</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="payment_detail">Detalle del pago</string>
     <string name="mark_as_paid">Marcado como pagado</string>
     <string name="who_pay">¿A quién quieres pagar?</string>
