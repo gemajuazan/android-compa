@@ -6,9 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import org.example.compa.R
-import org.example.compa.RegisterActivity
 import org.example.compa.databinding.LoginActivityBinding
-import org.example.compa.ui.menu.MenuActivity
+import org.example.compa.preferences.AppPreference
+import org.example.compa.ui.menu.MenuNavigationActivity
 import org.example.compa.utils.MaterialDialog
 import org.example.compa.utils.StyleUtil
 
@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    AppPreference.setUserUID(auth.currentUser?.uid ?: "")
                     goToMenu()
                 } else {
                     MaterialDialog.createDialog(this) {
@@ -103,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToMenu() {
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, MenuNavigationActivity::class.java)
         intent.putExtra("username", username)
         startActivity(intent)
     }

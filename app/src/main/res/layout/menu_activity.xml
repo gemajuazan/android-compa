@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".ui.menu.MenuActivity">
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -38,15 +37,16 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/ic_user"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        tools:ignore="ContentDescription" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="4px"
+        android:layout_height="2dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
@@ -65,8 +65,46 @@
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/tasks"
+            android:id="@+id/contacts"
             android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="24dp"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:strokeWidth="1px"
+            app:strokeColor="@color/primaryColor">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/groups"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/friends"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="24dp"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:strokeWidth="1px"
+            app:strokeColor="@color/primaryColor">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_friends"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/tasks"
+            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="24dp"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
             android:layout_width="wrap_content"
@@ -102,7 +140,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:id="@+id/entertainment"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
             android:layout_width="wrap_content"
@@ -119,9 +157,9 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp" />
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>-->
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:id="@+id/configuration"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
             android:layout_width="wrap_content"
@@ -138,7 +176,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>-->
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/log_out"

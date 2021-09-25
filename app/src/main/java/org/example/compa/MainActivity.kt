@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
+        //val navView: NavigationView = findViewById(R.id.nav_view)
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow).setDrawerLayout(drawerLayout).build()
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        //val navController = findNavController(R.id.nav_host_fragment)
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+        //navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
+    /*override fun onSupportNavigateUp(): Boolean {
+        //val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
+    }*/
 
 }

@@ -33,8 +33,8 @@
     <string name="title_activity_tasks" translatable="false">TasksActivity</string>
     <string name="delete_profile">Desactivar cuenta</string>
     <string name="name_task">Nombre de la tarea</string>
-    <string name="start_date_task">Fecha de inicio de la tarea</string>
-    <string name="finish_date_task">Fecha de fin de la tarea</string>
+    <string name="start_date_task">Inicio</string>
+    <string name="finish_date_task">Fin</string>
     <string name="category_task">Categoría de la tarea</string>
     <string name="description_task">Añade una descripción de la tarea</string>
     <string name="members_task" translatable="false">Fulanito, Menganito</string>
@@ -48,7 +48,7 @@
     <string name="register_payment_or_solicitude">Registrar</string>
     <string name="pay_transmitter">Nombre de usuario del emisor</string>
     <string name="pay_receiver">Nombre de usuario del receptor</string>
-    <string name="pay_date">Fecha del pago</string>
+    <string name="pay_date">Fecha</string>
     <string name="pay_price">Coste</string>
     <string name="pay_concept">Concepto</string>
     <string name="finished_task">Tarea finalizada</string>
@@ -81,20 +81,20 @@
     <string name="new_cobro_info">Has cobrado un pago, ¡ve a verlo!</string>
     <string name="welcome">Bienvenido,</string>
     <string name="compa" translatable="false">COMPA</string>
-    <string name="email_login">, no te mandaremos publicidad</string>
-    <string name="password_login">, por favor no pongas el nombre de tu gato</string>
+    <string name="email_login" translatable="false">, no te mandaremos publicidad</string>
+    <string name="password_login" translatable="false">, por favor no pongas el nombre de tu gato</string>
     <string name="let_met_log_in">Déjame entrar</string>
     <string name="i_have_not_account">No tengo cuenta</string>
     <string name="menu">MENÚ</string>
     <string name="menu_entertainment">Entretenimiento</string>
-    <string name="menu_configuration">Configuración</string>
+    <string name="menu_configuration">Ajustes</string>
     <string name="menu_exit">Me piro, vampiro</string>
     <string name="contacts_and_groups">Contactos y grupos</string>
     <string name="misif_1234" translatable="false">Misifú1234</string>
     <string name="incorrect_login_message">Inicio de sesión incorrecto</string>
     <string name="incorrect_data_login_message">O te has equivocado poniendo la contraseña o es que no te has registrado. Por favor, soluciona eso</string>
     <string name="okay_makey" translatable="false">Okay makey</string>
-    <string name="title_activity_contacts_and_groups">ContactsAndGroupsActivity</string>
+    <string name="title_activity_contacts_and_groups" translatable="false">ContactsAndGroupsActivity</string>
     <string name="next">Siguiente</string>
     <string name="previous">Anterior</string>
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
@@ -102,4 +102,86 @@
     <string name="update_birthdate_successfully">Has cambiado perfectamente tu fecha de nacimiento</string>
     <string name="something_was_wrong">Algo ha salido mal</string>
     <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
+    <string name="contacts">Contactos</string>
+    <string name="and_groups">y grupos</string>
+    <string name="loading_app">Cargando aplicación</string>
+    <string name="name_group">Nombre del grupo</string>
+    <string name="place_group_create">Lugar del desastre</string>
+    <string name="data_group_label">Datos del grupo</string>
+    <string name="members_group">Miembros del grupo</string>
+    <string name="no_members_added">Aún no hay nadie invitado. ¿Piensas encargarte de todo tú o qué?</string>
+    <string name="add_member_group_input_layout">Añade el correo del o la menda</string>
+    <string name="add_member_button">Añade un compa</string>
+    <string name="add">Añadir</string>
+    <string name="group">Grupo</string>
+    <string name="do_you_want_to_add_this_compa">¿Quieres añadir a este usuario como compañero de grupo? Piénsalo bien...</string>
+    <string name="no_no_no">Ni de coña</string>
+    <string name="add_group">Añadir grupo</string>
+    <string name="do_you_want_to_add_group">¿Quieres juntarte con esta gente para hacer cosas?</string>
+    <string name="meh">No me queda otra</string>
+    <string name="groups">Grupos</string>
+    <string name="menu_friends">Colegas</string>
+    <string name="no_friends">No tienes amigos :(</string>
+    <string name="search">Busca</string>
+    <string name="delete_friend_successfully">Has eliminado a este usuario correctamente. Esperemos que no lo hagas muy a menudo...</string>
+    <string name="delete_friend_title">Eliminar amigo</string>
+    <string name="add_friend">Añadir amigo</string>
+    <string name="do_you_want_to_add_this_friend">¿Estás seguro de que quieres añadir este usuario a tu lista de amigos?</string>
+    <string name="are_you_sure_delete_friend">¿Estás seguro de eliminar este amigo de tu lista de amigos? :(</string>
+    <string name="pending_friends">Amigos pendientes</string>
+    <string name="no_pending_friends">No tienes peticiones de amistad pendientes</string>
+    <string name="do_you_want_to_delete_friend">¿Deseas eliminar a este amigo?</string>
+    <string name="select_friend">Selecciona a un amigo</string>
+    <string name="do_you_want_to_delete_group">¿Quieres eliminar este grupo?</string>
+    <string name="delete_group">Eliminar grupo</string>
+    <string name="of_course_madafak">Que les den</string>
+    <string name="task_data">Datos de la tarea</string>
+    <string name="status">Estado</string>
+    <string name="work_realized">Trabajo realizado</string>
+    <string name="for_doing">Por hacer</string>
+    <string name="in_process">En proceso</string>
+    <string name="in_revision">En revisión</string>
+    <string name="finished">Finalizado</string>
+    <string name="no_info">Sin información</string>
+    <string name="select_group">Selecciona grupo</string>
+    <string name="historial">Historial</string>
+    <string name="owe_me">Me deben</string>
+    <string name="what_i_owe">Debo</string>
+    <string name="pay_debt">Pagar deuda</string>
+    <string name="collect_payment">Cobrar pago</string>
+    <string name="paid">Pagado</string>
+    <string name="unpaid">Sin pagar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="payment_detail">Detalle del pago</string>
+    <string name="mark_as_paid">Marcado como pagado</string>
+    <string name="who_pay">¿A quién quieres pagar?</string>
+    <string name="do_you_want_to_add_this_payment">¿Estás seguro de añadir este pago?</string>
+    <string name="who_collect">¿A quién quieres cobrar?</string>
+    <string name="do_you_want_to_add_this_collection">¿Estás seguro de añadir este cobro?</string>
+    <string name="pay">Pagar</string>
+    <string name="collect">Cobrar</string>
+    <string name="mark_as_unpaid">Marcar como impagado</string>
+    <string name="cleanliness">Limpieza</string>
+    <string name="buying">Compra</string>
+    <string name="trash">Basura</string>
+    <string name="washing">Fregar</string>
+    <string name="kitchen">Cocinar</string>
+    <string name="iron">Planchar</string>
+    <string name="select_category">Selecciona categoría</string>
+    <string name="personal_data">Información personal</string>
+    <string name="access_data">Información de acceso</string>
+    <string name="phone">Teléfono (con prefijo)</string>
+    <string name="search_friends">Buscar amigos</string>
+    <string name="all">Todo</string>
+    <string name="filter_by">"Filtrar por: "</string>
+    <string name="add_task_to_external_calendar">Añadir tarea al calendario</string>
+    <string name="no_task">No hay tareas. ¡Crea una!</string>
+    <string name="no_payments">No hay gastos que mostrar. ¡Crea uno!</string>
+    <string name="no_groups">No perteneces a ningún grupo. ¡Crea el primero!</string>
+    <string name="change_image">Cambiar imagen</string>
+    <string name="uploading_image">Subiendo imagen</string>
+    <string name="explanation_icons">Todos los iconos de la aplicación han sido elegidos y diseñados por la plataforma de Flaticon. Los autores de los mismos son: FreePick, Srip, Pixel Perfect y Prettycons.</string>
+    <string name="washing_machine">Lavar</string>
+    <string name="clothes">Ropa</string>
 </resources>

@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">#7C4E4E4E</item>
         <item name="colorAccent">@color/primaryColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/onPrimaryColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -14,30 +14,61 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBarSplash">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/primaryColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+    </style>
+
+    <style name="AppTheme.NoActionBarHeader">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/onPrimaryColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:color">@color/primaryColor</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ShapeAppearanceOverlay.MaterialCardView.Left" parent="">
+    <style name="ShapeAppearanceOverlay.MaterialCardView.Left" parent="Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">16dp</item>
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerSizeBottomRight">16dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MaterialCardView.Right" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">16dp</item>
-        <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeBottomRight">24dp</item>
+        <item name="cornerSizeBottomLeft">24dp</item>
     </style>
 
     <style name="LetMeLogIn">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="fontFamily">@font/raleway_light</item>
+    </style>
+
+    <style name="roundedButton">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">16dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
+    </style>
+
+    <style name="roundedButton.Color">
+        <item name="backgroundTint">@color/secondaryLightColor</item>
+        <item name="strokeColor">@color/secondaryColor</item>
+        <item name="strokeWidth">1px</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="IHaveAccount">
@@ -45,14 +76,23 @@
         <item name="cornerSizeTopRight">16dp</item>
         <item name="cornerSizeBottomRight">16dp</item>
         <item name="strokeWidth">1px</item>
-        <item name="strokeColor">@color/primaryColor</item>
+        <item name="strokeColor">@color/secondaryColor</item>
+        <item name="backgroundTint">@color/onSecondaryColor</item>
     </style>
+
+    <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/raleway_light</item>
+        <item name="android:textColor">@color/onPrimaryColor</item>
+    </style>
+
 
     <style name="NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <item name="android:statusBarColor">@color/primaryColor</item>
+        <item name="android:statusBarColor">@color/secondaryColor</item>
+        <item name="background">@color/onSecondaryColor</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -62,6 +102,22 @@
     <style name="StatusBar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:statusBarColor">@color/primaryColor</item>
+    </style>
+
+    <style name="CompaCard" parent="Widget.MaterialComponents.CardView">
+        <item name="backgroundColor">@color/onPrimaryColor</item>
+        <item name="backgroundTint">@color/onPrimaryColor</item>
+        <item name="cardBackgroundColor">@color/onPrimaryColor</item>
+    </style>
+
+    <style name="CompaTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxBackgroundColor">@color/onPrimaryColor</item>
+        <item name="boxStrokeColor">@color/onPrimaryColor</item>
+        <item name="boxStrokeWidth">0px</item>
     </style>
 
 </resources>

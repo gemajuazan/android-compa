@@ -34,10 +34,10 @@ class PaymentService : Service() {
             notificationManager!!.createNotificationChannel(notificationChannel)
         }
         val notificacion = NotificationCompat.Builder(this, CANALID)
-            .setSmallIcon(R.drawable.ic_compa_foreground)
+            .setSmallIcon(R.drawable.ic_logo_compa)
             .setContentTitle(getString(R.string.new_cobro))
             .setContentText(getString(R.string.new_cobro_info))
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_logo_compa_color))
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_logo_compa))
             .setWhen(System.currentTimeMillis() + 1000 * 60)
             .setDefaults(Notification.DEFAULT_VIBRATE)
         val intent = Intent(this, PaymentsActivity::class.java)

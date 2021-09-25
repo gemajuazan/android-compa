@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context="org.example.compa.ui.settings.SettingsFragment">
+
+    <include layout="@layout/compa_toolbar" android:id="@+id/toolbar" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/onPrimaryColor"
+        app:cardCornerRadius="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/explanation_icons"
+            android:layout_margin="16dp"
+            android:lineSpacingExtra="8dp"
+            android:fontFamily="@font/raleway_light" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:cardBackgroundColor="@color/onPrimaryColor"
+        app:cardCornerRadius="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/explanation_icons"
+            android:layout_margin="16dp"
+            android:lineSpacingExtra="8dp"
+            android:fontFamily="@font/raleway_light" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

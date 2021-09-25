@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.tasks.TasksActivity">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -23,7 +22,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:src="@drawable/ic_back_button"
                 android:clickable="true"
                 android:background="?selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,10 +71,10 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/secondaryColor"
-        android:foregroundTint="@android:color/white"
         android:src="@drawable/ic_add_24"
-        android:tint="@color/onSecondaryColor"
-        app:backgroundTint="@color/onSecondaryColor"
+        app:fabSize="normal"
+        app:tint="@color/onSecondaryColor"
+        app:borderWidth="0dp"
         app:layout_anchor="@+id/view_pager"
         app:layout_anchorGravity="end|bottom"
         app:rippleColor="@android:color/white" />

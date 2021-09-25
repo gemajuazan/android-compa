@@ -1,0 +1,177 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/payment_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:letterSpacing="0.2"
+            android:fontFamily="@font/raleway_light"
+            android:text="@string/payment_detail" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/payment_detail_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/raleway_light"
+            android:text="@string/payment_detail" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/transmitter_text_input"
+            style="@style/CompaTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/pay_transmitter"
+            app:boxStrokeWidth="1px">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/transmitter_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_light"
+                android:padding="12dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/receiver_text_input_layout"
+            style="@style/CompaTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/pay_receiver"
+            app:boxStrokeWidth="1px">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/receiver_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_light"
+                android:padding="12dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cost_text_input_layout"
+                style="@style/CompaTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"
+                android:hint="@string/pay_price"
+                app:boxStrokeWidth="1px"
+                app:startIconDrawable="@drawable/ic_baseline_euro_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cost_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_light"
+
+                    android:padding="12dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_finish_text_input_layout"
+                style="@style/CompaTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"
+                android:hint="@string/pay_date"
+                app:boxStrokeWidth="1px"
+                app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_finish_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:longClickable="false"
+                    android:fontFamily="@font/raleway_light"
+
+                    android:padding="12dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/concept_text_input_layout"
+            style="@style/CompaTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/pay_concept"
+            app:boxStrokeWidth="1px">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/concept_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="top"
+                android:fontFamily="@font/raleway_light"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:padding="12dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mark_as_paid_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="24dp"
+            android:clickable="true"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Right"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mark_as_paid_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:textColor="@color/onPrimaryColor"
+                android:gravity="center_vertical|center"
+                android:textAllCaps="true"
+                android:padding="8dp"
+                android:fontFamily="@font/raleway_light"
+                android:textSize="10sp"
+                android:letterSpacing="0.2"
+                tools:text="@string/pay_debt" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</FrameLayout>
