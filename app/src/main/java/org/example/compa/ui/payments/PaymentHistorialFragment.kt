@@ -80,7 +80,7 @@ class PaymentHistorialFragment : Fragment() {
                             id = id,
                             transmitter = transmitter,
                             receiver = receiver,
-                            price = price.toDouble(),
+                            price = price,
                             date = date,
                             concept = concept,
                             typePayment = typePayment,
@@ -96,6 +96,170 @@ class PaymentHistorialFragment : Fragment() {
             }
             binding.loader.visibility = View.GONE
         }
+    }
+
+    private fun filterPaymentsByIMust() {
+        payments.clear()
+        binding.loader.visibility = View.VISIBLE
+        paymentAdapter = MyPaymentAdapter(payments, requireContext())
+        db.collection("payments").get().addOnSuccessListener {
+            for (payment in it.documents) {
+                val id = payment.data?.get("id") as String
+                db.collection("payments").document(id).get().addOnSuccessListener { payment ->
+                    val transmitter = payment.data?.get("transmitter") as String
+                    val receiver = payment.data?.get("receiver") as String
+
+                    if (transmitter == AppPreference.getUserUsername()) {
+                        val id = payment.data?.get("id") as String
+                        val price = payment.data?.get("price") as Double
+                        val date = payment.data?.get("date") as Long
+                        val concept = payment.data?.get("concept") as String
+                        val typePayment = payment.data?.get("typePayment") as String
+                        val statusPayment = payment.data?.get("statusPayment") as String
+                        val newPayment = Payment(
+                            id = id,
+                            transmitter = transmitter,
+                            receiver = receiver,
+                            price = price,
+                            date = date,
+                            concept = concept,
+                            typePayment = typePayment,
+                            statusPayment = statusPayment
+                        )
+                        payments.add(newPayment)
+                        paymentAdapter.notifyDataSetChanged()
+                    }
+
+                    paymentAdapter = MyPaymentAdapter(payments, requireContext())
+                    binding.recyclerViewHistorial.adapter = paymentAdapter
+                    onClickPayment()
+                }
+            }
+        }
+        binding.loader.visibility = View.GONE
+    }
+
+    private fun filterByOweMe() {
+        payments.clear()
+        binding.loader.visibility = View.VISIBLE
+        paymentAdapter = MyPaymentAdapter(payments, requireContext())
+        db.collection("payments").get().addOnSuccessListener {
+            for (payment in it.documents) {
+                val id = payment.data?.get("id") as String
+                db.collection("payments").document(id).get().addOnSuccessListener { payment ->
+                    val transmitter = payment.data?.get("transmitter") as String
+                    val receiver = payment.data?.get("receiver") as String
+
+                    if (receiver == AppPreference.getUserUsername()) {
+                        val id = payment.data?.get("id") as String
+                        val price = payment.data?.get("price") as Double
+                        val date = payment.data?.get("date") as Long
+                        val concept = payment.data?.get("concept") as String
+                        val typePayment = payment.data?.get("typePayment") as String
+                        val statusPayment = payment.data?.get("statusPayment") as String
+                        val newPayment = Payment(
+                            id = id,
+                            transmitter = transmitter,
+                            receiver = receiver,
+                            price = price,
+                            date = date,
+                            concept = concept,
+                            typePayment = typePayment,
+                            statusPayment = statusPayment
+                        )
+                        payments.add(newPayment)
+                        paymentAdapter.notifyDataSetChanged()
+                    }
+                    paymentAdapter = MyPaymentAdapter(payments, requireContext())
+                    binding.recyclerViewHistorial.adapter = paymentAdapter
+                    onClickPayment()
+                }
+            }
+        }
+
+        binding.loader.visibility = View.GONE
+    }
+
+    private fun filterPaymentsByStatusPaid() {
+        payments.clear()
+        binding.loader.visibility = View.VISIBLE
+        paymentAdapter = MyPaymentAdapter(payments, requireContext())
+        db.collection("payments").get().addOnSuccessListener {
+            for (payment in it.documents) {
+                val id = payment.data?.get("id") as String
+                db.collection("payments").document(id).get().addOnSuccessListener { payment ->
+                    val statusPayment = payment.data?.get("statusPayment") as String
+
+                    if (statusPayment == "PAY") {
+                        val id = payment.data?.get("id") as String
+                        val price = payment.data?.get("price") as Double
+                        val date = payment.data?.get("date") as Long
+                        val concept = payment.data?.get("concept") as String
+                        val typePayment = payment.data?.get("typePayment") as String
+                        val transmitter = payment.data?.get("transmitter") as String
+                        val receiver = payment.data?.get("receiver") as String
+                        val newPayment = Payment(
+                            id = id,
+                            transmitter = transmitter,
+                            receiver = receiver,
+                            price = price,
+                            date = date,
+                            concept = concept,
+                            typePayment = typePayment,
+                            statusPayment = statusPayment
+                        )
+                        payments.add(newPayment)
+                        paymentAdapter.notifyDataSetChanged()
+                    }
+
+                    paymentAdapter = MyPaymentAdapter(payments, requireContext())
+                    binding.recyclerViewHistorial.adapter = paymentAdapter
+                    onClickPayment()
+                }
+            }
+        }
+        binding.loader.visibility = View.GONE
+    }
+
+    private fun filterPaymentsByStatusUnpaid() {
+        payments.clear()
+        binding.loader.visibility = View.VISIBLE
+        paymentAdapter = MyPaymentAdapter(payments, requireContext())
+        db.collection("payments").get().addOnSuccessListener {
+            for (payment in it.documents) {
+                val id = payment.data?.get("id") as String
+                db.collection("payments").document(id).get().addOnSuccessListener { payment ->
+                    val statusPayment = payment.data?.get("statusPayment") as String
+
+                    if (statusPayment == "NPA") {
+                        val id = payment.data?.get("id") as String
+                        val price = payment.data?.get("price") as Double
+                        val date = payment.data?.get("date") as Long
+                        val concept = payment.data?.get("concept") as String
+                        val typePayment = payment.data?.get("typePayment") as String
+                        val transmitter = payment.data?.get("transmitter") as String
+                        val receiver = payment.data?.get("receiver") as String
+                        val newPayment = Payment(
+                            id = id,
+                            transmitter = transmitter,
+                            receiver = receiver,
+                            price = price,
+                            date = date,
+                            concept = concept,
+                            typePayment = typePayment,
+                            statusPayment = statusPayment
+                        )
+                        payments.add(newPayment)
+                        paymentAdapter.notifyDataSetChanged()
+                    }
+
+                    paymentAdapter = MyPaymentAdapter(payments, requireContext())
+                    binding.recyclerViewHistorial.adapter = paymentAdapter
+                    onClickPayment()
+                }
+            }
+        }
+        binding.loader.visibility = View.GONE
     }
 
     private fun onClickPayment() {
@@ -135,7 +299,7 @@ class PaymentHistorialFragment : Fragment() {
             paymentBinding.price.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.colorAccent
+                    R.color.colorSuccess
                 )
             )
         }
@@ -154,7 +318,7 @@ class PaymentHistorialFragment : Fragment() {
                 paymentBinding.status.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.colorAccent
+                        R.color.colorSuccess
                     )
                 )
                 paymentBinding.markAsPaidTextView.text = getString(R.string.mark_as_unpaid)
@@ -408,6 +572,51 @@ class PaymentHistorialFragment : Fragment() {
 
         binding.addPayment.setOnClickListener {
             showAddPaymentBottomSheet()
+        }
+
+        binding.whatIOwe.setOnClickListener {
+            binding.allPayments.visibility = View.VISIBLE
+            binding.whatIOwe.visibility = View.GONE
+            binding.oweMe.visibility = View.VISIBLE
+            binding.paid.visibility = View.VISIBLE
+            binding.unpaid.visibility = View.VISIBLE
+            filterPaymentsByIMust()
+        }
+
+        binding.oweMe.setOnClickListener {
+            binding.allPayments.visibility = View.VISIBLE
+            binding.whatIOwe.visibility = View.VISIBLE
+            binding.oweMe.visibility = View.GONE
+            binding.paid.visibility = View.VISIBLE
+            binding.unpaid.visibility = View.VISIBLE
+            filterByOweMe()
+        }
+
+        binding.allPayments.setOnClickListener {
+            binding.allPayments.visibility = View.GONE
+            binding.whatIOwe.visibility = View.VISIBLE
+            binding.oweMe.visibility = View.VISIBLE
+            binding.paid.visibility = View.VISIBLE
+            binding.unpaid.visibility = View.VISIBLE
+            initializePayments()
+        }
+
+        binding.paid.setOnClickListener {
+            binding.allPayments.visibility = View.VISIBLE
+            binding.whatIOwe.visibility = View.VISIBLE
+            binding.oweMe.visibility = View.VISIBLE
+            binding.paid.visibility = View.GONE
+            binding.unpaid.visibility = View.VISIBLE
+            filterPaymentsByStatusPaid()
+        }
+
+        binding.unpaid.setOnClickListener {
+            binding.allPayments.visibility = View.VISIBLE
+            binding.whatIOwe.visibility = View.VISIBLE
+            binding.oweMe.visibility = View.VISIBLE
+            binding.paid.visibility = View.VISIBLE
+            binding.unpaid.visibility = View.GONE
+            filterPaymentsByStatusUnpaid()
         }
     }
 

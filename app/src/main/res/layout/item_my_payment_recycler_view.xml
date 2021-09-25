@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:clickable="true"
+        app:cardBackgroundColor="@color/onPrimaryColor"
         app:strokeColor="@color/colorStrokeLeft"
         app:strokeWidth="1px"
         app:layout_constraintBottom_toBottomOf="parent"

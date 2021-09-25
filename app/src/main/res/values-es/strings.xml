@@ -76,4 +76,5 @@
     <string name="phone">Teléfono</string>
     <string name="search_friends">Buscar amigos</string>
     <string name="all">Todo</string>
+    <string name="filter_by">"Filtrar por: "</string>
 </resources>
