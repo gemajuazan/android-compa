@@ -8,11 +8,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewMyPayments"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/onPrimaryColor"
+        app:strokeColor="@color/colorStrokeLeft"
+        app:strokeWidth="1px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,92 +24,136 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="8dp"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_margin="4dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/owe_transmitter"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/status_no_payment_card"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:visibility="gone"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/colorError"
+                    app:strokeWidth="2px"
+                    app:cardElevation="0dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/status_no_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorError"
+                        android:letterSpacing="0.1"
+                        android:fontFamily="@font/raleway_light"
+                        tools:text="PAGADO" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/status_payment_card"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:visibility="gone"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/colorAccent"
+                    app:strokeWidth="2px"
+                    app:cardElevation="0dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/status_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textAllCaps="true"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:fontFamily="@font/raleway_light"
+                        tools:text="PAGADO" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:textColor="#393939"
-                    android:textSize="14sp"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Gema Juárez" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text=">"
-                    android:textColor="@color/primaryColor"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/owe_transmitter"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text=">" />
-
-                <TextView
-                    android:id="@+id/owe_receiver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:layout_marginStart="8dp"
-                    android:textColor="#393939"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Joan Soro" />
+                    android:layout_weight="0"
+                    android:fontFamily="@font/raleway_light"
+                    tools:text="5,99€" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/owe_transmitter">
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end">
 
-                    <TextView
-                        android:id="@+id/owe_payments_concept"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/emisor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="10sp"
-                        android:textColor="@color/primaryColor" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/raleway_light"
+                        tools:text="compañero1" />
 
-                    <TextView
-                        android:id="@+id/owe_date"
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/primaryColor" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/receptor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textAllCaps="true"
-                        android:textSize="10sp"
-                        android:textColor="@color/primaryColor" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/raleway_light"
+                        tools:text="compañero2" />
 
                 </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/owe_price"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/concept"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:text="3.99"
-                android:textSize="26sp" />
+                android:layout_marginTop="16dp"
+                android:maxLines="2"
+                android:textColor="@color/primaryLightColor"
+                android:visibility="gone"
+                android:fontFamily="@font/raleway_light"
+                tools:text="Café y tostadas"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/primaryDisabledColor"
+                android:visibility="gone"
+                android:fontFamily="@font/raleway_light"
+                tools:text="27/02/2021 15:28"/>
 
         </LinearLayout>
 

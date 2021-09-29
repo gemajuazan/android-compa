@@ -9,8 +9,8 @@
       android:translateX="-5.4"
       android:translateY="-5.4">
     <path
-        android:pathData="M300,0H0V300H300V0Z">
-      <aapt:attr name="android:fillColor">
+        android:pathData="M300,0H0V300H300V0Z" android:fillColor="@color/primaryColor">
+      <!--<aapt:attr name="android:fillColor">
         <gradient 
             android:startY="-5.6326E-4"
             android:startX="299.997"
@@ -27,7 +27,7 @@
           <item android:offset="0.8876" android:color="#FF4F4F4F"/>
           <item android:offset="1" android:color="#FF272727"/>
         </gradient>
-      </aapt:attr>
+      </aapt:attr>-->
     </path>
   </group>
 </vector>

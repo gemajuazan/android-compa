@@ -4,27 +4,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import org.example.compa.R
-import org.example.compa.RegisterActivity
 import org.example.compa.databinding.LoginActivityBinding
-import org.example.compa.ui.menu.MenuActivity
+import org.example.compa.preferences.AppPreference
+import org.example.compa.ui.menu.MenuNavigationActivity
 import org.example.compa.utils.MaterialDialog
 import org.example.compa.utils.StyleUtil
 
-
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginActivityBinding
-
-    private lateinit var loginEmailTextInputEditText: TextInputEditText
-    private lateinit var loginPasswordTextInputEditText: TextInputEditText
 
     private val urlTwitter = "https://twitter.com/soerane"
     private val urlLinkedIn = "https://www.linkedin.com/in/gema-ju%C3%A1rez-almaz%C3%A1n-68644b147/"
 
     private var username:String = ""
-    private var customToken: String? = null
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    AppPreference.setUserUID(auth.currentUser?.uid ?: "")
                     goToMenu()
                 } else {
                     MaterialDialog.createDialog(this) {
@@ -109,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToMenu() {
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, MenuNavigationActivity::class.java)
         intent.putExtra("username", username)
         startActivity(intent)
     }

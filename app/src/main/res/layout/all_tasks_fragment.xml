@@ -7,23 +7,106 @@
     android:background="#F6F5F5"
     tools:context=".ui.tasks.AllTasksFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="72dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_tasks"
+                android:layout_marginVertical="16dp"
+                android:fontFamily="@font/raleway_light"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/filter_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            app:cardBackgroundColor="@color/onPrimaryColor"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_by"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/raleway_light"
+                    android:textColor="@color/secondaryColor" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/groups_chip_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_all_tasks"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/no_tasks"
+            android:layout_width="172dp"
+            android:layout_height="172dp"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/ic_no_task"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:tint="@color/secondaryLightColor" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/no_tasks_message"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/no_task"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/raleway_light"
+            android:textColor="@color/secondaryColor"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="96dp"
+        android:backgroundTint="@color/onSecondaryColor"
+        android:src="@drawable/ic_add"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        android:layout_gravity="end|bottom"
+        app:rippleColor="@android:color/white"
+        app:tint="@color/primaryColor" />
 
 </FrameLayout>

@@ -7,103 +7,101 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.my_tasks_fragment.*
-import org.example.compa.R
-import org.example.compa.db.CompaSQLiteOpenHelper
+import com.google.firebase.firestore.FirebaseFirestore
+import org.example.compa.databinding.MyTasksFragmentBinding
+import org.example.compa.models.Group
 import org.example.compa.models.Task
+import org.example.compa.preferences.AppPreference
 
-class MyTasksFragment : Fragment(), TasksAdapter.OnItemClickListener {
+class MyTasksFragment : Fragment() {
 
-    var listTasks = arrayListOf<Task>()
+    private lateinit var binding: MyTasksFragmentBinding
+
     private var myTasks = arrayListOf<Task>()
-    private var tasksAdapter = TasksAdapter(arrayListOf(), this)
-    private var username = ""
+    private var myTaskByMyUser = arrayListOf<String>()
+    private lateinit var tasksAdapter: TasksAdapter
+
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.my_tasks_fragment, container, false)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            username = requireArguments().getString("username").toString()
-        }
+        binding = MyTasksFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getUser()
-        initializeTasks()
-        filterTaskByUsername(username)
-        recycler_view_tasks.layoutManager = LinearLayoutManager(requireContext())
-        tasksAdapter = TasksAdapter(myTasks, this)
-        recycler_view_tasks.adapter = tasksAdapter
+        binding.recyclerViewTasks.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onResume() {
         super.onResume()
-        tasksAdapter.notifyDataSetChanged()
+        db = FirebaseFirestore.getInstance()
+        getMyTask()
     }
 
-    private fun getUser() {
-        val db = CompaSQLiteOpenHelper(requireContext(), "dbCompa", null, CompaSQLiteOpenHelper.DATABASE_VERSION)
-        val dbCompa = db.writableDatabase
-
-        val row = dbCompa.rawQuery("SELECT username FROM user", null)
-        if (row.moveToFirst()) {
-            username = row.getString(0)
+    private fun getTasks() {
+        myTasks.clear()
+        tasksAdapter = TasksAdapter(myTasks, requireContext())
+        for (idTask in myTaskByMyUser) {
+            db.collection("tasks").document(idTask).get().addOnSuccessListener {
+                val hashMap = it.data?.get("group") as HashMap<String, Any>
+                val groupId = hashMap["id"] as String
+                val id = it.data?.get("id") as String
+                val name = it.data?.get("name") as String
+                val startDate = it.data?.get("startDate") as Long
+                val finishDate = it.data?.get("finishDate") as Long
+                val category = it.data?.get("category") as String
+                val description = it.data?.get("description") as String
+                val nameGroup = hashMap["name"] as String
+                val task = Task(
+                    id = id,
+                    name = name,
+                    startDate = startDate,
+                    finishDate = finishDate,
+                    category = category,
+                    members = arrayListOf(),
+                    description = description,
+                    group = Group(groupId, nameGroup, "")
+                )
+                myTasks.add(task)
+                tasksAdapter.notifyDataSetChanged()
+            }
+            tasksAdapter.notifyDataSetChanged()
         }
+        tasksAdapter = TasksAdapter(myTasks, requireContext())
+        binding.recyclerViewTasks.adapter = tasksAdapter
 
-        dbCompa.close()
+        tasksAdapter.setOnItemClickListener(object : TasksAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(requireContext(), AddTaskActivity::class.java)
+                intent.putExtra("id", myTasks[position].id)
+                startActivity(intent)
+            }
+
+        })
     }
 
-    private fun initializeTasks() {
-        val db = CompaSQLiteOpenHelper(requireContext(), "dbCompa", null, CompaSQLiteOpenHelper.DATABASE_VERSION)
-        val dbCompa = db.writableDatabase
+    private fun getMyTask() {
+        myTaskByMyUser.clear()
+        db.collection("tasks_status").get().addOnSuccessListener {
+            for ((index, task) in it.documents.withIndex()) {
+                val id = task.data?.get("id") as String
+                db.collection("tasks_status").document(id).collection("members").get().addOnSuccessListener { members ->
+                    for (member in members.documents) {
+                        val hashMap = member.data?.get("member") as HashMap<String, Any>
+                        val idMember = hashMap["id"] as String
+                        if (idMember == AppPreference.getUserUID()) {
+                            myTaskByMyUser.add(id)
+                        }
+                        if (index == it.documents.size - 1) getTasks()
+                    }
+                }
 
-        var task: Task
-
-        val row = dbCompa.rawQuery("SELECT _id, name, startDate, finishDate, category, members, description FROM task", null)
-
-        while (row.moveToNext()) {
-            val members = row.getString(5).split(", ")
-            /*val startDate = Date(row.getString(2).toLong())
-            val finishDate = Date(row.getString(3).toLong())
-            val df2 = SimpleDateFormat("dd/MM/yyyy")*/
-            /*task = Task(
-                id = row.getInt(0),
-                name = row.getString(1),
-                startDate = row.getString(2),
-                finishDate = row.getString(3),
-                category = row.getString(4),
-                members = members,
-                numberMembers = members.size,
-                description = row.getString(6)
-            )*/
-            //listTasks.add(task)
-        }
-
-        dbCompa.close()
-    }
-
-    private fun filterTaskByUsername(username: String) {
-        for (task in listTasks) {
-            val listMembers = task.members
-            for (member in listMembers) {
-                /*if (member == username) {
-                    myTasks.add(task)
-                }*/
             }
         }
-    }
-
-    override fun onItemClick(position: Int) {
-        val intent = Intent(requireContext(), TaskDetailActivity::class.java)
-        intent.putExtra("id", myTasks[position].id)
-        startActivity(intent)
     }
 
 }

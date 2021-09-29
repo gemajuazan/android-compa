@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F6F5F5"
-    tools:context=".RegisterActivity">
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".ui.login.RegisterActivity">
 
-    <Toolbar
+    <include
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:elevation="8dp"
-        android:background="@color/primaryColor"
-        android:navigationIcon="@drawable/abc_vector_test"
-        android:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:titleTextColor="@android:color/white"
+        layout="@layout/compa_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +32,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="32dp"
+                android:layout_marginVertical="16dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -53,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="16dp"
-                        app:cardCornerRadius="16dp">
+                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -65,83 +61,126 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="16dp"
-                                android:text="Información personal"
+                                android:text="@string/personal_data"
                                 android:textAllCaps="true"
-                                android:textColor="@color/secondaryColor"
-                                android:textSize="14sp" />
+                                android:textColor="@color/primaryDarkColor"
+                                android:fontFamily="@font/raleway_light"
+                                android:letterSpacing="0.2"
+                                android:textSize="10sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_name"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:focusable="false"
-                                android:hint="@string/name"
-                                app:boxCornerRadiusTopStart="16dp"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:hint="@string/name">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_name_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"
                                     android:inputType="text" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_surnames"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:hint="@string/surnames"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/surnames">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_surnames_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"
                                     android:inputType="text"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_birthdate"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:hint="@string/date_birth"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/date_birth">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_birthdate_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
-                                    android:longClickable="false" />
+                                    android:fontFamily="@font/raleway_light"
+                                    android:longClickable="false"
+                                    android:focusableInTouchMode="false" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_username"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="16dp"
-                                android:hint="@string/username"
-                                app:boxCornerRadiusBottomEnd="16dp"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/username">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_username_input_text"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/register_phone"
+                                style="@style/CompaTextInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/phone">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/register_phone_input_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="16dp"
-                        app:cardCornerRadius="16dp">
+                        app:shapeAppearance="@style/ShapeAppearanceOverlay.MaterialCardView.Left">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -164,100 +203,121 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="16dp"
-                                android:text="Información de acceso"
+                                android:text="@string/access_data"
                                 android:textAllCaps="true"
-                                android:textColor="@color/secondaryColor"
-                                android:textSize="14sp" />
+                                android:textColor="@color/primaryDarkColor"
+                                android:fontFamily="@font/raleway_light"
+                                android:letterSpacing="0.2"
+                                android:textSize="10sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_email"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:focusable="false"
-                                android:hint="@string/email"
-                                app:boxCornerRadiusTopStart="16dp"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:hint="@string/email">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_email_input_text"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_repeat_email"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:hint="@string/repeat_email"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/repeat_email">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_repeat_email_input_text"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/raleway_light"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_password"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:hint="@string/password"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/password">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_password_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="textPassword"/>
+                                    android:inputType="textPassword"
+                                    android:fontFamily="@font/raleway_light"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/secondaryLightColor"
+                                android:layout_marginVertical="8dp"
+                                android:layout_marginHorizontal="16dp" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/register_repeat_password"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                style="@style/CompaTextInputLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="16dp"
-                                android:hint="@string/repeat_password"
-                                app:boxCornerRadiusBottomEnd="16dp"
-                                app:boxStrokeColor="@color/primaryColor">
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="8dp"
+                                android:hint="@string/repeat_password">
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/register_repeat_password_input_text"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="textPassword"/>
+                                    android:inputType="textPassword"
+                                    android:fontFamily="@font/raleway_light"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/register_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:layout_marginHorizontal="16dp"
                         android:text="@string/register"
+                        android:fontFamily="@font/raleway_light"
                         android:textColor="@color/onPrimaryColor"
-                        app:backgroundTint="@color/primaryColor" />
+                        app:backgroundTint="@color/primaryColor"
+                        app:cornerRadius="24dp"/>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_main_profile"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/menu_profile"
+        android:icon="@drawable/ic_user"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_main_tasks"
+        android:orderInCategory="100"
+        android:title="@string/menu_tasks"
+        android:icon="@drawable/ic_to_do_list"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_main_payments"
+        android:orderInCategory="100"
+        android:title="@string/menu_payments"
+        android:icon="@drawable/ic_credit_card"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_main_configuration"
+        android:orderInCategory="100"
+        android:title="@string/menu_configuration"
+        android:icon="@drawable/ic_settings"
         app:showAsAction="never" />
 </menu>
