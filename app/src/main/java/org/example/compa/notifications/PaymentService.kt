@@ -1,4 +1,4 @@
-package org.example.compa.services
+package org.example.compa.notifications
 
 import org.example.compa.R
 import android.app.*

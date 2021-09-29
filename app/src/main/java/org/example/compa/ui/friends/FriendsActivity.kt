@@ -14,6 +14,7 @@ import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.adapters.FriendAdapter
 import org.example.compa.ui.adapters.PendingFriendAdapter
 import org.example.compa.ui.profile.ProfileActivity
+import org.example.compa.utils.DataUtil
 import org.example.compa.utils.DataUtil.Companion.getPersonFromDatabaseHashMap
 import org.example.compa.utils.MaterialDialog
 
@@ -27,6 +28,8 @@ class FriendsActivity : AppCompatActivity() {
 
     private var pendingFriendsAdapter = PendingFriendAdapter(arrayListOf(), false)
     private var friendAdapter = FriendAdapter(arrayListOf(), false)
+
+    private lateinit var me: Person
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,7 @@ class FriendsActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         friends.clear()
         pendingFriends.clear()
+        getMe()
         getPendingFriends()
         getFriends()
     }
@@ -79,6 +83,12 @@ class FriendsActivity : AppCompatActivity() {
         binding.addFriendsFab.setOnClickListener {
             val intent = Intent(this, SearchFriendActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun getMe() {
+        db.collection("person").document(AppPreference.getUserUID()).get().addOnSuccessListener {
+            me = DataUtil.getPersonFromDatabase(it)
         }
     }
 
@@ -187,6 +197,9 @@ class FriendsActivity : AppCompatActivity() {
                     .set(Friend(person, false, favourite = false))
                 db.collection("person").document(AppPreference.getUserUID())
                     .collection("pending_friends").document(person.id).delete()
+                db.collection("person").document(person.id)
+                    .collection("friends").document(AppPreference.getUserUID())
+                    .set(Friend(me, false, favourite = false))
                 db.collection("person").document(person.id).collection("pending_friends")
                     .document(AppPreference.getUserUID()).delete()
                 pendingFriends.clear()

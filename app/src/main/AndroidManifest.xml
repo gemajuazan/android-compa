@@ -36,7 +36,7 @@
             android:name=".ui.profile.CreateGroupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.profile.ContactsAndGroupsActivity"
+            android:name=".ui.profile.GroupsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.entertainment.EntertainmentActivity"
