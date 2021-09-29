@@ -5,7 +5,7 @@
     <string name="update_birthdate_successfully">Has cambiado perfectamente tu fecha de nacimiento</string>
     <string name="something_was_wrong_message">Vaya, no se ha podido actualizar la información porque ha fallado algo</string>
     <string name="navigation_drawer_open">Abrir menú</string>
-    <string name="navigation_drawer_close">Cerrar menú</string>
+    <string name="navigation_drawer_close">Cerrar menu</string>
     <string name="action_settings">Ajustes</string>
     <string name="contacts">Contactos</string>
     <string name="and_groups">y grupos</string>
@@ -172,4 +172,6 @@
     <string name="previous">Anterior</string>
     <string name="something_was_wrong">Algo ha salido mal</string>
     <string name="delete_friend_title">Eliminar amigo</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="delete_account_message">¿Estás segur@ de querer eliminar tu cuenta? Una vez aceptes, todos tus datos se perderán y no podrán volver a ser recopilados.</string>
 </resources>

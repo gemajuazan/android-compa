@@ -18,11 +18,10 @@ import org.example.compa.databinding.AddPaymentFragmentBinding
 import org.example.compa.databinding.FriendsListBinding
 import org.example.compa.databinding.PaymentsActivityBinding
 import org.example.compa.models.Friend
-import org.example.compa.models.Member
 import org.example.compa.models.Payment
 import org.example.compa.models.Person
 import org.example.compa.preferences.AppPreference
-import org.example.compa.services.PaymentService
+import org.example.compa.notifications.PaymentService
 import org.example.compa.ui.adapters.FriendAdapter
 import org.example.compa.utils.DateUtil
 import org.example.compa.utils.MaterialDialog

@@ -184,4 +184,6 @@
     <string name="explanation_icons">Todos los iconos de la aplicación han sido elegidos y diseñados por la plataforma de Flaticon. Los autores de los mismos son: FreePick, Srip, Pixel Perfect y Prettycons.</string>
     <string name="washing_machine">Lavar</string>
     <string name="clothes">Ropa</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="delete_account_message">¿Estás segur@ de querer eliminar tu cuenta? Una vez aceptes, todos tus datos se perderán y no podrán volver a ser recopilados.</string>
 </resources>

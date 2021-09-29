@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context="org.example.compa.ui.profile.ContactsAndGroupsActivity">
+        tools:context="org.example.compa.ui.profile.GroupsActivity">
 
         <include android:id="@+id/compa_toolbar" layout="@layout/compa_toolbar" />
 

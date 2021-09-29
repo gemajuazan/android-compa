@@ -13,7 +13,7 @@ import org.example.compa.preferences.AppPreference
 import org.example.compa.ui.adapters.GroupAdapter
 import org.example.compa.utils.MaterialDialog
 
-class ContactsAndGroupsActivity : AppCompatActivity() {
+class GroupsActivity : AppCompatActivity() {
     private lateinit var binding: ContactsAndGroupsActivityBinding
 
     private lateinit var db: FirebaseFirestore
@@ -61,7 +61,7 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     private fun getGroups(groups: ArrayList<Group>) {
         groupAdapter = GroupAdapter(
             listsGroups = groups,
-            context = this@ContactsAndGroupsActivity,
+            context = this@GroupsActivity,
             needsLine = false,
             needsIcon = false
         )
@@ -77,7 +77,7 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
                 }
                 showNoGroups(groups)
                 groupAdapter = GroupAdapter(
-                    groups, context = this@ContactsAndGroupsActivity,
+                    groups, context = this@GroupsActivity,
                     needsLine = false,
                     needsIcon = false
                 )
@@ -103,24 +103,25 @@ class ContactsAndGroupsActivity : AppCompatActivity() {
     private fun setActionsGroup() {
         groupAdapter.setOnItemClickListener(object : GroupAdapter.ItemClickListener {
             override fun onSeeGroupClicked(group: Group, position: Int) {
-                val intent = Intent(this@ContactsAndGroupsActivity, CreateGroupActivity::class.java)
+                val intent = Intent(this@GroupsActivity, CreateGroupActivity::class.java)
                 intent.putExtra("action", 1)
                 intent.putExtra("groupId", group.id)
                 startActivity(intent)
             }
 
             override fun onEditGroupClicked(group: Group, position: Int) {
-                val intent = Intent(this@ContactsAndGroupsActivity, CreateGroupActivity::class.java)
+                val intent = Intent(this@GroupsActivity, CreateGroupActivity::class.java)
                 intent.putExtra("groupId", group.id)
                 intent.putExtra("action", 2)
                 startActivity(intent)
             }
 
             override fun onRemoveGroupClicked(group: Group, position: Int) {
-                MaterialDialog.createDialog(this@ContactsAndGroupsActivity) {
+                MaterialDialog.createDialog(this@GroupsActivity) {
                     setTitle(R.string.delete_group)
                     setMessage(R.string.do_you_want_to_delete_group)
                     setPositiveButton(R.string.of_course_madafak) { _, _ ->
+                        db.collection("person").document(AppPreference.getUserUID()).collection("groups").document(group.id).delete()
                         db.collection("groups").document(group.id).collection("members").document().delete()
                         db.collection("groups").document(group.id).delete()
                         getGroups(arrayListOf())

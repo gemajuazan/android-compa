@@ -295,7 +295,7 @@ class PaymentHistorialFragment : Fragment() {
         paymentBinding.receptor.text = payment.receiver
         paymentBinding.concept.text = payment.concept
 
-        paymentBinding.date.text = DateUtil.getDate(payment.date ?: -1, "dd/MM/yyyy")
+        paymentBinding.date.text = DateUtil.getDate(payment.date, "dd/MM/yyyy")
 
         val format: NumberFormat = NumberFormat.getCurrencyInstance()
         format.maximumFractionDigits = 2

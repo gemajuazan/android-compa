@@ -33,13 +33,15 @@
         app:cardBackgroundColor="@color/onPrimaryColor"
         app:cardCornerRadius="24dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete_user"
             android:layout_height="wrap_content"
-            android:text="@string/explanation_icons"
+            android:layout_width="match_parent"
             android:layout_margin="16dp"
-            android:lineSpacingExtra="8dp"
-            android:fontFamily="@font/raleway_light" />
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@color/onPrimaryColor"
+            android:fontFamily="@font/raleway_light"
+            android:text="@string/delete_account" />
 
     </com.google.android.material.card.MaterialCardView>
 

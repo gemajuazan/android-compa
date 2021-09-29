@@ -106,7 +106,7 @@ class MyProfileFragment : Fragment() {
             startActivity(intent)
         }
         binding.groups.linearLayout.setOnClickListener {
-            val intent = Intent(requireContext(), ContactsAndGroupsActivity::class.java)
+            val intent = Intent(requireContext(), GroupsActivity::class.java)
             startActivity(intent)
         }
         binding.editInfo.linearLayout.setOnClickListener {

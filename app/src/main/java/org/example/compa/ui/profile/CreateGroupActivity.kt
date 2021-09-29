@@ -61,7 +61,9 @@ class CreateGroupActivity : AppCompatActivity() {
                 getMembers()
             }
             2 -> {
-                onlyRead = false
+                binding.addMember.visibility = View.GONE
+                binding.addMemberToList.visibility = View.GONE
+                onlyRead = true
                 edit = true
                 setGroupData(intent.getStringExtra("groupId") ?: "")
                 getMembers()
@@ -253,31 +255,14 @@ class CreateGroupActivity : AppCompatActivity() {
                 db.collection("person").document(AppPreference.getUserUID()).collection("groups")
                     .document(groupId).update("place", binding.placeEditText.text.toString())
 
-                db.collection("person").document(AppPreference.getUserUID()).collection("groups").document(groupId).collection("members").document().delete()
-
-                for ((position, member) in members.withIndex()) {
-
-                    db.collection("person").document(AppPreference.getUserUID()).collection("groups").document(groupId).collection("members")
-                        .document(member.id).set(member)
-                    if (position == members.size - 1) {
-                        finish()
-                    }
-                }
 
                 db.collection("groups").document(groupId)
                     .update("name", binding.nameEditText.text.toString())
                 db.collection("groups").document(groupId)
                     .update("place", binding.placeEditText.text.toString())
-                db.collection("groups").document(groupId).collection("members").document().delete()
 
-                for ((position, member) in members.withIndex()) {
+                finish()
 
-                    db.collection("groups").document(groupId).collection("members")
-                        .document(member.id).set(member)
-                    if (position == members.size - 1) {
-                        finish()
-                    }
-                }
             }
             setNegativeButton(getString(R.string.no_no_no)) { _, _ -> }
         }.show()
